@@ -15,9 +15,6 @@ CB_FILENAMES = \
 	cub3d.c
 	# app.c
 
-CB_FILENAMES += \
-	graphics/dummy.c
-
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
 OBJ = $(SRC:.c=.o)
