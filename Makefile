@@ -12,7 +12,10 @@ CB_HEADER = $(SOURCE_DIR)/$(NAME).h
 include $(LIBFT_DIR)/colors.mk
 
 CB_FILENAMES = \
-	cub3d.c
+	cub3d.c \
+	destroy.c \
+	error_exit.c \
+	scene_validation.c \
 	# app.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
@@ -27,6 +30,11 @@ $(NAME): $(OBJ) $(LIBFT)
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR) all clean
+
+#only for testing purposes
+dummy: dummy.o  $(LIBFT)
+	rm -f dummy
+	$(CC) $(CFLAGS) dummy.o -o dummy $(LFLAGS)
 
 lft:
 	@make -C $(LIBFT_DIR) all clean
