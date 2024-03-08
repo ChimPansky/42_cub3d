@@ -8,8 +8,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-#
-
+# include <math.h>
 
 // Colors
 # define COLOR_RESET "\033[0;39m"
@@ -17,15 +16,19 @@
 # define COLOR_GREEN "\033[0;92m"
 # define COLOR_YELLOW "\033[0;93m"
 
-# define movement_speed	80
+# define MOVEMENT_SPEED	80
+# define MAP_SYMBOLS "01NSWE D"
+
+typedef int t_trgb;
 
 typedef enum e_map_syms {
 	WALL = '1',
+	PATH = '0',
 	DOOR = 'D',
-	PLAYER_E = 'E',
-	PLAYER_W = 'W',
-	PLAYER_S = 'S',
 	PLAYER_N = 'N',
+	PLAYER_S = 'S',
+	PLAYER_W = 'W',
+	PLAYER_E = 'E',
 	HOLE = ' ',
 }		t_map_syms;
 
@@ -33,20 +36,13 @@ typedef struct s_player t_player;
 
 typedef struct s_map
 {
-	t_map_syms	**raw_map;
-	int			width;
-	int			height;
+	//t_map_syms	**raw_map;
+	t_charptr_array	raw_map;
+	size_t			width;
+	size_t			height;
 }			t_map;
 
-typedef struct s_rgba
-{
-	short int	red;
-	short int	green;
-	short int	blue;
-	short int	alpha;
-}				t_rgba;
-
-typedef enum e_texture_type
+typedef enum e_scene_type
 {
 	NORTH,
 	SOUTH,
@@ -54,18 +50,18 @@ typedef enum e_texture_type
 	EAST,
 	FLOOR,
 	CEILING,
-	TX_COUNT,
+	WALLS_FLOOR_CEILING_COUNT,
 	UNKNOWN
-}			t_texture_type;
-typedef struct s_texture_element
+}			t_scene_type;
+typedef struct s_scene_element
 {
-	t_texture_type	tx_type;
+	t_scene_type	scene_type;
 	union
 	{
 		char	*tx_path;
-		t_rgba	tx_rgba;
+		t_trgb	trgb;
 	};
-}			t_texture_element;
+}			t_scene_element;
 
 typedef struct s_textures
 {
@@ -73,15 +69,34 @@ typedef struct s_textures
 	char	*wall_so;
 	char	*wall_we;
 	char	*wall_ea;
-	t_rgba	floor;
-	t_rgba	ceiling;
+	t_trgb	floor;
+	t_trgb	ceiling;
 }				t_textures;
+
+typedef struct s_pos
+{
+	float	x;
+	float	y;
+}				t_pos;
+
+typedef struct s_speed
+{
+	float	x;
+	float	y;
+}				t_speed;
+
+typedef struct s_player
+{
+	t_pos	pos;
+	float	angle;
+	t_speed	speed;
+}				t_player;
 
 typedef struct s_cube
 {
-	t_map		*map;
+	t_map		map;
 	bool		done;
-	t_player	*player;
+	t_player	player;
 	t_textures	walls_floor_ceiling;
 }			t_cube;
 
@@ -104,37 +119,38 @@ typedef struct s_mlx
 //             |
 //             y
 
-typedef struct s_pos
-{
-	float	x;
-	float	y;
-}				t_pos;
 
-typedef struct s_speed
-{
-	float	x;
-	float	y;
-}				t_speed;
-
-
-typedef struct s_player
-{
-	t_pos	pos;
-	float	angle;
-	t_speed	speed;
-}				t_player;
 
 // cub3d.c:
-void cub_destroy(t_cube *cub);
+void 	cub_destroy(t_cube *cub);
 
 // scene_validation.c:
 void	read_scene_description(t_cube *cub, char *fpath);
+
+// walls_validation.c:
+int		add_wall(t_cube *cub, t_scene_element *element);
+int		extract_tx_path_from_line(char **str, char **tx_path);
+
+// floor_ceiling_validation.c
+int		add_floor_ceiling(t_cube *cub, t_scene_element *element);
+int		extract_trgb_from_line(char **str, t_trgb *trgb);
+
+// map_validation.c
+int		read_map(t_cube *cub, int scene_fd);
 
 // destroy.c:
 void cub_destroy(t_cube *cub);
 
 // error_exit.c:
-void	error_exit(t_cube *cub, char *err_msg, int exit_code);
+void	print_error(char *err_msg);
+void	error_exit(t_cube *cub, int exit_code);
 
+// utilities.c:
+void	skip_spaces(char **str);
+
+// debugging:
+void	print_textures(t_textures textures);	//TODO: remove
+void	print_player(t_player player); //TODO: remove
+void	charptr_array_print(t_charptr_array *arr); // TODO: remove
 
 #endif

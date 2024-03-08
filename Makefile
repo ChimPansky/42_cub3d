@@ -15,8 +15,14 @@ CB_FILENAMES = \
 	cub3d.c \
 	destroy.c \
 	error_exit.c \
-	scene_validation.c \
+	utilities.c \
 	# app.c
+
+CB_FILENAMES += \
+	scene_validation/floor_ceiling_validation.c \
+	scene_validation/map_validation.c \
+	scene_validation/scene_validation.c \
+	scene_validation/walls_validation.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
