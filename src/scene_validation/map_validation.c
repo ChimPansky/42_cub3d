@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/08 23:53:29 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/09 00:32:51 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,49 @@ static int	get_map_width(t_charptr_array raw_map)
 	return (max_width);
 }
 
+int	check_walls_in_col(t_charptr_array *raw_map, size_t col, size_t map_height)
+{
+	size_t	row;
+	char	last_char;
+	char	cur_char;
+
+	row = 0;
+	last_char = HOLE;
+	while (row < map_height)
+	{
+		cur_char = raw_map->buf[row][col];
+		if (ft_strchr("NSWE", cur_char))
+			cur_char = PATH;
+		if (cur_char == PATH && (row == map_height - 1
+			|| (last_char != PATH && last_char != WALL)))
+			return (FAILURE);
+		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
+			return (FAILURE);
+		last_char = cur_char;
+		row++;
+	}
+	return (SUCCESS);
+}
+
 int	check_walls_in_row(t_charptr_array *raw_map, size_t row, size_t map_width)
 {
 	size_t	col;
-	bool	inside_walls;
+	char	last_char;
+	char	cur_char;
 
 	col = 0;
-	inside_walls = false;
+	last_char = HOLE;
 	while (col < map_width)
 	{
-		if (raw_map->buf[row][col] == WALL )
-			inside_walls = true;
-		else if (raw_map->buf[row][col] == PATH)
-		{
-			if (!inside_walls)
-				return (FAILURE);
-			inside_walls = false;
-		}
-		if ()//.....
+		cur_char = raw_map->buf[row][col];
+		if (ft_strchr("NSWE", cur_char))
+			cur_char = PATH;
+		if (cur_char == PATH && (col == map_width - 1
+			|| (last_char != PATH && last_char != WALL)))
+			return (FAILURE);
+		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
+			return (FAILURE);
+		last_char = cur_char;
 		col++;
 	}
 	return (SUCCESS);
