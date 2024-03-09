@@ -1,0 +1,15 @@
+
+SO path/to/north.xpm
+  NO   test.xpm
+   NO     path/west.xpm
+
+	EA      path/east.xpm
+
+C 254, 1,  1
+
+   F   20 ,  1  , 24
+
+11111
+100N1
+10001
+11111

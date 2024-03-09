@@ -1,0 +1,17 @@
+
+
+
+  SO path/to/north.xpm
+  WE      path/west.xpm
+NO  path/invalid_xpm_file.txt
+
+EA      path/east.xpm
+
+C 254, 1,  1
+
+   F   20 ,  1  , 24
+
+11111
+100N1
+10001
+11111

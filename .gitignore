@@ -11,7 +11,9 @@ dummy.c
 
 #folders:
 minishell_tester/
-minilibx_resources
+minilibx_resources/
+unit_tests/
+scene_descriptions/02_invalid_file_rights/
 
 # binaries
 *.o

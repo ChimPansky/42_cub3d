@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/08 21:47:48 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/09 10:24:24 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,13 @@ static int get_next_element(int scene_fd, t_scene_element *element)
 
 	while (true)
 	{
-		line = get_next_line(scene_fd);
+		line = get_next_line_no_nl(scene_fd);
 		ptr_free = line.str;
 		if (line.error)
 			return (perror("get_next_element: get_next_line"), FAILURE);
 		if (line.str == NULL)
 			return (print_error("Missing texture element "
 				"in scene description."), FAILURE);
-		ft_str_chr_replace(line.str, '\n', '\0');
 		if (ft_string_is_empty(line.str))
 			free(ptr_free);
 		else

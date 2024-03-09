@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/09 00:32:51 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/09 10:21:59 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,27 +183,39 @@ static int	validate_map(t_cube *cub, t_charptr_array *raw_map)
 	return (SUCCESS);
 }
 
-int	read_map(t_cube *cub, int scene_fd)
+
+static int	fill_raw_map(t_cube *cub, int scene_fd)
 {
 	t_line	line;
+	bool	empty_lines;
 
+	empty_lines = false;
 	while (true)
 	{
-		line = get_next_line(scene_fd);
+		line = get_next_line_no_nl(scene_fd);
 		if (line.str == NULL)
 			break ;
-		ft_str_chr_replace(line.str, '\n', '\0');
 		if (ft_string_is_empty(line.str))
 		{
 			free(line.str);
 			if (cub->map.raw_map.sz > 0)
-				return (print_error("Found empty line in map"), FAILURE);
+				empty_lines = true;
 		}
+		else if (empty_lines)
+			return (free(line.str),
+				print_error("Found empty line(s) in map"), FAILURE);
 		else
 			charptr_array_add_allocated_str(&cub->map.raw_map, &line.str);
 	}
 	if (line.error)
 		return (perror("read_map: get_next_line"), FAILURE);
+	return (SUCCESS);
+}
+
+int	read_map(t_cube *cub, int scene_fd)
+{
+	if (fill_raw_map(cub, scene_fd) != SUCCESS)
+		return (FAILURE);
 	if (validate_map(cub, &cub->map.raw_map) != SUCCESS)
 		return (FAILURE);
 	print_player(cub->player);

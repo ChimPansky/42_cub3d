@@ -147,6 +147,7 @@ void	error_exit(t_cube *cub, int exit_code);
 
 // utilities.c:
 void	skip_spaces(char **str);
+t_line	get_next_line_no_nl(int scene_fd);
 
 // debugging:
 void	print_textures(t_textures textures);	//TODO: remove
