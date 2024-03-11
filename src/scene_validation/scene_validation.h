@@ -1,49 +1,35 @@
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef SCENE_VALIDATION_H
+# define SCENE_VALIDATION_H
 
-# include "../libft/libft.h"
-# include "stdbool.h"
-# include <errno.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <fcntl.h>
-# include <math.h>
+# include "../cub3d.h"
 
-// Colors
-# define COLOR_RESET "\033[0;39m"
-# define COLOR_RED "\033[0;91m"
-# define COLOR_GREEN "\033[0;92m"
-# define COLOR_YELLOW "\033[0;93m"
-
-# define PLAYER_MOVE_SPEED 50	// 1-100
-# define PLAYER_ROTATION_SPEED 50 // 1-100
 # define MAP_SYMBOLS "01NSWE D"
-
-typedef int t_trgb;
-
-typedef enum e_map_syms {
-	WALL = '1',
-	PATH = '0',
-	DOOR = 'D',
-	PLAYER_N = 'N',
-	PLAYER_S = 'S',
-	PLAYER_W = 'W',
-	PLAYER_E = 'E',
-	HOLE = ' ',
-}		t_map_syms;
 
 typedef struct s_player t_player;
 
-typedef struct s_map
+typedef enum e_scene_type
 {
-	//t_map_syms	**raw_map;
-	t_charptr_array	raw_map;
-	size_t			width;
-	size_t			height;
-}			t_map;
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	FLOOR,
+	CEILING,
+	WALLS_FLOOR_CEILING_COUNT,
+	UNKNOWN
+}			t_scene_type;
+typedef struct s_scene_element
+{
+	t_scene_type	scene_type;
+	union
+	{
+		char	*tx_path;
+		t_trgb	trgb;
+	};
+}			t_scene_element;
 
-typedef struct s_sprite_source
+typedef struct s_textures
 {
 	char	*wall_no;
 	char	*wall_so;
@@ -51,7 +37,7 @@ typedef struct s_sprite_source
 	char	*wall_ea;
 	t_trgb	floor;
 	t_trgb	ceiling;
-}				t_sprite_source;
+}				t_textures;
 
 typedef struct s_pos
 {
@@ -77,24 +63,16 @@ typedef struct s_cube
 	t_map		map;
 	bool		done;
 	t_player	player;
+	t_textures	walls_floor_ceiling;
 }			t_cube;
 
-typedef struct s_graphics
+typedef struct s_mlx
 {
-	void			*mlx;
-	t_sprite_source	sprite_sources;
+	void *mlx;
 	// mlx...;
 	// mlx_window;
 	// mlx_img_minimap;
-}				t_graphics;
-
-typedef struct s_app
-{
-	t_cube		cub;
-	t_graphics	graphics;
-
-}				t_app;
-
+}				t_mlx;
 //             |
 //             |
 //             |
@@ -113,7 +91,7 @@ typedef struct s_app
 void 	cub_destroy(t_cube *cub);
 
 // scene_validation.c:
-void	read_scene_description(t_app *app, char *fpath);
+void	read_scene_description(t_cube *cub, char *fpath);
 
 // walls_validation.c:
 int		add_wall(t_cube *cub, t_scene_element *element);

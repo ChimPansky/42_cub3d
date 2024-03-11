@@ -39,35 +39,50 @@ void	charptr_array_print(t_charptr_array *arr)	//TODO: remove
 		ft_printf("%s\n", arr->buf[i++]);
 }
 
-void cub_init(t_cube *cub, int ac, char *av[])
+void cub_init(t_cube *cub)
 {
-	ft_bzero(cub, sizeof(t_cube));
-	cub->player.pos.x = -1.0;
-	cub->player.pos.y = -1.0;
-	if (charptr_array_init(&cub->map.raw_map) != SUCCESS)
+
+
+
+	//charptr_array_print(&cub->map.raw_map);
+	//printf("\n");
+	// print_textures(cub->walls_floor_ceiling);
+	// printf("\n");
+	// print_player(cub->player);
+	// printf("\n");
+	cub->done = false;
+}
+
+void	app_init(t_app *app, char *cub_path)
+{
+	ft_bzero(app, sizeof(t_app));
+	if (charptr_array_init(app->cub->map.raw_map) != SUCCESS)
 	{
 		perror("cub_init: charptr_array_init");
-		error_exit(cub, FAILURE);
+		error_exit(app, FAILURE, NULL);
 	}
-	if (ac < 2)
-	{
-		print_error("Please provide a scene description "
-			"as parameter (.cub file).");
-		error_exit(cub, FAILURE);
-	}
-	read_scene_description(cub, av[1]);
-	cub->done = false;
+	read_scene_description(&app, cub_path);
+
+	graphics_init(&app->graphics);
+
+
 }
 
 int main(int ac, char *av[])
 {
-	t_cube cub;
+	t_app	app;
 
-	cub_init(&cub, ac, av);
+	if (ac < 2)
+		return (print_error("Please provide a scene description "
+			"as parameter (.cub file)."), FAILURE);
+	if (ac > 2)
+		return (print_error("Too many arguments!"), FAILURE);
+	app_init(&app, av[1]);
 	while (!cub.done)
 	{
 		printf("in game loop\n");
 		usleep(1000000);
 	}
 	cub_destroy(&cub);
+	return (SUCCESS);
 }

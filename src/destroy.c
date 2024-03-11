@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 10:15:51 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/08 21:33:33 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:58:47 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void textures_destroy(t_textures textures)
 	free(textures.wall_so);
 	free(textures.wall_we);
 	free(textures.wall_ea);
-	ft_printf("destroyed textures!\n");
 }
 
 void cub_destroy(t_cube *cub)

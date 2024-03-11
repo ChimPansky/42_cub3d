@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:20:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/08 11:50:59 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/11 09:02:35 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	print_error(char *err_msg)
 	ft_dprintf(STDERR_FILENO, COLOR_RESET);
 }
 
-void	error_exit(t_cube *cub, int exit_code)
+void	error_exit(t_cube *cub, int exit_code, char *err_msg)
 {
+	if (err_msg)
+		print_error(err_msg);
 	cub_destroy(cub);
 	if (errno)
 		exit(errno);

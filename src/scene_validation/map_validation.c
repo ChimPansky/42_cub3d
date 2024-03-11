@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/09 10:21:59 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:00:29 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,6 @@ static int	validate_map(t_cube *cub, t_charptr_array *raw_map)
 		return (print_error("Map too small."), FAILURE);
 	if (equalize_string_lengths(cub, raw_map) != SUCCESS)
 		return (FAILURE);
-	charptr_array_print(raw_map);
 	if (check_for_invalid_chars_and_player(cub, raw_map) != SUCCESS)
 		return (FAILURE);
 	if (cub->player.pos.x == -1.0)

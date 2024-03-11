@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/09 10:24:24 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/11 10:17:03 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,29 +97,23 @@ static int	read_walls_floor_ceiling(t_cube *cub, int scene_fd)
 		}
 		elements_read++;
 	}
-	print_textures(cub->walls_floor_ceiling);
 	return (SUCCESS);
 }
 
-void	read_scene_description(t_cube *cub, char *fpath)
+void	read_scene_description(t_app *app, char *fpath)
 {
 	int	scene_fd;
 
-	if (ft_file_check_extension(fpath, ".cub") == false)
-	{
-		print_error("Scene description must be a .cub file.");
-		error_exit(cub, FAILURE);
-	}
+	if (ft_file_check_extension(fpath, ".cub") == false
+		|| ft_strlen(fpath) < 5)
+		error_exit(cub, FAILURE, "Scene description must be a .cub file.");
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
-	{
-		print_error("Could not open scene description file.");
-		error_exit(cub, FAILURE);
-	}
+		error_exit(cub, FAILURE, "Could not open scene description file.");
 	if (read_walls_floor_ceiling(cub, scene_fd) != SUCCESS
 		|| read_map(cub, scene_fd) != SUCCESS)
 	{
 		close(scene_fd);
-		error_exit(cub, FAILURE);
+		error_exit(cub, FAILURE, NULL);
 	}
 }
