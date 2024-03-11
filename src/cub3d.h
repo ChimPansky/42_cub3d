@@ -9,6 +9,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include "graphics/graphics.h"
 
 // Colors
 # define COLOR_RESET "\033[0;39m"
@@ -106,14 +107,6 @@ typedef struct s_cube
 	t_map		map;
 	t_player	player;
 }			t_cube;
-
-typedef struct s_graph
-{
-	void			*mlx;
-	// mlx...;
-	// mlx_window;
-	// mlx_img_minimap;
-}				t_graph;
 
 typedef struct s_app
 {

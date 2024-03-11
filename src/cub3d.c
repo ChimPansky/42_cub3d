@@ -13,11 +13,11 @@ void cub_destroy(t_cube *cub)
 	(void)cub;
 }
 
-int main(int ac, char *av[])
-{
-	t_cube cub;
+// int main(int ac, char *av[])
+// {
+// 	t_cube cub;
 
-	cub_init(&cub, ac, av);
-	printf("THIS IS THE MAIN");
-	cub_destroy(&cub);
-}
+// 	cub_init(&cub, ac, av);
+// 	printf("THIS IS THE MAIN");
+// 	cub_destroy(&cub);
+// }

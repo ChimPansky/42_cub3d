@@ -1,1 +1,1 @@
--I./libft ./mlx
+-I./libft -Imlx -Isrc -std=c99

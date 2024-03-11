@@ -4,7 +4,7 @@ CFLAGS = -Wall -Werror -Wextra #-Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-IFLAGS = -I $(LIBFT_DIR) -I/usr/include -Imlx
+IFLAGS = -I $(LIBFT_DIR) -I/usr/include -Imlx -Isrc
 LFLAGS = -L$(LIBFT_DIR) -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 LIBMLX = mlx/libmlx_Linux.a
 SOURCE_DIR = src
@@ -13,8 +13,16 @@ CB_HEADER = $(SOURCE_DIR)/$(NAME).h
 include $(LIBFT_DIR)/colors.mk
 
 CB_FILENAMES = \
-	cub3d.c
-	# app.c
+	cub3d.c \
+	app.c
+
+CB_FILENAMES += \
+	graphics/graphics.c \
+	graphics/mlx_utils.c
+
+
+CB_FILENAMES += \
+	render/render.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

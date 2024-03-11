@@ -4,19 +4,16 @@
 
 void app_init(t_app *app, int ac, char *av[])
 {
-	cub_init(&app->cube, ac, av);
+    (void)ac;
+    (void)av;
+	// cub_init(&app->cube, ac, av);
     graphics_init(&app->gr);
 }
 
 void app_destroy(t_app *app)
 {
-	cub_destroy(&app->cube);
+	// cub_destroy(&app->cube);
 	graphics_destroy(&app->gr);
-}
-
-void render(t_app *app)
-{
-
 }
 
 int main_loop(void *data)
@@ -25,8 +22,9 @@ int main_loop(void *data)
 
     // time now
 	app = (t_app *)data;
-    render_minimap(app);
-    render_scene(app);
+    render_minimap(&app->gr.minimap, &app->cub);
+    mlx_put_image_to_window(app->gr.mlx, app->gr.win, app->gr.minimap.image, MM_X, MM_Y);
+    // render_scene(app);
     // usleep till now + 1sec/60
     return 0;
 }

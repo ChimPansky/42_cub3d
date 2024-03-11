@@ -22,7 +22,7 @@ void	put_pixel(t_image *img, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-static unsigned int	pixel(u_int8_t r, u_int8_t g, u_int8_t b, u_int8_t a)
+unsigned int	pixel(u_int8_t r, u_int8_t g, u_int8_t b, u_int8_t a)
 {
 	return (r << 16 | g << 8 | b | a << 24);
 }
