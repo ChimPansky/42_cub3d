@@ -1,46 +1,53 @@
 #include "cub3d.h"
 #include "mlx.h"
 #include "render/render.h"
+#include "logic/logic.h"
+#include <unistd.h>
+#include <time.h>
 
-void app_init(t_app *app, int ac, char *av[])
+// 1000/60 = 16.6666
+#define MSEC_PER_FRAME 16
+
+void	app_init(t_app *app, int ac, char *av[])
 {
-    (void)ac;
-    (void)av;
-	// cub_init(&app->cube, ac, av);
-    graphics_init(&app->gr);
+	cub_init(app, ac, av);
+	graphics_init(&app->gr);
 }
 
-void app_destroy(t_app *app)
+void	app_destroy(t_app *app)
 {
-	// cub_destroy(&app->cube);
+	cub_destroy(app);
 	graphics_destroy(&app->gr);
 }
 
-int main_loop(void *data)
+int	main_loop(void *data)
 {
-	t_app *app;
+	clock_t	start_time;
+	int		msec_passed;
+	t_app	*app;
 
-    // time now
+	start_time = clock();
 	app = (t_app *)data;
-    render_minimap(&app->gr.minimap, &app->cub);
-    mlx_put_image_to_window(app->gr.mlx, app->gr.win, app->gr.minimap.image, MM_X, MM_Y);
-    // render_scene(app);
-    // usleep till now + 1sec/60
-    return 0;
+	process_logic(app);
+	render_scene(&app->gr.minimap, &app->cub);
+	mlx_put_image_to_window(app->gr.mlx, app->gr.win,
+		app->gr.scene.image, 0, 0);
+	render_minimap(&app->gr.minimap, &app->cub);
+	mlx_put_image_to_window(app->gr.mlx, app->gr.win,
+		app->gr.minimap.image, MM_X, MM_Y);
+	msec_passed = (clock() - start_time) * 1000 / CLOCKS_PER_SEC;
+	if (msec_passed < MSEC_PER_FRAME)
+		usleep((MSEC_PER_FRAME - msec_passed) * 1000);
+	return (0);
 }
 
-void set_up_event_hooks()
+int	main(int ac, char *av[])
 {
-
-}
-
-int main(int ac, char *av[])
-{
-	t_app app;
+	t_app	app;
 
 	app_init(&app, ac, av);
-    set_up_event_hooks(&app);
 	mlx_loop_hook(app.gr.mlx, main_loop, &app);
+	set_hooks(&app);
 	mlx_loop(app.gr.mlx);
 	app_destroy(&app);
 }

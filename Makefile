@@ -20,9 +20,16 @@ CB_FILENAMES += \
 	graphics/graphics.c \
 	graphics/mlx_utils.c
 
+CB_FILENAMES += \
+	render/render_minimap.c \
+	render/render_scene.c
 
 CB_FILENAMES += \
-	render/render.c
+	hooks/key_hooks.c \
+	hooks/hooks.c
+
+CB_FILENAMES += \
+	logic/logic.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

@@ -1,4 +1,3 @@
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -10,6 +9,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "graphics/graphics.h"
+# include "hooks/hooks.h"
 
 // Colors
 # define COLOR_RESET "\033[0;39m"
@@ -21,7 +21,8 @@
 # define PLAYER_ROTATION_SPEED 50 // 1-100
 # define MAP_SYMBOLS "01NSWE D"
 
-typedef int t_trgb;
+typedef int				t_trgb;
+typedef struct s_player	t_player;
 
 typedef enum e_map_char {
 	WALL = '1',
@@ -40,12 +41,8 @@ typedef enum e_map_sym {
 	PATH_SYM = '0',
 }		t_map_sym;
 
-
-typedef struct s_player t_player;
-
 typedef struct s_map
 {
-	//t_map_syms	**raw_map;
 	t_charptr_array	raw_map;
 	size_t			width;
 	size_t			height;
@@ -62,6 +59,7 @@ typedef enum e_scene_type
 	WALLS_FLOOR_CEILING_COUNT,
 	UNKNOWN
 }			t_scene_type;
+
 typedef struct s_scene_element
 {
 	t_scene_type	scene_type;
@@ -71,7 +69,6 @@ typedef struct s_scene_element
 		t_trgb	trgb;
 	};
 }			t_scene_element;
-
 
 typedef struct s_sprite_source
 {
@@ -91,8 +88,8 @@ typedef struct s_pos
 
 typedef struct s_speed
 {
-	double	x;
-	double	y;
+	double	forw;
+	double	ort;
 }				t_speed;
 
 typedef struct s_player
@@ -113,7 +110,7 @@ typedef struct s_app
 	t_cube			cub;
 	t_graph			gr;
 	t_sprite_source	sprite_sources;
-
+	t_pressed_keys	pressed_keys;
 
 }				t_app;
 
@@ -129,10 +126,9 @@ typedef struct s_app
 //             |
 //             y
 
-
-
 // cub3d.c:
-void 	cub_destroy(t_cube *cub);
+void	cub_init(t_app *app, int ac, char *av[]);
+void	cub_destroy(t_app *app);
 
 // scene_validation.c:
 void	read_scene_description(t_app *app, char *fpath);
@@ -147,9 +143,6 @@ int		extract_trgb_from_line(char **str, t_trgb *trgb);
 
 // map_validation.c
 int		read_map(t_cube *cub, int scene_fd);
-
-// destroy.c:
-void cub_destroy(t_cube *cub);
 
 // error_exit.c:
 void	print_error(char *err_msg);
