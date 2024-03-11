@@ -50,6 +50,28 @@ typedef struct s_map
 	size_t			height;
 }			t_map;
 
+typedef enum e_scene_type
+{
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST,
+	FLOOR,
+	CEILING,
+	WALLS_FLOOR_CEILING_COUNT,
+	UNKNOWN
+}			t_scene_type;
+typedef struct s_scene_element
+{
+	t_scene_type	scene_type;
+	union
+	{
+		char	*tx_path;
+		t_trgb	trgb;
+	};
+}			t_scene_element;
+
+
 typedef struct s_sprite_source
 {
 	char	*wall_no;
@@ -145,8 +167,8 @@ void	skip_spaces(char **str);
 t_line	get_next_line_no_nl(int scene_fd);
 
 // debugging:
-void	print_textures(t_textures textures);	//TODO: remove
-void	print_player(t_player player); //TODO: remove
+//void	print_textures(t_textures textures);	//TODO: remove
+//void	print_player(t_player player); //TODO: remove
 void	charptr_array_print(t_charptr_array *arr); // TODO: remove
 
 #endif
