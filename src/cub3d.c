@@ -5,8 +5,7 @@ void cub_init(t_cube *cub, int ac, char *av[])
 {
 	if (!ac)
 		(void)av;
-	cub->done = false;
-
+	(void)cub;
 }
 
 void cub_destroy(t_cube *cub)
@@ -19,9 +18,6 @@ int main(int ac, char *av[])
 	t_cube cub;
 
 	cub_init(&cub, ac, av);
-	while (!cub.done)
-	{
-
-	}
+	printf("THIS IS THE MAIN");
 	cub_destroy(&cub);
 }

@@ -4,8 +4,9 @@ CFLAGS = -Wall -Werror -Wextra #-Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-IFLAGS = -I $(LIBFT_DIR)
-LFLAGS = -L$(LIBFT_DIR) -lft #TODO: add mlx stuff
+IFLAGS = -I $(LIBFT_DIR) -I/usr/include -Imlx
+LFLAGS = -L$(LIBFT_DIR) -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+LIBMLX = mlx/libmlx_Linux.a
 SOURCE_DIR = src
 CB_HEADER = $(SOURCE_DIR)/$(NAME).h
 
@@ -21,7 +22,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
@@ -30,6 +31,9 @@ $(LIBFT):
 
 lft:
 	@make -C $(LIBFT_DIR) all clean
+
+$(LIBMLX):
+	cd mlx && ./configure
 
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
