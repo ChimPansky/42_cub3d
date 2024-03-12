@@ -43,9 +43,9 @@ int	add_wall(t_sprite_sources *sprites, t_scene_element *element)
 	else
 		return (free(element->tx_path), print_error("critical: "
 			"add_tx_wall: invalid scene_type."));
-	if (*texture_path != NULL)
-		return (free(element->tx_path), print_error("Found duplicate "
-			"wall element in scene description."));
+	// if (*texture_path != NULL)
+	// 	return (free(element->tx_path), print_error("Found duplicate "
+	// 		"wall element in scene description."));
 	*texture_path = element->tx_path;
 	return (SUCCESS);
 }

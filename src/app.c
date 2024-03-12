@@ -25,7 +25,7 @@ static int	app_init(t_app *app, char *cub_path)
 		return (FAILURE);
 	if (read_scene_description(app, cub_path, &sprites) != SUCCESS)
 		return (game_destroy(&app->game), FAILURE);
-	if (graphics_init(&app->graph, sprites) != SUCCESS)
+	if (graphics_init(&app->graph, &sprites) != SUCCESS)
 		return (game_destroy(&app->game), FAILURE);
 	sprite_sources_destroy(&sprites);
 	return (SUCCESS);

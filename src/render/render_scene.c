@@ -1,4 +1,3 @@
-#include "../graphics/graphics.h"
 #include "../cub3d.h"
 #include <sys/types.h>
 #include "mlx.h"

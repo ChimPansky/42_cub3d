@@ -28,7 +28,9 @@ typedef struct s_graph {
 	t_image	scene;
 }		t_graph;
 
-void	graphics_init(t_graph *graph, t_sprite_sources sprites);
+typedef struct s_sprite_sources t_sprite_sources;
+
+int	graphics_init(t_graph *graph, t_sprite_sources *sprites);
 void	graphics_destroy(t_graph *gr);
 
 #endif  // GRAPHICS_H

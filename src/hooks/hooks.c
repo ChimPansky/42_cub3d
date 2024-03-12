@@ -4,8 +4,8 @@
 
 void	set_hooks(t_app *app)
 {
-	mlx_hook(app->gr.win, KeyPress, KeyPressMask,
+	mlx_hook(app->graph.win, KeyPress, KeyPressMask,
 		key_press_hook, &app);
-	mlx_hook(app->gr.win, KeyRelease, KeyReleaseMask,
+	mlx_hook(app->graph.win, KeyRelease, KeyReleaseMask,
 		key_release_hook, &app);
 }
