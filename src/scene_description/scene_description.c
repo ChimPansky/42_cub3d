@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/12 13:07:52 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:48:27 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	read_scene_description(t_app *app, char *fpath, t_sprite_sources *sprites)
 	if (scene_fd == -1)
 		return (print_error("Scene description must be a .cub file."));
 	if (read_walls_floor_ceiling(sprites, scene_fd) != SUCCESS
-		|| read_map(app->game, scene_fd) != SUCCESS)
+		|| read_map(&app->game, scene_fd) != SUCCESS)
 		return (close(scene_fd), FAILURE);
 	return (close(scene_fd), SUCCESS);
 }

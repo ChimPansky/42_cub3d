@@ -13,10 +13,8 @@ CB_HEADER = $(SOURCE_DIR)/$(NAME).h
 include $(LIBFT_DIR)/colors.mk
 
 CB_FILENAMES = \
-	cub3d.c \
-	destroy.c \
-	error_exit.c \
-	app.c
+	app.c \
+	error_exit.c
 
 CB_FILENAMES += \
 	scene_description/floor_ceiling_validation.c \
@@ -43,7 +41,6 @@ CB_FILENAMES += \
 #TODO: remove
 CB_FILENAMES += \
 	debug/debug.c
-
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

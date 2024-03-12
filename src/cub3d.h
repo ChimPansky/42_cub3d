@@ -109,15 +109,12 @@ int		main_loop(void *data);
 void	sprite_sources_destroy(t_sprite_sources *sprites);
 void	app_destroy(t_app *app);
 
-// map_validation.c
-int		read_map(t_cube *cub, int scene_fd);
 
 // error_exit.c:
 int	print_error(char *err_msg);
-void	error_exit(t_cube *cub, int exit_code, char *err_msg);
 
 // debugging:
-void	print_textures(t_sprite_source sprite_sources);	//TODO: remove
+void	print_textures(t_sprite_sources sprite_sources);	//TODO: remove
 void	print_player(t_player player); //TODO: remove
 void	charptr_array_print(t_charptr_array *arr); // TODO: remove
 

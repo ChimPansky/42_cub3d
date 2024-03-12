@@ -69,8 +69,8 @@ int	main(int ac, char *av[])
 		return (print_error("Too many arguments!"), FAILURE);
 	if (app_init(&app, av[1]) != SUCCESS)
 		return (FAILURE);
-	mlx_loop_hook(app.gr.mlx, main_loop, &app);
+	mlx_loop_hook(app.graph.mlx, main_loop, &app);
 	set_hooks(&app);
-	mlx_loop(app.gr.mlx);
+	mlx_loop(app.graph.mlx);
 	app_destroy(&app);
 }

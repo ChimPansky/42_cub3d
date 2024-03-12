@@ -30,7 +30,7 @@ typedef struct s_scene_element
 	};
 }			t_scene_element;
 
-// scene_validation.c:
+// scene_description.c:
 int	read_scene_description(t_app *app, char *fpath,
 		t_sprite_sources *sprites);
 
