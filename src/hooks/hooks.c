@@ -1,10 +1,11 @@
 #include "mlx.h"
 #include "../cub3d.h"
+#include "X11/X.h"
 
 void	set_hooks(t_app *app)
 {
-	mlx_hook(app->gr.win, X11_KEY_PRESS, X11_KEY_PRESS_MASK,
+	mlx_hook(app->gr.win, KeyPress, KeyPressMask,
 		key_press_hook, &app);
-	mlx_hook(app->gr.win, X11_KEY_RELEASE, X11_KEY_RELEASE_MASK,
+	mlx_hook(app->gr.win, KeyRelease, KeyReleaseMask,
 		key_release_hook, &app);
 }
