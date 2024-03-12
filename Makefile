@@ -4,8 +4,9 @@ CFLAGS = -Wall -Werror -Wextra #-Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
-IFLAGS = -I $(LIBFT_DIR)
-LFLAGS = -L$(LIBFT_DIR) -lft #TODO: add mlx stuff
+IFLAGS = -I $(LIBFT_DIR) -I/usr/include -Imlx -Isrc
+LFLAGS = -L$(LIBFT_DIR) -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
+LIBMLX = mlx/libmlx_Linux.a
 SOURCE_DIR = src
 CB_HEADER = $(SOURCE_DIR)/$(NAME).h
 
@@ -15,14 +16,34 @@ CB_FILENAMES = \
 	cub3d.c \
 	destroy.c \
 	error_exit.c \
-	utilities.c \
-	# app.c
+	app.c
 
 CB_FILENAMES += \
-	scene_validation/floor_ceiling_validation.c \
-	scene_validation/map_validation.c \
-	scene_validation/scene_validation.c \
-	scene_validation/walls_validation.c
+	scene_description/floor_ceiling_validation.c \
+	scene_description/map_validation.c \
+	scene_description/scene_description.c \
+	scene_description/walls_validation.c \
+	scene_description/utilities.c
+
+CB_FILENAMES += \
+	graphics/graphics.c \
+	graphics/mlx_utils.c
+
+CB_FILENAMES += \
+	render/render_minimap.c \
+	render/render_scene.c
+
+CB_FILENAMES += \
+	hooks/key_hooks.c \
+	hooks/hooks.c
+
+CB_FILENAMES += \
+	game_state/game_state.c
+
+#TODO: remove
+CB_FILENAMES += \
+	debug/debug.c
+
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
@@ -30,7 +51,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
@@ -44,6 +65,9 @@ dummy: dummy.o  $(LIBFT)
 
 lft:
 	@make -C $(LIBFT_DIR) all clean
+
+$(LIBMLX):
+	cd mlx && ./configure
 
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@

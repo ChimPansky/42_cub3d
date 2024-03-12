@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/08 15:32:17 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:05:46 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+#include "scene_description.h"
 
 static int	get_next_rgb_val(char **str, int shift)
 {
@@ -22,7 +23,7 @@ static int	get_next_rgb_val(char **str, int shift)
 	skip_spaces(str);
 	if (**str == '\0')
 		return (print_error("Found incomplete RGB value "
-			"in scene description."), -1);
+			"in scene description."));
 	while (**str >= '0' && **str <= '9')
 	{
 		valid = true;
@@ -38,7 +39,7 @@ static int	get_next_rgb_val(char **str, int shift)
 	if (valid)
 		return (color_val << shift);
 	return (print_error("RGB values in scene description "
-		"must be between 0 and 255."), -1);
+		"must be between 0 and 255."));
 }
 
 int	extract_trgb_from_line(char **str, t_trgb *trgb)
@@ -51,7 +52,7 @@ int	extract_trgb_from_line(char **str, t_trgb *trgb)
 		return (FAILURE);
 	if (**str != ',')
 		return (print_error("RGB values in scene description "
-			"must be separated by commas."), FAILURE);
+			"must be separated by commas."));
 	(*str)++;
 	*trgb = *trgb | rgb;		// Red
 	rgb = get_next_rgb_val(str, 8);
@@ -59,7 +60,7 @@ int	extract_trgb_from_line(char **str, t_trgb *trgb)
 		return (FAILURE);
 	if (**str != ',')
 		return (print_error("RGB values in scene description "
-			"must be separated by commas."), FAILURE);
+			"must be separated by commas."));
 	(*str)++;
 	*trgb = *trgb | rgb;		// Blue
 	rgb = get_next_rgb_val(str, 0);
@@ -69,17 +70,17 @@ int	extract_trgb_from_line(char **str, t_trgb *trgb)
 	return (SUCCESS);
 }
 
-int	add_floor_ceiling(t_cube *cub, t_scene_element *element)
+int	add_floor_ceiling(t_sprite_sources *sprites, t_scene_element *element)
 {
 	t_trgb	*trgb;
 
 	if (element->scene_type == FLOOR)
-		trgb = &cub->walls_floor_ceiling.floor;
+		trgb = &sprites->floor;
 	else
-		trgb = &cub->walls_floor_ceiling.ceiling;
+		trgb = &sprites->ceiling;
 	if (*trgb != 0)
 		return (print_error("Found duplicate floor/ceiling element in "
-			"scene description."), FAILURE);
+			"scene description."));
 	*trgb = element->trgb;
 	return (SUCCESS);
 }

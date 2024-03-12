@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_validation.c                                 :+:      :+:    :+:   */
+/*   scene_description.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/11 10:17:03 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:07:52 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../cub3d.h"
+#include "scene_description.h"
 
 static int	extract_element_type_from_line(char **str,
 		t_scene_element *element)
@@ -75,7 +75,7 @@ static int get_next_element(int scene_fd, t_scene_element *element)
 	return (SUCCESS);
 }
 
-static int	read_walls_floor_ceiling(t_cube *cub, int scene_fd)
+static int	read_walls_floor_ceiling(t_sprite_sources *sprites, int scene_fd)
 {
 	t_scene_element 	element;
 	int					elements_read;
@@ -87,12 +87,12 @@ static int	read_walls_floor_ceiling(t_cube *cub, int scene_fd)
 			return (FAILURE);
 		if (element.scene_type == FLOOR || element.scene_type == CEILING)
 		{
-			if (add_floor_ceiling(cub, &element) != SUCCESS)
+			if (add_floor_ceiling(sprites, &element) != SUCCESS)
 				return (FAILURE);
 		}
 		else
 		{
-			if (add_wall(cub, &element) != SUCCESS)
+			if (add_wall(sprites, &element) != SUCCESS)
 				return (FAILURE);
 		}
 		elements_read++;
@@ -100,20 +100,18 @@ static int	read_walls_floor_ceiling(t_cube *cub, int scene_fd)
 	return (SUCCESS);
 }
 
-void	read_scene_description(t_app *app, char *fpath)
+int	read_scene_description(t_app *app, char *fpath, t_sprite_sources *sprites)
 {
 	int	scene_fd;
 
 	if (ft_file_check_extension(fpath, ".cub") == false
 		|| ft_strlen(fpath) < 5)
-		error_exit(cub, FAILURE, "Scene description must be a .cub file.");
+		return (print_error("Could not open scene description file."));
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
-		error_exit(cub, FAILURE, "Could not open scene description file.");
-	if (read_walls_floor_ceiling(cub, scene_fd) != SUCCESS
-		|| read_map(cub, scene_fd) != SUCCESS)
-	{
-		close(scene_fd);
-		error_exit(cub, FAILURE, NULL);
-	}
+		return (print_error("Scene description must be a .cub file."));
+	if (read_walls_floor_ceiling(sprites, scene_fd) != SUCCESS
+		|| read_map(app->game, scene_fd) != SUCCESS)
+		return (close(scene_fd), FAILURE);
+	return (close(scene_fd), SUCCESS);
 }

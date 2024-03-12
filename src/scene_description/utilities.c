@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:28:26 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/09 10:19:49 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/12 11:20:39 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+//#include "../../libft/libft.h"
+#include "libft.h"
 
 void	skip_spaces(char **str)
 {
