@@ -54,8 +54,10 @@ void	render_minimap(t_image *mm_image, t_cube *cub)
 		++pix.x;
 	}
 	pix.x = MM_W / 2 - MM_PLAYER_PIX_SZ - 1;
-	pix.y = MM_H / 2 - MM_PLAYER_PIX_SZ - 1;
 	while (++pix.x < MM_W / 2 + MM_PLAYER_PIX_SZ)
+	{
+		pix.y = MM_H / 2 - MM_PLAYER_PIX_SZ - 1;
 		while (++pix.y < MM_H / 2 + MM_PLAYER_PIX_SZ)
 			put_pixel(mm_image, pix.x, pix.y, MM_PLAYER_COL);
+	}
 }
