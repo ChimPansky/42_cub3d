@@ -42,7 +42,7 @@ t_map_sym	coord_to_map_sym(t_map *map, t_pos *coord)
 	return (UNKNOWN_SYM);
 }
 
-void	render_minimap(t_image *mm_image, t_cube *cub)
+void	render_minimap(t_image *mm_image, t_game_state *game_state)
 {
 	t_pixel	pix;
 	t_pos	coord;
@@ -54,7 +54,7 @@ void	render_minimap(t_image *mm_image, t_cube *cub)
 		pix.y = 0;
 		while (pix.y < MM_H)
 		{
-			minimap_pixel_to_coord(&pix, &coord, &cub->player.pos);
+			minimap_pixel_to_coord(&pix, &coord, &game_state->player.pos);
 			put_pixel(mm_image, pix.x, pix.y,
 				color_by_sym(coord_to_map_sym(&cub->map, &coord)));
 			++pix.y;

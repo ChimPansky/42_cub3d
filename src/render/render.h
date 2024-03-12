@@ -10,7 +10,7 @@ typedef struct s_pixel
 	int	y;
 }		t_pixel;
 
-void	render_minimap(t_image *mm_image, t_cube *cub);
-void	render_scene(t_image *scene_image, t_cube *cub);
+void	render_minimap(t_image *mm_image, t_game_state *game_state);
+void	render_scene(t_image *scene_image, t_game_state *game_state);
 
 #endif  // RENDER_H

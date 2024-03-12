@@ -7,7 +7,7 @@
 void	process_logic(t_app *app)
 {
 	t_player	*player;
-	player = &app->cub.player;
+	player = &app->game_state.player;
 	if (app->pressed_keys.w)
 		player->speed.forw = 1;
 	else if (app->pressed_keys.s)
