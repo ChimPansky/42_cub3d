@@ -1,0 +1,3 @@
+-I./libft
+-I./mlx
+-I./src

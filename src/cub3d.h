@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "stdbool.h"
 # include <errno.h>
 # include <stdlib.h>
@@ -48,38 +48,6 @@ typedef struct s_map
 	size_t			height;
 }			t_map;
 
-typedef enum e_scene_type
-{
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
-	FLOOR,
-	CEILING,
-	WALLS_FLOOR_CEILING_COUNT,
-	UNKNOWN
-}			t_scene_type;
-
-typedef struct s_scene_element
-{
-	t_scene_type	scene_type;
-	union
-	{
-		char	*tx_path;
-		t_trgb	trgb;
-	};
-}			t_scene_element;
-
-typedef struct s_sprite_source
-{
-	char	*wall_no;
-	char	*wall_so;
-	char	*wall_we;
-	char	*wall_ea;
-	t_trgb	floor;
-	t_trgb	ceiling;
-}				t_sprite_source;
-
 typedef struct s_pos
 {
 	double	x;
@@ -99,17 +67,16 @@ typedef struct s_player
 	t_speed	speed;
 }				t_player;
 
-typedef struct s_cube
+typedef struct s_game_state
 {
 	t_map		map;
 	t_player	player;
-}			t_cube;
+}			t_game_state;
 
 typedef struct s_app
 {
-	t_cube			cub;
+	t_game_state	game_state;
 	t_graph			gr;
-	t_sprite_source	sprite_sources;
 	t_pressed_keys	pressed_keys;
 
 }				t_app;
@@ -130,23 +97,9 @@ typedef struct s_app
 void	cub_init(t_app *app, int ac, char *av[]);
 void	cub_destroy(t_app *app);
 
-// scene_validation.c:
-void	read_scene_description(t_app *app, char *fpath);
-
-// walls_validation.c:
-int		add_wall(t_cube *cub, t_scene_element *element);
-int		extract_tx_path_from_line(char **str, char **tx_path);
-
-// floor_ceiling_validation.c
-int		add_floor_ceiling(t_cube *cub, t_scene_element *element);
-int		extract_trgb_from_line(char **str, t_trgb *trgb);
-
-// map_validation.c
-int		read_map(t_cube *cub, int scene_fd);
-
 // error_exit.c:
-void	print_error(char *err_msg);
-void	error_exit(t_cube *cub, int exit_code, char *err_msg);
+int	print_error(char *err_msg);
+void	error_exit(t_game_state *cub, int exit_code, char *err_msg);
 
 // utilities.c:
 void	skip_spaces(char **str);
