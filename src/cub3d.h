@@ -1,16 +1,16 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "stdbool.h"
 # include <errno.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
-# include "graphics/graphics.h"
 # include "hooks/hooks.h"
-
+# include "mlx.h"
+# include "graphics/mlx_utils.h"
 
 // Colors
 # define COLOR_RESET "\033[0;39m"
@@ -83,6 +83,13 @@ typedef struct s_sprite_sources
 	t_trgb	floor;
 	t_trgb	ceiling;
 }				t_sprite_sources;
+
+typedef struct s_graph {
+	void	*mlx;
+	void	*win;
+	t_image	minimap;
+	t_image	scene;
+}		t_graph;
 
 typedef struct s_app
 {

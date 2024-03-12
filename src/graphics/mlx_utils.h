@@ -2,7 +2,6 @@
 # define MLX_UTILS_H
 
 # include <sys/types.h>
-# include "mlx.h"
 
 typedef struct s_image {
 	void	*image;
