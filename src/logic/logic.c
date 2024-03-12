@@ -2,7 +2,7 @@
 #include "../cub3d.h"
 #include <math.h>
 
-#define PLAYER_SPEED_FIELD_PER_FRAME 0.01
+#define PLAYER_SPEED_FIELD_PER_FRAME 0.05
 
 void	process_logic(t_app *app)
 {

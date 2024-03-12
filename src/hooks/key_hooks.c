@@ -5,17 +5,17 @@
 
 void	process_tracked_keys(int key_code, t_app *app, bool is_pressed)
 {
-	if (key_code == XK_W)
+	if (key_code == XK_w)
 		app->pressed_keys.w = is_pressed;
-	if (key_code == XK_A)
+	if (key_code == XK_a)
 		app->pressed_keys.a = is_pressed;
-	if (key_code == XK_S)
+	if (key_code == XK_s)
 		app->pressed_keys.s = is_pressed;
-	if (key_code == XK_D)
+	if (key_code == XK_d)
 		app->pressed_keys.d = is_pressed;
 	if (key_code == XK_Right)
 		app->pressed_keys.right = is_pressed;
-	if (key_code == XK_A)
+	if (key_code == XK_Left)
 		app->pressed_keys.left = is_pressed;
 }
 
