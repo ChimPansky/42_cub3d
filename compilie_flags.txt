@@ -1,1 +1,1 @@
--I./libft
+-I./libft -I./mlx -I./src/ -std=c99
