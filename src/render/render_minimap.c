@@ -28,10 +28,18 @@ t_trgb	color_by_sym(t_map_sym sym)
 		return (MM_UNDEFINED_COL);
 }
 
-t_map_sym	coord_to_map_sym(t_pos *coord)
+t_map_sym	coord_to_map_sym(t_map *map, t_pos *coord)
 {
-	(void) coord;
-	return (WALL_SYM);
+	const int x = coord->x;
+	const int y = coord->y;
+
+	if (y >= (int)map->height || x >= (int)map->height || x < 0 || y < 0)
+		return (UNKNOWN_SYM);
+	if (map->raw_map.buf[y][x] == WALL_SYM)
+		return (WALL_SYM);
+	if (map->raw_map.buf[y][x] == PATH_SYM)
+		return (PATH_SYM);
+	return (UNKNOWN_SYM);
 }
 
 void	render_minimap(t_image *mm_image, t_cube *cub)
@@ -48,7 +56,7 @@ void	render_minimap(t_image *mm_image, t_cube *cub)
 		{
 			minimap_pixel_to_coord(&pix, &coord, &cub->player.pos);
 			put_pixel(mm_image, pix.x, pix.y,
-				color_by_sym(coord_to_map_sym(&coord)));
+				color_by_sym(coord_to_map_sym(&cub->map, &coord)));
 			++pix.y;
 		}
 		++pix.x;
