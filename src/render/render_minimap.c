@@ -1,8 +1,7 @@
-#include "../graphics/graphics.h"
 #include "../cub3d.h"
 #include <sys/types.h>
-#include "mlx.h"
 #include "render.h"
+#include "../graphics/graphics.h"
 
 void	minimap_pixel_to_coord(t_pixel *pix, t_pos *coord, t_pos *center)
 {
@@ -28,10 +27,17 @@ t_trgb	color_by_sym(t_map_sym sym)
 		return (MM_UNDEFINED_COL);
 }
 
-t_map_sym	coord_to_map_sym(t_pos *coord)
+t_map_sym	coord_to_map_sym(t_map *map, t_pos *coord)
 {
-	(void) coord;
-	return (WALL_SYM);
+	int X = coord->x;
+	int Y = coord->y;
+
+	if (X >= (int)map->width || Y >= (int)map->height || X < 0 || Y < 0)
+		return UNKNOWN_SYM;
+
+	if (map->raw_map.buf[Y][X] == '1')
+		return (WALL_SYM);
+	return (PATH_SYM);
 }
 
 void	render_minimap(t_image *mm_image, t_game_state *game)
@@ -48,7 +54,7 @@ void	render_minimap(t_image *mm_image, t_game_state *game)
 		{
 			minimap_pixel_to_coord(&pix, &coord, &game->player.pos);
 			put_pixel(mm_image, pix.x, pix.y,
-				color_by_sym(coord_to_map_sym(&coord)));
+				color_by_sym(coord_to_map_sym(&game->map, &coord)));
 			++pix.y;
 		}
 		++pix.x;

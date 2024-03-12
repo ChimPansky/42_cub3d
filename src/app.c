@@ -1,9 +1,10 @@
 #include "cub3d.h"
-#include "mlx.h"
+#include "../mlx/mlx.h"
 #include "render/render.h"
 #include "game_state/game_state.h"
 #include "scene_description/scene_description.h"
 #include <time.h>
+#include "graphics/graphics.h"
 
 // 1000/60 = 16.6666
 #define MSEC_PER_FRAME 16
@@ -21,11 +22,12 @@ static int	app_init(t_app *app, char *cub_path)
 	t_sprite_sources	sprites;
 
 	ft_bzero(app, sizeof(t_app));
+	ft_bzero(&sprites, sizeof(sprites));
 	if (game_init(&app->game) != SUCCESS)
 		return (FAILURE);
 	if (read_scene_description(app, cub_path, &sprites) != SUCCESS)
 		return (game_destroy(&app->game), FAILURE);
-	if (graphics_init(&app->graph, sprites) != SUCCESS)
+	if (graphics_init(&app->graph, &sprites) != SUCCESS)
 		return (game_destroy(&app->game), FAILURE);
 	sprite_sources_destroy(&sprites);
 	return (SUCCESS);

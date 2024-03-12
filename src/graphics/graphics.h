@@ -1,8 +1,7 @@
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# include "cub3d.h"
-
+# include "../cub3d.h"
 
 # define APP_W 640
 # define APP_H 480
@@ -21,9 +20,9 @@
 # define MM_UNDEFINED_COL 0x0000FF00
 # define MM_PLAYER_COL 0x00FF0000
 
+typedef struct s_sprite_sources t_sprite_sources;
 
-
-void	graphics_init(t_graph *graph, t_sprite_sources sprites);
+int	graphics_init(t_graph *graph, t_sprite_sources *sprites);
 void	graphics_destroy(t_graph *gr);
 
 #endif  // GRAPHICS_H

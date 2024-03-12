@@ -38,9 +38,9 @@ CB_FILENAMES += \
 CB_FILENAMES += \
 	game_state/game_state.c
 
-#TODO: remove
-CB_FILENAMES += \
-	debug/debug.c
+# #TODO: remove
+# CB_FILENAMES += \
+# 	debug/debug.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

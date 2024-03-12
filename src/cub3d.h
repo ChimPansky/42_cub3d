@@ -1,7 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include "stdbool.h"
 # include <errno.h>
 # include <stdlib.h>
@@ -9,7 +9,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "hooks/hooks.h"
-# include "mlx.h"
+# include "../mlx/mlx.h"
 # include "graphics/mlx_utils.h"
 
 // Colors
