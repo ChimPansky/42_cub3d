@@ -14,6 +14,7 @@ include $(LIBFT_DIR)/colors.mk
 
 CB_FILENAMES = \
 	cub3d.c \
+	error_exit.c \
 	app.c
 
 CB_FILENAMES += \
@@ -29,7 +30,15 @@ CB_FILENAMES += \
 	hooks/hooks.c
 
 CB_FILENAMES += \
+	logic/game.c \
 	logic/logic.c
+
+CB_FILENAMES += \
+	scene_description/floor_ceiling_validation.c \
+	scene_description/map_validation.c \
+	scene_description/scene_description.c \
+	scene_description/utilities.c \
+	scene_description/walls_validation.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
