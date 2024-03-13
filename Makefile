@@ -1,6 +1,5 @@
 #TODO https://stackoverflow.com/questions/2394609/makefile-header-dependencies
 
-include libft/colors.mk
 
 NAME = cub3d
 all: $(NAME)
@@ -9,12 +8,13 @@ LIBMLX = mlx/libmlx_Linux.a
 $(LIBMLX):
 	cd mlx && ./configure
 
+include libft/colors.mk
 LIBFT = libft/libft.a
 $(LIBFT):
-	@make -C $(LIBFT_DIR) all clean
+	@make -C libft all clean
 
 lft:
-	@make -C $(LIBFT_DIR) all clean
+	@make -C libft all clean
 
 .PHONY: lft
 
