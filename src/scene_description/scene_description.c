@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
 #include "scene_description.h"
+#include "cub3d.h"
+#include <stdio.h>
+#include <fcntl.h>
 
 static int	extract_element_type_from_line(char **str,
 		t_scene_element *element)

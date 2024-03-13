@@ -2,22 +2,11 @@
 # define HOOKS_H
 
 # include <stdbool.h>
+# include "structs/inputs.h"
 
-typedef struct s_pressed_keys
-{
-	bool	w;
-	bool	a;
-	bool	s;
-	bool	d;
-	bool	right;
-	bool	left;
-}		t_pressed_keys;
+void	set_hooks(void *mlx, void *win, t_inputs *inputs);
 
-typedef struct s_app	t_app;
-
-void	set_hooks(t_app *app);
-
-int		key_release_hook(int key_code, t_app *app);
-int		key_press_hook(int key_code, t_app *app);
+int		key_release_hook(int key_code, t_inputs *inputs);
+int		key_press_hook(int key_code, t_inputs *inputs);
 
 #endif  // HOOKS_H

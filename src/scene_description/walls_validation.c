@@ -12,6 +12,7 @@
 
 #include "../cub3d.h"
 #include "scene_description.h"
+#include <stdio.h>
 
 int	extract_tx_path_from_line(char **str, char **tx_path)
 {

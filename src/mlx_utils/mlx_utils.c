@@ -3,8 +3,7 @@
 #include "mlx.h"
 #include <stddef.h>
 
-t_image	*init_image(
-	void *mlx, t_image *img, int width, int height)
+t_image	*init_image(void *mlx, t_image *img, int width, int height)
 {
 	img->image = mlx_new_image(mlx, width, height);
 	if (!img->image)
@@ -12,6 +11,11 @@ t_image	*init_image(
 	img->addr = mlx_get_data_addr(img->image, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	return (img);
+}
+
+void	destroy_image(void *mlx, t_image *img)
+{
+	mlx_destroy_image(mlx, img->image);
 }
 
 void	put_pixel(t_image *img, int x, int y, unsigned int color)

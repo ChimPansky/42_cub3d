@@ -1,35 +1,36 @@
 #include "hooks.h"
 #include <X11/keysym.h>
 #include <unistd.h>
-#include "../cub3d.h"
 
-void	process_tracked_keys(int key_code, t_app *app, bool is_pressed)
+void	process_tracked_keys(int key_code, t_inputs *inputs, bool is_pressed)
 {
 	if (key_code == XK_w)
-		app->pressed_keys.w = is_pressed;
+		inputs->w = is_pressed;
 	if (key_code == XK_a)
-		app->pressed_keys.a = is_pressed;
+		inputs->a = is_pressed;
 	if (key_code == XK_s)
-		app->pressed_keys.s = is_pressed;
+		inputs->s = is_pressed;
 	if (key_code == XK_d)
-		app->pressed_keys.d = is_pressed;
+		inputs->d = is_pressed;
 	if (key_code == XK_Right)
-		app->pressed_keys.right = is_pressed;
+		inputs->right = is_pressed;
 	if (key_code == XK_Left)
-		app->pressed_keys.left = is_pressed;
+		inputs->left = is_pressed;
 }
 
-int	key_press_hook(int key_code, t_app *app)
+int	key_press_hook(int key_code, t_inputs *inputs)
 {
-	process_tracked_keys(key_code, app, true);
+	process_tracked_keys(key_code, inputs, true);
 	return (0);
 }
 
-int	key_release_hook(int key_code, t_app *app)
+// TODO app_destroy on exit, possibly set inputs->esc and check later
+#include <stdlib.h>
+int	key_release_hook(int key_code, t_inputs *inputs)
 {
 	if (key_code == XK_Escape)
 		exit(0);
 	else
-		process_tracked_keys(key_code, app, false);
+		process_tracked_keys(key_code, inputs, false);
 	return (0);
 }
