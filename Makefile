@@ -1,37 +1,47 @@
+#TODO https://stackoverflow.com/questions/2394609/makefile-header-dependencies
+
+
 NAME = cub3d
+all: $(NAME)
+
+LIBMLX = mlx/libmlx_Linux.a
+$(LIBMLX):
+	cd mlx && ./configure
+
+include libft/colors.mk
+LIBFT = libft/libft.a
+$(LIBFT):
+	@make -C libft all clean
+
+lft:
+	@make -C libft all clean
+
+.PHONY: lft
+
 CC = cc
 CFLAGS = -Wall -Werror -Wextra #-Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-IFLAGS = -I $(LIBFT_DIR) -I/usr/include -Imlx -Isrc
-LFLAGS = -L$(LIBFT_DIR) -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-LIBMLX = mlx/libmlx_Linux.a
+# CFLAGS += -O3
+IFLAGS = -I/usr/include -Ilibft -Imlx -Isrc
+LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 SOURCE_DIR = src
-CB_HEADER = $(SOURCE_DIR)/$(NAME).h
-
-include $(LIBFT_DIR)/colors.mk
 
 CB_FILENAMES = \
-	cub3d.c \
-	error_exit.c \
-	app.c
-
-CB_FILENAMES += \
-	graphics/graphics.c \
-	graphics/mlx_utils.c
-
-CB_FILENAMES += \
-	render/render_minimap.c \
-	render/render_scene.c
+	cub3d.c
 
 CB_FILENAMES += \
 	hooks/key_hooks.c \
 	hooks/hooks.c
 
 CB_FILENAMES += \
-	logic/game.c \
 	logic/logic.c
+
+CB_FILENAMES += \
+	mlx_utils/mlx_utils.c
+
+CB_FILENAMES += \
+	render/render_minimap.c \
+	render/render_scene.c
 
 CB_FILENAMES += \
 	scene_description/floor_ceiling_validation.c \
@@ -40,24 +50,24 @@ CB_FILENAMES += \
 	scene_description/utilities.c \
 	scene_description/walls_validation.c
 
+CB_FILENAMES += \
+	structs/app.c \
+	structs/game_state.c \
+	structs/graphics.c \
+	structs/inputs.c \
+	structs/map.c \
+	structs/minimap.c \
+	structs/physics.c \
+	structs/player.c \
+	structs/trgb.c
+
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
-
 $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
-
-$(LIBFT):
-	@make -C $(LIBFT_DIR) all clean
-
-lft:
-	@make -C $(LIBFT_DIR) all clean
-
-$(LIBMLX):
-	cd mlx && ./configure
 
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
@@ -70,10 +80,7 @@ fclean: clean
 
 re: fclean all
 
-test: $(NAME)
-	bash tests/test_runner.sh
-
 valgrind:
 	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME)
 
-.PHONY: all bonus clean fclean re test lft
+.PHONY: all bonus clean fclean re test

@@ -1,8 +1,8 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-# include "../cub3d.h"
-# include "../graphics/mlx_utils.h"
+# include "structs/game_state.h"
+# include "structs/minimap.h"
 
 typedef struct s_pixel
 {
@@ -10,7 +10,7 @@ typedef struct s_pixel
 	int	y;
 }		t_pixel;
 
-void	render_minimap(t_image *mm_image, t_game_state *game_state);
+void	render_minimap(t_minimap *minimap, t_game_state *game_state);
 void	render_scene(t_image *scene_image, t_game_state *game_state);
 
 #endif  // RENDER_H

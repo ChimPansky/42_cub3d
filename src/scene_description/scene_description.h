@@ -2,11 +2,23 @@
 #ifndef SCENE_VALIDATION_H
 # define SCENE_VALIDATION_H
 
-# include "../cub3d.h"
+# include "structs/trgb.h"
+# include "structs/app.h"
 
 # define MAP_SYMBOLS "01NSWE D"
 
 typedef struct s_player t_player;
+
+typedef enum e_map_char {
+	WALL = '1',
+	PATH = '0',
+	DOOR = 'D',
+	PLAYER_N = 'N',
+	PLAYER_S = 'S',
+	PLAYER_W = 'W',
+	PLAYER_E = 'E',
+	HOLE = ' ',
+}		t_map_char;
 
 typedef enum e_scene_type
 {

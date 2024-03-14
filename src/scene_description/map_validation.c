@@ -12,6 +12,8 @@
 
 #include "../cub3d.h"
 #include "scene_description.h"
+#include <math.h>
+#include <stdio.h>
 
 static int	get_map_width(t_charptr_array raw_map)
 {

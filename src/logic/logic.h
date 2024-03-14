@@ -1,8 +1,12 @@
 #ifndef LOGIC_H
 # define LOGIC_H
 
-# include "../cub3d.h"
+# include "structs/game_state.h"
+# include "structs/inputs.h"
 
-void	process_logic(t_app *app);
+# define PLAYER_SPEED_FIELD_PER_FRAME 0.05
+
+void	process_inputs(t_game_state *game_state, t_inputs *inputs);
+void	change_state_for_next_frame(t_game_state *game_state);
 
 #endif  // LOGIC_H
