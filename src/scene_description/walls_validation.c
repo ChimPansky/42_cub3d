@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/12 22:21:32 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:17:05 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,25 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 	return (SUCCESS);
 }
 
-int	add_wall(t_sprite_sources *sprites, t_scene_element *element)
+int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 {
-	char	**texture_path;
+	void	**sprite_ptr;
 
 	if (element->scene_type == NORTH)
-		texture_path = &sprites->wall_no;
+		sprite_ptr = &sprites->wall_no;
 	else if (element->scene_type == SOUTH)
-		texture_path = &sprites->wall_so;
+		sprite_ptr = &sprites->wall_so;
 	else if (element->scene_type == WEST)
-		texture_path = &sprites->wall_we;
+		sprite_ptr = &sprites->wall_we;
 	else if (element->scene_type == EAST)
-		texture_path = &sprites->wall_ea;
+		sprite_ptr = &sprites->wall_ea;
 	else
 		return (free(element->tx_path), print_error("critical: "
 			"add_tx_wall: invalid scene_type."));
-	if (*texture_path != NULL)
+	if (*sprite_ptr != NULL)
 		return (free(element->tx_path), print_error("Found duplicate "
 			"wall element in scene description."));
-	*texture_path = element->tx_path;
+	if (xpm_path_to_mlx_img(mlx, element->tx_path, *sprite_ptr) != SUCCESS)
+		return (FAILURE);
 	return (SUCCESS);
 }

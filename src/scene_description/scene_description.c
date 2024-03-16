@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/12 13:48:27 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:37:08 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int get_next_element(int scene_fd, t_scene_element *element)
 	return (SUCCESS);
 }
 
-static int	read_walls_floor_ceiling(t_sprite_sources *sprites, int scene_fd)
+static int	read_walls_floor_ceiling(void *mlx, t_sprites *sprites, int scene_fd)
 {
 	t_scene_element 	element;
 	int					elements_read;
@@ -94,26 +94,27 @@ static int	read_walls_floor_ceiling(t_sprite_sources *sprites, int scene_fd)
 		}
 		else
 		{
-			if (add_wall(sprites, &element) != SUCCESS)
-				return (FAILURE);
+			if (add_wall(mlx, sprites, &element) != SUCCESS)
+				return (free(element.tx_path), FAILURE);
+			free(element.tx_path);
 		}
 		elements_read++;
 	}
 	return (SUCCESS);
 }
 
-int	read_scene_description(t_app *app, char *fpath, t_sprite_sources *sprites)
+int	read_scene_description(t_app *app, char *fpath)
 {
 	int	scene_fd;
 
-	ft_bzero(sprites, sizeof(t_sprite_sources));
+	ft_bzero(&app->gr.sprites, sizeof(t_sprites));
 	if (ft_file_check_extension(fpath, ".cub") == false
 		|| ft_strlen(fpath) < 5)
 		return (print_error("Could not open scene description file."));
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
 		return (print_error("Scene description must be a .cub file."));
-	if (read_walls_floor_ceiling(sprites, scene_fd) != SUCCESS
+	if (read_walls_floor_ceiling(app->mlx, &app->gr.sprites, scene_fd) != SUCCESS
 		|| read_map(&app->game_state, scene_fd) != SUCCESS)
 		return (close(scene_fd), FAILURE);
 	return (close(scene_fd), SUCCESS);

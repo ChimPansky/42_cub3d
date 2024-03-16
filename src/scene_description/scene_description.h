@@ -42,26 +42,15 @@ typedef struct s_scene_element
 	};
 }			t_scene_element;
 
-typedef struct s_sprite_source
-{
-	char	*wall_no;
-	char	*wall_so;
-	char	*wall_we;
-	char	*wall_ea;
-	t_trgb	floor;
-	t_trgb	ceiling;
-}				t_sprite_sources;
-
 // scene_description.c:
-int	read_scene_description(t_app *app, char *fpath,
-		t_sprite_sources *sprites);
+int	read_scene_description(t_app *app, char *fpath);
 
 // walls_validation.c:
-int		add_wall(t_sprite_sources *sprites, t_scene_element *element);
+int		add_wall(void *mlx, t_sprites *sprites, t_scene_element *element);
 int		extract_tx_path_from_line(char **str, char **tx_path);
 
 // floor_ceiling_validation.c
-int		add_floor_ceiling(t_sprite_sources *sprites, t_scene_element *element);
+int		add_floor_ceiling(t_sprites *sprites, t_scene_element *element);
 int		extract_trgb_from_line(char **str, t_trgb *trgb);
 
 // map_validation.c

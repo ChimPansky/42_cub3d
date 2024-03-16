@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/12 13:05:46 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/16 15:29:02 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	extract_trgb_from_line(char **str, t_trgb *trgb)
 	return (SUCCESS);
 }
 
-int	add_floor_ceiling(t_sprite_sources *sprites, t_scene_element *element)
+int	add_floor_ceiling(t_sprites *sprites, t_scene_element *element)
 {
 	t_trgb	*trgb;
 

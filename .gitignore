@@ -12,6 +12,7 @@ test.c
 #folders:
 minishell_tester/
 minilibx_resources
+unit_tests
 
 # binaries
 *.o
