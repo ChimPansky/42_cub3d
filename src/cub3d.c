@@ -1,4 +1,5 @@
 // 1000/60 = 16.6666
+#include "mlx.h"
 #define MSEC_PER_FRAME 16
 
 #define COLOR_RESET "\033[0;39m"
@@ -13,16 +14,13 @@
 #include "logic/logic.h"
 #include "hooks/hooks.h"
 #include <time.h>
+#include "mlx_utils/mlx_utils.h"
 
 int	print_error(char *err_msg)
 {
-	ft_dprintf(STDERR_FILENO, COLOR_RED);
 	ft_dprintf(STDERR_FILENO, "Error\n");
 	if (err_msg)
 		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
-	else
-		ft_dprintf(STDERR_FILENO, "Unknown Error\n");
-	ft_dprintf(STDERR_FILENO, COLOR_RESET);
 	return (FAILURE);
 }
 
@@ -33,9 +31,10 @@ static int	app_init(t_app *app, char *cub_path)
 	if (!app->mlx)
 		return (!SUCCESS);
 	if (game_init(&app->game_state) != SUCCESS)
-		return (FAILURE);
-	if (read_scene_description(app, cub_path, &app->gr.sprites) != SUCCESS)
-		return (game_destroy(&app->game_state), FAILURE);
+		return (mlx_destroy(app->mlx), FAILURE);
+	if (read_scene_description(app, cub_path) != SUCCESS)
+		return (mlx_destroy(app->mlx), game_destroy(&app->game_state),
+			FAILURE);
 	graphics_init(app->mlx, &app->gr);
 	return (SUCCESS);
 }
@@ -44,7 +43,7 @@ void	app_destroy(t_app *app)
 {
 	game_destroy(&app->game_state);
 	graphics_destroy(&app->mlx, &app->gr);
-	// TODO: mlx_destroy (mlx_display? free(mlx)?)
+	mlx_destroy(app->mlx);
 }
 
 // TODO mlx_put_image_to_window inside render?

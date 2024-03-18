@@ -3,8 +3,9 @@
 #include "trgb.h"
 #include "map.h"
 #include "mlx_utils/mlx_utils.h"
-
 #include "libft.h"
+#include "cub3d.h"
+#include "stdio.h"
 
 int	minimap_init(void *mlx, t_minimap *minimap)
 {
@@ -15,7 +16,8 @@ int	minimap_init(void *mlx, t_minimap *minimap)
 	minimap->pix_per_field = MM_PIXEL_PER_FIELD;
 	if (NULL
 		== init_image(mlx, &minimap->image, minimap->width, minimap->height))
-		return (!SUCCESS);
+		return (print_error(NULL), perror("minimap_init: init_image"),
+			FAILURE);
 	return (SUCCESS);
 }
 

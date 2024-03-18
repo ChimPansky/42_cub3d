@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/16 15:17:05 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/16 20:11:10 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,11 @@ int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 	else if (element->scene_type == EAST)
 		sprite_ptr = &sprites->wall_ea;
 	else
-		return (free(element->tx_path), print_error("critical: "
-			"add_tx_wall: invalid scene_type."));
+		return (print_error("critical: add_tx_wall: invalid scene_type."));
 	if (*sprite_ptr != NULL)
-		return (free(element->tx_path), print_error("Found duplicate "
-			"wall element in scene description."));
-	if (xpm_path_to_mlx_img(mlx, element->tx_path, *sprite_ptr) != SUCCESS)
+		return (print_error("Found duplicate wall element in "
+			"scene description."));
+	if (xpm_path_to_mlx_img(mlx, element->tx_path, sprite_ptr) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
 }
