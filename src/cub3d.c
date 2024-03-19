@@ -9,7 +9,7 @@
 
 #include "libft.h"
 #include "structs/app.h"
-#include "scene_description/scene_description.h"
+#include "input_parsing/input_parsing.h"
 #include "render/render.h"
 #include "logic/logic.h"
 #include "hooks/hooks.h"
