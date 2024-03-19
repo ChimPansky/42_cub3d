@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walls_validation.c                                 :+:      :+:    :+:   */
+/*   parse_wall_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/16 20:11:10 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:05:29 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "scene_description.h"
+#include "input_parsing.h"
 #include <stdio.h>
 
 int	extract_tx_path_from_line(char **str, char **tx_path)

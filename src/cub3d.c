@@ -58,8 +58,8 @@ int	main_loop(void *data)
 	process_inputs(&app->game_state, &app->inputs);
 	change_state_for_next_frame(&app->game_state);
 	render_scene(&app->gr.scene, &app->game_state);
-	mlx_put_image_to_window(app->mlx, app->gr.win,
-		app->gr.scene.image, 0, 0);
+	//mlx_put_image_to_window(app->mlx, app->gr.win,
+		//app->gr.scene.image, 0, 0);
 	render_minimap(&app->gr.minimap, &app->game_state);
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.minimap.image.image, MM_X, MM_Y);

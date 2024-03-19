@@ -1,85 +1,96 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_validation.c                                   :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/12 13:33:25 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:05:24 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "scene_description.h"
+#include "input_parsing.h"
 #include <math.h>
-#include <stdio.h>
 
-static int	get_map_width(t_charptr_array raw_map)
+
+// int	check_walls_in_col(t_charptr_array raw_map, size_t col, size_t map_height)
+// {
+// 	size_t	row;
+// 	char	last_char;
+// 	char	cur_char;
+
+// 	row = 0;
+// 	last_char = HOLE;
+// 	while (row < map_height)
+// 	{
+// 		cur_char = raw_map.buf[row][col];
+// 		if (ft_strchr("NSWE", cur_char))
+// 			cur_char = PATH;
+// 		if (cur_char == PATH && (row == map_height - 1
+// 			|| (last_char != PATH && last_char != WALL)))
+// 			return (FAILURE);
+// 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
+// 			return (FAILURE);
+// 		last_char = cur_char;
+// 		row++;
+// 	}
+// 	return (SUCCESS);
+// }
+
+// int	check_walls_in_row(t_charptr_array raw_map, size_t row, size_t map_width)
+// {
+// 	size_t	col;
+// 	char	last_char;
+// 	char	cur_char;
+
+// 	col = 0;
+// 	last_char = HOLE;
+// 	while (col < map_width)
+// 	{
+// 		cur_char = raw_map.buf[row][col];
+// 		if (ft_strchr("NSWE", cur_char))
+// 			cur_char = PATH;
+// 		if (cur_char == PATH && (col == map_width - 1
+// 			|| (last_char != PATH && last_char != WALL)))
+// 			return (FAILURE);
+// 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
+// 			return (FAILURE);
+// 		last_char = cur_char;
+// 		col++;
+// 	}
+// 	return (SUCCESS);
+// }
+
+
+int	check_walls_row_col(t_charptr_array raw_map, int row_col_check, size_t row_col_to_check, size_t max_index)
 {
-	size_t	row;
-	int	max_width;
-	int	cur_width;
-
-	row = 0;
-	max_width = 0;
-	cur_width = 0;
-	while (row < raw_map.sz)
-	{
-		cur_width = ft_strlen(raw_map.buf[row++]);
-		if (cur_width > max_width)
-			max_width = cur_width;
-	}
-	return (max_width);
-}
-
-int	check_walls_in_col(t_charptr_array raw_map, size_t col, size_t map_height)
-{
-	size_t	row;
 	char	last_char;
 	char	cur_char;
+	size_t	i;
 
-	row = 0;
+	i = 0;
 	last_char = HOLE;
-	while (row < map_height)
+	while (i < max_index)
 	{
-		cur_char = raw_map.buf[row][col];
+		if (row_col_check == ROW_CHECK)
+			cur_char = raw_map.buf[row_col_to_check][i];
+		else
+			cur_char = raw_map.buf[i][row_col_to_check];
 		if (ft_strchr("NSWE", cur_char))
 			cur_char = PATH;
-		if (cur_char == PATH && (row == map_height - 1
+		if (cur_char == PATH && (i == max_index - 1
 			|| (last_char != PATH && last_char != WALL)))
 			return (FAILURE);
 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
 			return (FAILURE);
 		last_char = cur_char;
-		row++;
+		i++;
 	}
 	return (SUCCESS);
 }
 
-int	check_walls_in_row(t_charptr_array raw_map, size_t row, size_t map_width)
-{
-	size_t	col;
-	char	last_char;
-	char	cur_char;
-
-	col = 0;
-	last_char = HOLE;
-	while (col < map_width)
-	{
-		cur_char = raw_map.buf[row][col];
-		if (ft_strchr("NSWE", cur_char))
-			cur_char = PATH;
-		if (cur_char == PATH && (col == map_width - 1
-			|| (last_char != PATH && last_char != WALL)))
-			return (FAILURE);
-		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
-			return (FAILURE);
-		last_char = cur_char;
-		col++;
-	}
-	return (SUCCESS);
-}
 static int	check_walls(t_map map)
 {
 	size_t	row;
@@ -89,12 +100,12 @@ static int	check_walls(t_map map)
 	col = 0;
 	while (row < map.height)
 	{
-		if (check_walls_in_row(map.raw_map, row++, map.width) != SUCCESS)
+		if (check_walls_row_col(map.raw_map, ROW_CHECK, row++, map.width) != SUCCESS)
 			return (print_error("Map not surrounded by walls"));
 	}
 	while (col < map.width)
 	{
-		if (check_walls_in_col(map.raw_map, col++, map.height) != SUCCESS)
+		if (check_walls_row_col(map.raw_map, COL_CHECK, col++, map.height) != SUCCESS)
 			return (print_error("Map not surrounded by walls"));
 	}
 	return (SUCCESS);
@@ -148,33 +159,16 @@ static int	check_for_invalid_chars_and_player(t_player *player,
 	return (SUCCESS);
 }
 
-static int	equalize_string_lengths(t_map *map)
+int	read_and_validate_map(t_game_state *game, int scene_fd)
 {
-	size_t	row;
-
-	row = 0;
-	while (row < map->raw_map.sz)
-	{
-		if (ft_strlen(map->raw_map.buf[row]) < map->width)
-		{
-			map->raw_map.buf[row] = ft_strrpad(map->raw_map.buf[row], ' ',
-				map->width, true);
-			if (!map->raw_map.buf[row])
-				return (perror("validate_map: ft_strrpad"), FAILURE);
-		}
-		row++;
-	}
-	return (SUCCESS);
-}
-
-static int	validate_map(t_game_state *game)
-{
+	if (fill_raw_map(&game->map, scene_fd) != SUCCESS)
+		return (FAILURE);
 	game->map.height = game->map.raw_map.sz;
 	game->map.width = get_map_width(game->map.raw_map);
-	if (game->map.height < 3 || game->map.width < 3)
-		return (print_error("Map too small."));
 	if (equalize_string_lengths(&game->map) != SUCCESS)
 		return (FAILURE);
+	if (game->map.height < 3 || game->map.width < 3)
+		return (print_error("Map too small."));
 	if (check_for_invalid_chars_and_player(&game->player, &game->map)
 		!= SUCCESS)
 		return (FAILURE);
@@ -182,43 +176,5 @@ static int	validate_map(t_game_state *game)
 		return (print_error("Map has no player."));
 	if (check_walls(game->map) != SUCCESS)
 		return (FAILURE);
-	return (SUCCESS);
-}
-
-
-static int	fill_raw_map(t_map *map, int scene_fd)
-{
-	t_line	line;
-	bool	empty_lines;
-
-	empty_lines = false;
-	while (true)
-	{
-		line = get_next_line_no_nl(scene_fd);
-		if (line.str == NULL)
-			break ;
-		if (ft_string_is_empty(line.str))
-		{
-			free(line.str);
-			if (map->raw_map.sz > 0)
-				empty_lines = true;
-		}
-		else if (empty_lines)
-			return (free(line.str),	print_error("Found empty line(s) in map"));
-		else
-			charptr_array_add_allocated_str(&map->raw_map, &line.str);
-	}
-	if (line.error)
-		return (perror("read_map: get_next_line"), FAILURE);
-	return (SUCCESS);
-}
-
-int	read_map(t_game_state *game, int scene_fd)
-{
-	if (fill_raw_map(&game->map, scene_fd) != SUCCESS)
-		return (FAILURE);
-	if (validate_map(game) != SUCCESS)
-		return (FAILURE);
-	//print_player(map.player);
 	return (SUCCESS);
 }

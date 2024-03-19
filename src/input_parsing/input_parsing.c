@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene_description.c                                :+:      :+:    :+:   */
+/*   input_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/16 15:37:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:05:03 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_description.h"
+#include "input_parsing.h"
 #include "cub3d.h"
 #include <stdio.h>
 #include <fcntl.h>
@@ -115,7 +115,7 @@ int	read_scene_description(t_app *app, char *fpath)
 	if (scene_fd == -1)
 		return (print_error("Scene description must be a .cub file."));
 	if (read_walls_floor_ceiling(app->mlx, &app->gr.sprites, scene_fd) != SUCCESS
-		|| read_map(&app->game_state, scene_fd) != SUCCESS)
+		|| read_and_validate_map(&app->game_state, scene_fd) != SUCCESS)
 		return (close(scene_fd), FAILURE);
 	return (close(scene_fd), SUCCESS);
 }

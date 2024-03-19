@@ -18,10 +18,18 @@ int	graphics_init(void *mlx, t_graph *gr)
 			minimap_destroy(mlx, &gr->minimap),
 			print_error(NULL), perror("graphics_init: init_image"),
 			FAILURE);
-	// todo: figure out why this doesnt display the img in the window:
-	//mlx_put_image_to_window(mlx,
-				// gr->win, gr->sprites.wall_so,
-				// 50, 50);
+	mlx_put_image_to_window(mlx,
+				 gr->win, gr->sprites.wall_no,
+				 0, 0);
+	mlx_put_image_to_window(mlx,
+				 gr->win, gr->sprites.wall_so,
+				 100, 100);
+	mlx_put_image_to_window(mlx,
+				 gr->win, gr->sprites.wall_we,
+				 300, 300);
+	mlx_put_image_to_window(mlx,
+				 gr->win, gr->sprites.wall_ea,
+				 400, 400);
 	return (SUCCESS);
 }
 

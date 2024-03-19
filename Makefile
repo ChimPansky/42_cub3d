@@ -44,11 +44,12 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	scene_description/floor_ceiling_validation.c \
-	scene_description/map_validation.c \
-	scene_description/scene_description.c \
-	scene_description/utilities.c \
-	scene_description/walls_validation.c
+	input_parsing/input_parsing.c \
+	input_parsing/parse_floor_ceiling_colors.c \
+	input_parsing/parse_map.c \
+	input_parsing/parse_wall_textures.c \
+	input_parsing/prepare_map.c \
+	input_parsing/utilities.c
 
 CB_FILENAMES += \
 	structs/app.c \

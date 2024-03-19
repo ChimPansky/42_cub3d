@@ -45,7 +45,7 @@ static int	sl_destroy_notify(t_sl_game *game)
 void	sl_mlx_set_hooks(t_sl_game *game)
 {
 	void	*mlx_conn;
-	void	*mlx_window;
+	void	*mlxwindow;
 
 	mlx_conn = game->mlx->mlx_connection;
 	mlx_window = game->mlx->mlx_window;

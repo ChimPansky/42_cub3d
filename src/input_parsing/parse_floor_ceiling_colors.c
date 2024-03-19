@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   floor_ceiling_validation.c                         :+:      :+:    :+:   */
+/*   parse_floor_ceiling_colors.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/16 15:29:02 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:05:13 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-#include "scene_description.h"
+#include "input_parsing.h"
 
 static int	get_next_rgb_val(char **str, int shift)
 {
