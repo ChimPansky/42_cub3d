@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:05:35 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:22:32 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	equalize_string_lengths(t_map *map)
 		if (ft_strlen(map->raw_map.buf[row]) < map->width)
 		{
 			map->raw_map.buf[row] = ft_strrpad(map->raw_map.buf[row], ' ',
-				map->width, true);
+					map->width, true);
 			if (!map->raw_map.buf[row])
 				return (perror("validate_map: ft_strrpad"), FAILURE);
 		}
@@ -32,7 +32,6 @@ int	equalize_string_lengths(t_map *map)
 	}
 	return (SUCCESS);
 }
-
 
 int	fill_raw_map(t_map *map, int scene_fd)
 {
@@ -52,7 +51,7 @@ int	fill_raw_map(t_map *map, int scene_fd)
 				empty_lines = true;
 		}
 		else if (empty_lines)
-			return (free(line.str),	print_error("Found empty line(s) in map"));
+			return (free(line.str), print_error("Found empty line(s) in map"));
 		else
 			charptr_array_add_allocated_str(&map->raw_map, &line.str);
 	}

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_parsing.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/03/19 09:23:19 by tkasbari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef INPUT_PARSING_H
 # define INPUT_PARSING_H
@@ -7,7 +18,7 @@
 
 # define MAP_SYMBOLS "01NSWE D"
 
-typedef struct s_player t_player;
+typedef struct s_player	t_player;
 
 typedef enum e_map_char {
 	WALL = '1',
@@ -48,7 +59,7 @@ typedef struct s_scene_element
 }			t_scene_element;
 
 // input_parsing.c:
-int	read_scene_description(t_app *app, char *fpath);
+int		read_scene_description(t_app *app, char *fpath);
 
 // parse_wall_textures.c:
 int		add_wall(void *mlx, t_sprites *sprites, t_scene_element *element);

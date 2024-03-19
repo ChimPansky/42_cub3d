@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:05:24 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:17:54 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,8 @@
 #include "input_parsing.h"
 #include <math.h>
 
-
-// int	check_walls_in_col(t_charptr_array raw_map, size_t col, size_t map_height)
-// {
-// 	size_t	row;
-// 	char	last_char;
-// 	char	cur_char;
-
-// 	row = 0;
-// 	last_char = HOLE;
-// 	while (row < map_height)
-// 	{
-// 		cur_char = raw_map.buf[row][col];
-// 		if (ft_strchr("NSWE", cur_char))
-// 			cur_char = PATH;
-// 		if (cur_char == PATH && (row == map_height - 1
-// 			|| (last_char != PATH && last_char != WALL)))
-// 			return (FAILURE);
-// 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
-// 			return (FAILURE);
-// 		last_char = cur_char;
-// 		row++;
-// 	}
-// 	return (SUCCESS);
-// }
-
-// int	check_walls_in_row(t_charptr_array raw_map, size_t row, size_t map_width)
-// {
-// 	size_t	col;
-// 	char	last_char;
-// 	char	cur_char;
-
-// 	col = 0;
-// 	last_char = HOLE;
-// 	while (col < map_width)
-// 	{
-// 		cur_char = raw_map.buf[row][col];
-// 		if (ft_strchr("NSWE", cur_char))
-// 			cur_char = PATH;
-// 		if (cur_char == PATH && (col == map_width - 1
-// 			|| (last_char != PATH && last_char != WALL)))
-// 			return (FAILURE);
-// 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
-// 			return (FAILURE);
-// 		last_char = cur_char;
-// 		col++;
-// 	}
-// 	return (SUCCESS);
-// }
-
-
-int	check_walls_row_col(t_charptr_array raw_map, int row_col_check, size_t row_col_to_check, size_t max_index)
+int	check_walls_row_col(t_charptr_array raw_map, int row_col_check,
+	size_t row_col_to_check, size_t max_index)
 {
 	char	last_char;
 	char	cur_char;
@@ -81,7 +32,7 @@ int	check_walls_row_col(t_charptr_array raw_map, int row_col_check, size_t row_c
 		if (ft_strchr("NSWE", cur_char))
 			cur_char = PATH;
 		if (cur_char == PATH && (i == max_index - 1
-			|| (last_char != PATH && last_char != WALL)))
+				|| (last_char != PATH && last_char != WALL)))
 			return (FAILURE);
 		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
 			return (FAILURE);
@@ -100,12 +51,14 @@ static int	check_walls(t_map map)
 	col = 0;
 	while (row < map.height)
 	{
-		if (check_walls_row_col(map.raw_map, ROW_CHECK, row++, map.width) != SUCCESS)
+		if (check_walls_row_col(map.raw_map, ROW_CHECK, row++, map.width)
+			!= SUCCESS)
 			return (print_error("Map not surrounded by walls"));
 	}
 	while (col < map.width)
 	{
-		if (check_walls_row_col(map.raw_map, COL_CHECK, col++, map.height) != SUCCESS)
+		if (check_walls_row_col(map.raw_map, COL_CHECK, col++, map.height)
+			!= SUCCESS)
 			return (print_error("Map not surrounded by walls"));
 	}
 	return (SUCCESS);
@@ -116,16 +69,16 @@ static int	set_player_pos_and_angle(t_player *player,
 {
 	if (player->pos.x != 0.0)
 		return (print_error("Found multiple starting positions "
-			"for player in map"));
+				"for player in map"));
 	player->pos.x = x + 0.5;
 	player->pos.y = y + 0.5;
 	if (direction == PLAYER_E)
 		player->angle = 0.0;
-	else if(direction == PLAYER_S)
+	else if (direction == PLAYER_S)
 		player->angle = M_PI_2;
-	else if(direction == PLAYER_W)
+	else if (direction == PLAYER_W)
 		player->angle = M_PI;
-	else if(direction == PLAYER_N)
+	else if (direction == PLAYER_N)
 		player->angle = M_PI + M_PI_2;
 	return (SUCCESS);
 }
@@ -148,7 +101,7 @@ static int	check_for_invalid_chars_and_player(t_player *player,
 			if (ft_strchr("NSWE", map->raw_map.buf[row][col]))
 			{
 				if (set_player_pos_and_angle(player, col, row,
-					map->raw_map.buf[row][col]) != SUCCESS)
+						map->raw_map.buf[row][col]) != SUCCESS)
 					return (FAILURE);
 				map->raw_map.buf[row][col] = PATH;
 			}

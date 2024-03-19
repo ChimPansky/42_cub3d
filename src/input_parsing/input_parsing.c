@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:05:03 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:19:36 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int	extract_element_type_from_line(char **str,
 	else if (ft_strncmp(*str, "C ", 2) == 0)
 		element->scene_type = CEILING;
 	else
-	 	return (print_error("Found unknown texture element "
-			"in scene description."), FAILURE);
+		return (print_error("Found unknown texture element "
+				"in scene description."), FAILURE);
 	if (element->scene_type == CEILING || element->scene_type == FLOOR)
 		(*str) += 2;
 	else
-	 	(*str) += 3;
+		(*str) += 3;
 	return (SUCCESS);
 }
 
@@ -50,7 +50,7 @@ static int	extract_element_from_line(char **str, t_scene_element *element)
 	return (extract_tx_path_from_line(str, &element->tx_path));
 }
 
-static int get_next_element(int scene_fd, t_scene_element *element)
+static int	get_next_element(int scene_fd, t_scene_element *element)
 {
 	t_line	line;
 	char	*ptr_free;
@@ -63,7 +63,7 @@ static int get_next_element(int scene_fd, t_scene_element *element)
 			return (perror("get_next_element: get_next_line"), FAILURE);
 		if (line.str == NULL)
 			return (print_error("Missing texture element "
-				"in scene description."), FAILURE);
+					"in scene description."), FAILURE);
 		if (ft_string_is_empty(line.str))
 			free(ptr_free);
 		else
@@ -77,10 +77,11 @@ static int get_next_element(int scene_fd, t_scene_element *element)
 	return (SUCCESS);
 }
 
-static int	read_walls_floor_ceiling(void *mlx, t_sprites *sprites, int scene_fd)
+static int	read_walls_floor_ceiling(void *mlx,
+	t_sprites *sprites, int scene_fd)
 {
-	t_scene_element 	element;
-	int					elements_read;
+	t_scene_element	element;
+	int				elements_read;
 
 	elements_read = 0;
 	while (elements_read < WALLS_FLOOR_CEILING_COUNT)
@@ -114,7 +115,8 @@ int	read_scene_description(t_app *app, char *fpath)
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
 		return (print_error("Scene description must be a .cub file."));
-	if (read_walls_floor_ceiling(app->mlx, &app->gr.sprites, scene_fd) != SUCCESS
+	if (read_walls_floor_ceiling(app->mlx, &app->gr.sprites, scene_fd)
+		!= SUCCESS
 		|| read_and_validate_map(&app->game_state, scene_fd) != SUCCESS)
 		return (close(scene_fd), FAILURE);
 	return (close(scene_fd), SUCCESS);

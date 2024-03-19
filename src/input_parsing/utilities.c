@@ -6,16 +6,15 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:28:26 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/18 20:07:20 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:23:53 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../libft/libft.h"
 #include "libft.h"
 
 void	skip_spaces(char **str)
 {
-	while(**str == ' ')
+	while (**str == ' ')
 		(*str)++;
 }
 
@@ -32,8 +31,8 @@ t_line	get_next_line_no_nl(int scene_fd)
 int	get_map_width(t_charptr_array raw_map)
 {
 	size_t	row;
-	int	max_width;
-	int	cur_width;
+	int		max_width;
+	int		cur_width;
 
 	row = 0;
 	max_width = 0;

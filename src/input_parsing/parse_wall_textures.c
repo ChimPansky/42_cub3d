@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:05:29 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/19 09:12:43 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 		return (perror("extract_tx_path_from_line: ft_strdup"), FAILURE);
 	if (ft_file_check_extension(*tx_path, ".xpm") == false)
 		return (free(*tx_path), print_error("Wall textures "
-			"in scene description have to be .xpm files."));
+				"in scene description have to be .xpm files."));
 	return (SUCCESS);
 }
 
@@ -45,7 +45,7 @@ int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 		return (print_error("critical: add_tx_wall: invalid scene_type."));
 	if (*sprite_ptr != NULL)
 		return (print_error("Found duplicate wall element in "
-			"scene description."));
+				"scene description."));
 	if (xpm_path_to_mlx_img(mlx, element->tx_path, sprite_ptr) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
