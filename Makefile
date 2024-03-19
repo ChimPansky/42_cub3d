@@ -59,7 +59,8 @@ CB_FILENAMES += \
 	structs/minimap.c \
 	structs/physics.c \
 	structs/player.c \
-	structs/trgb.c
+	structs/trgb.c \
+	structs/vector.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
@@ -71,6 +72,9 @@ $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+
+dummy: $(OBJ) $(LIBFT) $(LIBMLX) dummy.o
+	$(CC) $(CFLAGS) src/structs/vector.o dummy.o -o dummy $(LFLAGS)
 
 clean:
 	rm -f $(OBJ)
