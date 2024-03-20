@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 12:09:14 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:56:12 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,33 @@
 
 #include "math.h"
 
-typedef struct s_vector
+typedef struct s_cartesian_vector
 {
 	double	x;
 	double	y;
-}				t_vector;
+}				t_cvector;
 
-t_vector	vector(double x, double y);
-double		get_vec_len(t_vector vec);
-double		get_vec_angle(t_vector vec);
-t_vector	vector_rotate(t_vector vec, double angle);
-t_vector	vector_add(t_vector vec1, t_vector vec2);
-t_vector	vector_sub(t_vector vec1, t_vector vec2);
-t_vector	vector_mult(t_vector vec1, t_vector vec2);
-t_vector	vector_normalize(t_vector vec);
-void		vector_print(t_vector vec);
+typedef struct s_polar_vector
+{
+	double	r;
+	double	phi;
+}				t_pvector;
+
+double		angles_add(double angle1, double angle2);
+
+// functions for cartesian vectors:
+t_cvector	cvector(double x, double y);
+t_cvector	angle_to_cvector(double angle);
+double		get_cvec_len(t_cvector cvec);
+t_cvector	cvector_rotate(t_cvector cvec, double angle);
+t_cvector	cvector_add(t_cvector cvec1, t_cvector cvec2);
+t_cvector	cvector_normalize(t_cvector cvec);
+void		cvector_print(t_cvector cvec); // TODO: remove
+
+// functions for polar vectors:
+t_pvector	pvector(double r, double phi);
+t_pvector	coords_to_pvector(double x, double y);
+t_pvector	pvector_rotate(t_pvector pvec, double rot_angle);
+void		pvector_print(t_pvector pvec);	//TODO: remove
 
 #endif  // VECTOR_H

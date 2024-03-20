@@ -60,7 +60,8 @@ CB_FILENAMES += \
 	structs/physics.c \
 	structs/player.c \
 	structs/trgb.c \
-	structs/vector.c
+	structs/cartesian_vector.c \
+	structs/polar_vector.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
@@ -73,8 +74,8 @@ $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-dummy: $(OBJ) $(LIBFT) $(LIBMLX) dummy.o
-	$(CC) $(CFLAGS) src/structs/vector.o dummy.o -o dummy $(LFLAGS)
+dummy: $(LIBFT) $(LIBMLX) src/structs/polar_vector.o  src/structs/cartesian_vector.o dummy.o
+	$(CC) $(CFLAGS) src/structs/polar_vector.o  src/structs/cartesian_vector.o 	dummy.o -o dummy $(LFLAGS)
 
 clean:
 	rm -f $(OBJ)
