@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/20 13:56:12 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:56:09 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void		cvector_print(t_cvector cvec); // TODO: remove
 // functions for polar vectors:
 t_pvector	pvector(double r, double phi);
 t_pvector	coords_to_pvector(double x, double y);
+t_pvector	pvector_scale(t_pvector pvec, double factor);
 t_pvector	pvector_rotate(t_pvector pvec, double rot_angle);
 void		pvector_print(t_pvector pvec);	//TODO: remove
 

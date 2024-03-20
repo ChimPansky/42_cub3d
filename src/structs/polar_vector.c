@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/20 14:04:34 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/20 16:55:49 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ t_pvector	pvector(double r, double phi)
 
 	result.r = r;
 	result.phi = phi;
+	return (result);
+}
+
+t_pvector	pvector_scale(t_pvector pvec, double factor)
+{
+	t_pvector	result;
+
+	result.r = pvec.r * factor;
+	result.phi = pvec.phi;
 	return (result);
 }
 
