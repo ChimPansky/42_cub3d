@@ -17,6 +17,9 @@ void	render_scene(t_image *scene_image, t_game_state *cub)
 	camera_left = pos_sub_pvec(camera_center, screen_pvect);
 	camera_right = pos_add_pvec(camera_center, screen_pvect);
 
+	(void)camera_left;
+	(void)camera_right;
+
 	(void)screen_pvect;
 	(void)scene_image;
 	(void)cub;
