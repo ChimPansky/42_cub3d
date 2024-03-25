@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:23:19 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/25 13:08:28 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "structs/app.h"
 
 # define MAP_SYMBOLS "01NSWE D"
+# define FLOOR_CEILING_TRANSPARENCY 50
 
 typedef struct s_player	t_player;
 

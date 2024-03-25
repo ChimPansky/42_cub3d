@@ -1,59 +1,34 @@
 #include "trgb.h"
+#include "libft.h"
 
-
-static int	get_next_rgb_val(char **str, int shift)
+t_trgb	trgb_create(int t, int r, int g, int b)
 {
-	int		color_val;
-	bool	valid;
+	t_trgb	color;
 
-	valid = false;
-	color_val = 0;
-	skip_spaces(str);
-	if (**str == '\0')
-		return (print_error("Found incomplete RGB value "
-				"in scene description."));
-	while (**str >= '0' && **str <= '9')
-	{
-		valid = true;
-		color_val = color_val * 10 + **str - '0';
-		(*str)++;
-		if (color_val > 255)
-		{
-			valid = false;
-			break ;
-		}
-	}
-	skip_spaces(str);
-	if (valid)
-		return (color_val << shift);
-	return (print_error("RGB values in scene description "
-			"must be between 0 and 255."));
+	color = 0;
+	color |= t << 24;
+	color |= r << 16;
+	color |= g << 8;
+	color |= b;
+	return (color);
 }
 
-int	extract_trgb_from_line(char **str, t_trgb *trgb)
+int	get_t_from_trgb(t_trgb color)
 {
-	int	rgb;
+	return ((color >> 24) & 255);
+}
 
-	*trgb = *trgb | 100 << 24;
-	rgb = get_next_rgb_val(str, 16);
-	if (rgb == -1)
-		return (FAILURE);
-	if (**str != ',')
-		return (print_error("RGB values in scene description "
-				"must be separated by commas."));
-	(*str)++;
-	*trgb = *trgb | rgb;
-	rgb = get_next_rgb_val(str, 8);
-	if (rgb == -1)
-		return (FAILURE);
-	if (**str != ',')
-		return (print_error("RGB values in scene description "
-				"must be separated by commas."));
-	(*str)++;
-	*trgb = *trgb | rgb;
-	rgb = get_next_rgb_val(str, 0);
-	if (rgb == -1)
-		return (FAILURE);
-	*trgb = *trgb | rgb;
-	return (SUCCESS);
+int	get_r_from_trgb(t_trgb color)
+{
+	return ((color >> 16) & 255);
+}
+
+int	get_g_from_trgb(t_trgb color)
+{
+	return ((color >> 8) & 255);
+}
+
+int	get_b_from_trgb(t_trgb color)
+{
+	return (color & 255);
 }
