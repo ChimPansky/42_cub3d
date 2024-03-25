@@ -34,25 +34,3 @@ int	key_release_hook(int key_code, t_inputs *inputs)
 		process_tracked_keys(key_code, inputs, false);
 	return (0);
 }
-/*
-static int	sl_destroy_notify(t_sl_game *game)
-{
-	game->game_aborted = true;
-	sl_game_over(game);
-	return (SUCCESS);
-}
-
-void	sl_mlx_set_hooks(t_sl_game *game)
-{
-	void	*mlx_conn;
-	void	*mlxwindow;
-
-	mlx_conn = game->mlx->mlx_connection;
-	mlx_window = game->mlx->mlx_window;
-	mlx_hook(mlx_window, DestroyNotify, StructureNotifyMask,
-		sl_destroy_notify, game);
-	mlx_hook(mlx_window, KeyPress, KeyPressMask, sl_key_press, game);
-	mlx_hook(mlx_window, KeyRelease, KeyReleaseMask, sl_key_release, game);
-	mlx_loop_hook(mlx_conn, sl_loop_event, game);
-}
-*/

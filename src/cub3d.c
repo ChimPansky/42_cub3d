@@ -15,14 +15,7 @@
 #include "hooks/hooks.h"
 #include <time.h>
 #include "mlx_utils/mlx_utils.h"
-
-int	print_error(char *err_msg)
-{
-	ft_dprintf(STDERR_FILENO, "Error\n");
-	if (err_msg)
-		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
-	return (FAILURE);
-}
+#include "utils/utils.h"
 
 static int	app_init(t_app *app, char *cub_path)
 {
@@ -30,6 +23,7 @@ static int	app_init(t_app *app, char *cub_path)
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		return (!SUCCESS);
+	mlx_do_key_autorepeatoff(app->mlx);
 	if (game_init(&app->game_state) != SUCCESS)
 		return (mlx_destroy(app->mlx), FAILURE);
 	if (read_scene_description(app, cub_path) != SUCCESS)
@@ -43,6 +37,7 @@ void	app_destroy(t_app *app)
 {
 	game_destroy(&app->game_state);
 	graphics_destroy(&app->mlx, &app->gr);
+	mlx_do_key_autorepeaton(app->mlx);
 	mlx_destroy(app->mlx);
 }
 
@@ -59,7 +54,7 @@ int	main_loop(void *data)
 	change_state_for_next_frame(&app->game_state);
 	render_scene(&app->gr.scene, &app->game_state);
 	//mlx_put_image_to_window(app->mlx, app->gr.win,
-		//app->gr.scene.image, 0, 0);
+	//	app->gr.scene.image, 0, 0);
 	render_minimap(&app->gr.minimap, &app->game_state);
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.minimap.image.image, MM_X, MM_Y);

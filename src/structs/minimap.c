@@ -4,7 +4,7 @@
 #include "map.h"
 #include "mlx_utils/mlx_utils.h"
 #include "libft.h"
-#include "cub3d.h"
+#include "utils/utils.h"
 #include "stdio.h"
 
 int	minimap_init(void *mlx, t_minimap *minimap)

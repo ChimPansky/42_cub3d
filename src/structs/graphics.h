@@ -9,10 +9,10 @@
 
 typedef struct s_sprites
 {
-	void	*wall_no;
-	void	*wall_so;
-	void	*wall_we;
-	void	*wall_ea;
+	t_image	wall_no;
+	t_image	wall_so;
+	t_image	wall_we;
+	t_image	wall_ea;
 	t_trgb	floor;
 	t_trgb	ceiling;
 }				t_sprites;

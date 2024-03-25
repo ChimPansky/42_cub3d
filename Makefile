@@ -62,6 +62,9 @@ CB_FILENAMES += \
 	structs/player.c \
 	structs/trgb.c
 
+CB_FILENAMES += \
+	utils/error.c \
+
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 
 OBJ = $(SRC:.c=.o)

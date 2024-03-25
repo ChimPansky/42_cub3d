@@ -1,7 +1,7 @@
 #include "graphics.h"
 #include "mlx.h"
 #include "libft.h"
-#include "cub3d.h"
+#include "utils/utils.h"
 #include "stdio.h"
 
 // TODO add checks
@@ -19,30 +19,30 @@ int	graphics_init(void *mlx, t_graph *gr)
 			print_error(NULL), perror("graphics_init: init_image"),
 			FAILURE);
 	mlx_put_image_to_window(mlx,
-				 gr->win, gr->sprites.wall_no,
+				 gr->win, gr->sprites.wall_no.image,
 				 0, 0);
 	mlx_put_image_to_window(mlx,
-				 gr->win, gr->sprites.wall_so,
+				 gr->win, gr->sprites.wall_so.image,
 				 100, 100);
 	mlx_put_image_to_window(mlx,
-				 gr->win, gr->sprites.wall_we,
+				 gr->win, gr->sprites.wall_we.image,
 				 300, 300);
 	mlx_put_image_to_window(mlx,
-				 gr->win, gr->sprites.wall_ea,
+				 gr->win, gr->sprites.wall_ea.image,
 				 400, 400);
 	return (SUCCESS);
 }
 
 static void	destroy_sprites(void *mlx, t_sprites *sprites)
 {
-	if (sprites->wall_no)
-		mlx_destroy_image(mlx, sprites->wall_no);
-	if (sprites->wall_so)
-		mlx_destroy_image(mlx, sprites->wall_so);
-	if (sprites->wall_we)
-		mlx_destroy_image(mlx, sprites->wall_we);
-	if (sprites->wall_ea)
-		mlx_destroy_image(mlx, sprites->wall_ea);
+	if (sprites->wall_no.image)
+		mlx_destroy_image(mlx, sprites->wall_no.image);
+	if (sprites->wall_so.image)
+		mlx_destroy_image(mlx, sprites->wall_so.image);
+	if (sprites->wall_we.image)
+		mlx_destroy_image(mlx, sprites->wall_we.image);
+	if (sprites->wall_ea.image)
+		mlx_destroy_image(mlx, sprites->wall_ea.image);
 }
 
 

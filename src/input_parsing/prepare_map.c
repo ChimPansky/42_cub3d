@@ -6,11 +6,11 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/19 09:22:32 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/21 09:38:21 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "utils/utils.h"
 #include "input_parsing.h"
 #include <stdio.h>
 

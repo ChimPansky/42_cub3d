@@ -1,10 +1,9 @@
 #include "mlx_utils.h"
-
 #include "mlx.h"
 #include <stddef.h>
 #include "stdio.h"
-#include "libft.h"
-#include "cub3d.h"
+#include "utils/utils.h"
+#include <stdlib.h>
 
 t_image	*init_image(void *mlx, t_image *img, int width, int height)
 {
@@ -16,15 +15,17 @@ t_image	*init_image(void *mlx, t_image *img, int width, int height)
 	return (img);
 }
 
-int	xpm_path_to_mlx_img(void *mlx, char *xpm_path, void **target)
+t_image			*xpm_path_to_t_image(void *mlx, t_image *img, char *xpm_path)
 {
 	int		width;
 	int		height;
 
-	*target = mlx_xpm_file_to_image(mlx, xpm_path, &width, &height);
-	if (!*target)
-		return (print_error(NULL), perror(xpm_path), FAILURE);
-	return (SUCCESS);
+	img->image = mlx_xpm_file_to_image(mlx, xpm_path, &width, &height);
+	if (!img->image)
+		return (print_error(NULL), perror(xpm_path), NULL);
+	img->addr = mlx_get_data_addr(img->image, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	return (img);
 }
 
 void	destroy_image(void *mlx, t_image *img)

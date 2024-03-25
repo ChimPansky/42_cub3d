@@ -19,6 +19,7 @@ unit_tests
 *.a
 *.out
 cub3d
+dummy
 
 # generated
 tests/tests_output/*
