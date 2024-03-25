@@ -26,28 +26,6 @@ int	print_error(char *err_msg)
 	return (FAILURE);
 }
 
-static int	app_init(t_app *app, char *cub_path)
-{
-	t_sprite_sources	sources;
-
-	ft_bzero(app, sizeof(t_app));
-	app->mlx = mlx_init();
-	if (!app->mlx)
-		return (!SUCCESS);
-	if (game_init(&app->game_state) != SUCCESS)
-		return (FAILURE);
-	if (read_scene_description(app, cub_path, &sources) != SUCCESS)
-		return (game_destroy(&app->game_state), FAILURE);
-	graphics_init(app->mlx, &app->gr);
-	return (SUCCESS);
-}
-
-void	app_destroy(t_app *app)
-{
-	game_destroy(&app->game_state);
-	graphics_destroy(&app->mlx, &app->gr);
-}
-
 // TODO mlx_put_image_to_window inside render?
 int	main_loop(void *data)
 {
@@ -82,8 +60,8 @@ int	main(int ac, char *av[])
 		return (print_error("Too many arguments!"), FAILURE);
 	if (app_init(&app, av[1]) != SUCCESS)
 		return (FAILURE);
+	set_hooks(&app);
 	mlx_loop_hook(app.mlx, main_loop, &app);
-	set_hooks(app.mlx, app.gr.win, &app.inputs);
 	mlx_loop(app.mlx);
 	app_destroy(&app);
 }

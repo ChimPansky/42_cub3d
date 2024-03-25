@@ -3,7 +3,7 @@
 #include "mlx.h"
 #include <stddef.h>
 
-t_image	*init_image(void *mlx, t_image *img, int width, int height)
+t_image	*image_init(void *mlx, t_image *img, int width, int height)
 {
 	img->image = mlx_new_image(mlx, width, height);
 	if (!img->image)
@@ -13,7 +13,7 @@ t_image	*init_image(void *mlx, t_image *img, int width, int height)
 	return (img);
 }
 
-void	destroy_image(void *mlx, t_image *img)
+void	image_destroy(void *mlx, t_image *img)
 {
 	mlx_destroy_image(mlx, img->image);
 }
