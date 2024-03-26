@@ -2,11 +2,12 @@
 #include "X11/X.h"
 #include "hooks.h"
 
-void	set_hooks(void *mlx, void *win, t_inputs *inputs)
+void	set_hooks(t_app *app)
 {
-	mlx_do_key_autorepeatoff(mlx);
-	mlx_hook(win, KeyPress, KeyPressMask,
-		key_press_hook, inputs);
-	mlx_hook(win, KeyRelease, KeyReleaseMask,
-		key_release_hook, inputs);
+	mlx_hook(app->gr.win, KeyPress, KeyPressMask,
+		key_press_hook, app);
+	mlx_hook(app->gr.win, KeyRelease, KeyReleaseMask,
+		key_release_hook, app);
+	mlx_hook(app->gr.win, DestroyNotify, SubstructureNotifyMask,
+		mlx_loop_end, app->mlx);
 }

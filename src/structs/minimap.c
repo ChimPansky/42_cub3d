@@ -14,14 +14,14 @@ int	minimap_init(void *mlx, t_minimap *minimap)
 	minimap->offset_y = MM_Y;
 	minimap->pix_per_field = MM_PIXEL_PER_FIELD;
 	if (NULL
-		== init_image(mlx, &minimap->image, minimap->width, minimap->height))
+		== image_init(mlx, &minimap->image, minimap->width, minimap->height))
 		return (!SUCCESS);
 	return (SUCCESS);
 }
 
 void	minimap_destroy(void *mlx, t_minimap *minimap)
 {
-	destroy_image(mlx, &minimap->image);
+	image_destroy(mlx, &minimap->image);
 }
 
 t_trgb	minimap_color_by_map_sym(t_map_sym sym)
