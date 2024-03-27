@@ -12,11 +12,15 @@ typedef struct s_image {
 	int		endian;
 }		t_image;
 
+typedef struct s_pixel
+{
+	int	x;
+	int	y;
+}		t_pixel;
+
 t_image			*image_init(void *mlx, t_image *img, int width, int height);
 void			image_destroy(void *mlx, t_image *img);
 
-void			put_pixel(t_image *img, int x, int y, unsigned int color);
-
-unsigned int	pixel(u_int8_t r, u_int8_t g, u_int8_t b, u_int8_t a);
+void			image_put_pixel(t_image *img, t_pixel pix, unsigned int color);
 
 #endif  // MLX_UTILS_H
