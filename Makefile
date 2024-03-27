@@ -38,9 +38,6 @@ CB_FILENAMES += \
 	logic/logic.c
 
 CB_FILENAMES += \
-	mlx_utils/mlx_utils.c
-
-CB_FILENAMES += \
 	render/render_minimap.c \
 	render/render_scene.c
 
@@ -55,6 +52,7 @@ CB_FILENAMES += \
 	structs/app.c \
 	structs/game_state.c \
 	structs/graphics.c \
+	structs/image.c \
 	structs/inputs.c \
 	structs/map.c \
 	structs/minimap.c \

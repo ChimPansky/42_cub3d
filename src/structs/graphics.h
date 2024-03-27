@@ -1,7 +1,7 @@
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# include "mlx_utils/mlx_utils.h"
+# include "structs/image.h"
 # include "structs/minimap.h"
 
 # define WIN_W 640

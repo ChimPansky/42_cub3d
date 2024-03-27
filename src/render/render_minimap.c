@@ -26,7 +26,7 @@ static void	render_player(t_minimap *minimap)
 	{
 		pix.y = minimap->height / 2 - MM_PLAYER_PIX_SZ - 1;
 		while (++pix.y < minimap->height / 2 + MM_PLAYER_PIX_SZ)
-			put_pixel(&minimap->image, pix.x, pix.y, MM_PLAYER_COL);
+			image_put_pixel(&minimap->image, pix, MM_PLAYER_COL);
 	}
 }
 
@@ -44,7 +44,7 @@ void	render_minimap(t_minimap *minimap, t_game_state *game_state)
 		{
 			minimap_pixel_to_coord(
 				minimap, &pix, &coord, &game_state->player.pos);
-			put_pixel(&minimap->image, pix.x, pix.y,
+			image_put_pixel(&minimap->image, pix,
 				minimap_color_by_map_sym(
 					coord_to_map_sym(&game_state->map, &coord)));
 			++pix.y;

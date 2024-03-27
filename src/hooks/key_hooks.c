@@ -1,4 +1,5 @@
 #include "structs/app.h"
+#include "mlx.h"
 #include <X11/keysym.h>
 #include <unistd.h>
 
