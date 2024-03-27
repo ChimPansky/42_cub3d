@@ -1,4 +1,5 @@
 #include "app.h"
+#include "mlx.h"
 #include "scene_description/scene_description.h"
 
 int	app_init(t_app *app, char *cub_path)

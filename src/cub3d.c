@@ -7,8 +7,8 @@
 #define COLOR_YELLOW "\033[0;93m"
 
 #include "libft.h"
+#include "mlx.h"
 #include "structs/app.h"
-#include "scene_description/scene_description.h"
 #include "render/render.h"
 #include "logic/logic.h"
 #include "hooks/hooks.h"
