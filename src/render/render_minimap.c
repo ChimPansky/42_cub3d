@@ -28,6 +28,7 @@ static void	render_player(t_minimap *minimap)
 		while (++pix.y < minimap->height / 2 + MM_PLAYER_PIX_SZ)
 			image_put_pixel(&minimap->image, pix, MM_PLAYER_COL);
 	}
+	
 }
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state)

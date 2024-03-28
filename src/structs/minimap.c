@@ -16,6 +16,7 @@ int	minimap_init(void *mlx, t_minimap *minimap)
 	if (NULL
 		== image_init(mlx, &minimap->image, minimap->width, minimap->height))
 		return (!SUCCESS);
+	if (NULL == image_init_from_xpm(mlx, &minimap->coursor, COURSOR_PATH))
 	return (SUCCESS);
 }
 

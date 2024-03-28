@@ -20,6 +20,8 @@
 # define MM_UNDEFINED_COL 0x0000FF00
 # define MM_PLAYER_COL 0x00FF0000
 
+# define COURSOR_PATH "sprites/coursor.xpm"
+
 typedef struct s_minimap
 {
 	t_image	image;
@@ -28,6 +30,7 @@ typedef struct s_minimap
 	int		offset_x;
 	int		offset_y;
 	double	pix_per_field;
+	t_image			coursor;
 }		t_minimap;
 
 int		minimap_init(void *mlx, t_minimap *minimap);
