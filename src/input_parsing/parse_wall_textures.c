@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walls_validation.c                                 :+:      :+:    :+:   */
+/*   parse_wall_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/16 20:11:10 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/29 09:11:08 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
-#include "scene_description.h"
+#include "input_parsing.h"
 #include <stdio.h>
 
 int	extract_tx_path_from_line(char **str, char **tx_path)
@@ -25,14 +25,16 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 		return (perror("extract_tx_path_from_line: ft_strdup"), FAILURE);
 	if (ft_file_check_extension(*tx_path, ".xpm") == false)
 		return (free(*tx_path), print_error("Wall textures "
-			"in scene description have to be .xpm files."));
+				"in scene description have to be .xpm files."));
 	return (SUCCESS);
 }
 
+// TODO add errors
 int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 {
-	void	**sprite_ptr;
+	t_image	*sprite_ptr;
 
+	sprite_ptr = NULL;
 	if (element->scene_type == NORTH)
 		sprite_ptr = &sprites->wall_no;
 	else if (element->scene_type == SOUTH)
@@ -43,10 +45,10 @@ int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 		sprite_ptr = &sprites->wall_ea;
 	else
 		return (print_error("critical: add_tx_wall: invalid scene_type."));
-	if (*sprite_ptr != NULL)
+	if (sprite_ptr->image != NULL)
 		return (print_error("Found duplicate wall element in "
-			"scene description."));
-	if (xpm_path_to_mlx_img(mlx, element->tx_path, sprite_ptr) != SUCCESS)
+				"scene description."));
+	if (image_init_from_xpm(mlx, sprite_ptr, element->tx_path) == NULL)
 		return (FAILURE);
 	return (SUCCESS);
 }

@@ -1,6 +1,4 @@
 // 1000/60 = 16.6666
-#include "mlx.h"
-#define MSEC_PER_FRAME 16
 
 #define COLOR_RESET "\033[0;39m"
 #define COLOR_RED "\033[0;91m"
@@ -8,12 +6,14 @@
 #define COLOR_YELLOW "\033[0;93m"
 
 #include "libft.h"
+#include "mlx.h"
 #include "structs/app.h"
 #include "render/render.h"
 #include "logic/logic.h"
 #include "hooks/hooks.h"
 #include "utils.h"
 #include <time.h>
+#include "cub3d.h"
 
 // TODO mlx_put_image_to_window inside render?
 int	main_loop(void *data)

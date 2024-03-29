@@ -9,6 +9,7 @@ typedef struct s_player
 	t_pos	pos;
 	t_speed	speed;
 	double	angle;
+	double	rot_speed;
 }				t_player;
 
 #endif  // PLAYER_H
