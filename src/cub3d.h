@@ -1,6 +1,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+#define FPS             60
+#define MSEC_PER_FRAME  1000/FPS
+
 //             |
 //             |
 //             |
