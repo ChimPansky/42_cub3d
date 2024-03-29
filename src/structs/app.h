@@ -13,4 +13,7 @@ typedef struct s_app
 	t_inputs		inputs;
 }		t_app;
 
+int		app_init(t_app *app, char *cub_path);
+void	app_destroy(t_app *app);
+
 #endif  // APP_H

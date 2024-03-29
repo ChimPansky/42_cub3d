@@ -2,7 +2,8 @@
 
 #include "trgb.h"
 #include "map.h"
-#include "mlx_utils/mlx_utils.h"
+#include "structs/image.h"
+
 #include "libft.h"
 #include "cub3d.h"
 #include "stdio.h"
@@ -15,15 +16,14 @@ int	minimap_init(void *mlx, t_minimap *minimap)
 	minimap->offset_y = MM_Y;
 	minimap->pix_per_field = MM_PIXEL_PER_FIELD;
 	if (NULL
-		== init_image(mlx, &minimap->image, minimap->width, minimap->height))
-		return (print_error(NULL), perror("minimap_init: init_image"),
-			FAILURE);
+		== image_init(mlx, &minimap->image, minimap->width, minimap->height))
+		return (!SUCCESS);
 	return (SUCCESS);
 }
 
 void	minimap_destroy(void *mlx, t_minimap *minimap)
 {
-	destroy_image(mlx, &minimap->image);
+	image_destroy(mlx, &minimap->image);
 }
 
 t_trgb	minimap_color_by_map_sym(t_map_sym sym)

@@ -27,7 +27,8 @@ LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 SOURCE_DIR = src
 
 CB_FILENAMES = \
-	cub3d.c
+	cub3d.c \
+	utils.c
 
 CB_FILENAMES += \
 	hooks/key_hooks.c \
@@ -35,9 +36,6 @@ CB_FILENAMES += \
 
 CB_FILENAMES += \
 	logic/logic.c
-
-CB_FILENAMES += \
-	mlx_utils/mlx_utils.c
 
 CB_FILENAMES += \
 	render/render_minimap.c \
@@ -54,6 +52,7 @@ CB_FILENAMES += \
 	structs/app.c \
 	structs/game_state.c \
 	structs/graphics.c \
+	structs/image.c \
 	structs/inputs.c \
 	structs/map.c \
 	structs/minimap.c \

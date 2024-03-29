@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "scene_description.h"
-#include "cub3d.h"
+#include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
 
