@@ -74,9 +74,6 @@ $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 %.o : %.c $(CB_HEADER)
 	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
-dummy: $(LIBFT) $(LIBMLX) src/structs/polar_vector.o  src/structs/cartesian_vector.o dummy.o
-	$(CC) $(CFLAGS) src/structs/polar_vector.o  src/structs/cartesian_vector.o 	dummy.o -o dummy $(LFLAGS)
-
 clean:
 	rm -f $(OBJ)
 

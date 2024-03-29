@@ -1,8 +1,6 @@
 #include "graphics.h"
 #include "mlx.h"
 #include "libft.h"
-#include "cub3d.h"
-#include "stdio.h"
 
 // TODO add checks
 int	graphics_init(void *mlx, t_graph *gr)
