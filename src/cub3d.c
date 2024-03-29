@@ -8,23 +8,11 @@
 
 #include "libft.h"
 #include "structs/app.h"
-#include "scene_description/scene_description.h"
 #include "render/render.h"
 #include "logic/logic.h"
 #include "hooks/hooks.h"
+#include "utils.h"
 #include <time.h>
-
-int	print_error(char *err_msg)
-{
-	ft_dprintf(STDERR_FILENO, COLOR_RED);
-	ft_dprintf(STDERR_FILENO, "Error\n");
-	if (err_msg)
-		ft_dprintf(STDERR_FILENO, "%s\n", err_msg);
-	else
-		ft_dprintf(STDERR_FILENO, "Unknown Error\n");
-	ft_dprintf(STDERR_FILENO, COLOR_RESET);
-	return (FAILURE);
-}
 
 // TODO mlx_put_image_to_window inside render?
 int	main_loop(void *data)

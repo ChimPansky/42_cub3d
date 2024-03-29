@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "utils.h"
 #include "scene_description.h"
 
 static int	get_next_rgb_val(char **str, int shift)

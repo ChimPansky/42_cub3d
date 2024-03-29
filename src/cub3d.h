@@ -1,8 +1,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-int	print_error(char *err_msg);
-
 //             |
 //             |
 //             |

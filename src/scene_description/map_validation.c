@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "utils.h"
 #include "scene_description.h"
 #include <math.h>
 #include <stdio.h>

@@ -27,7 +27,8 @@ LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 SOURCE_DIR = src
 
 CB_FILENAMES = \
-	cub3d.c
+	cub3d.c \
+	utils.c
 
 CB_FILENAMES += \
 	hooks/key_hooks.c \
