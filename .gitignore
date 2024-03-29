@@ -4,7 +4,10 @@
 
 #*.txt
 *.png
+
+#test files:
 test.c
+dummy.c
 
 # IDE
 .vscode
