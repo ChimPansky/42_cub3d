@@ -6,6 +6,7 @@
 #define COLOR_YELLOW "\033[0;93m"
 
 #include "libft.h"
+#include "mlx.h"
 #include "structs/app.h"
 #include "render/render.h"
 #include "logic/logic.h"
