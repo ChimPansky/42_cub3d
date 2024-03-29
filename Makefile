@@ -27,7 +27,8 @@ LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 SOURCE_DIR = src
 
 CB_FILENAMES = \
-	cub3d.c
+	cub3d.c \
+	utils.c
 
 CB_FILENAMES += \
 	hooks/key_hooks.c \
@@ -41,11 +42,12 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	scene_description/floor_ceiling_validation.c \
-	scene_description/map_validation.c \
-	scene_description/scene_description.c \
-	scene_description/utilities.c \
-	scene_description/walls_validation.c
+	input_parsing/input_parsing.c \
+	input_parsing/parse_floor_ceiling_colors.c \
+	input_parsing/parse_map.c \
+	input_parsing/parse_wall_textures.c \
+	input_parsing/prepare_map.c \
+	input_parsing/utilities.c
 
 CB_FILENAMES += \
 	structs/app.c \
