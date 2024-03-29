@@ -4,8 +4,6 @@
 #define FPS             60
 #define MSEC_PER_FRAME  1000/FPS
 
-int	print_error(char *err_msg);
-
 //             |
 //             |
 //             |

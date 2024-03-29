@@ -1,7 +1,7 @@
 #ifndef MINIMAP_H
 # define MINIMAP_H
 
-# include "mlx_utils/mlx_utils.h"
+# include "structs/image.h"
 # include "trgb.h"
 # include "map.h"
 

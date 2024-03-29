@@ -2,7 +2,7 @@
 
 #include "trgb.h"
 #include "map.h"
-#include "mlx_utils/mlx_utils.h"
+#include "structs/image.h"
 
 #include "libft.h"
 

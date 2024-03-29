@@ -13,12 +13,6 @@
 //#include "../../libft/libft.h"
 #include "libft.h"
 
-void	skip_spaces(char **str)
-{
-	while(**str == ' ')
-		(*str)++;
-}
-
 t_line	get_next_line_no_nl(int scene_fd)
 {
 	t_line	line;

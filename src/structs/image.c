@@ -1,6 +1,7 @@
-#include "mlx_utils.h"
+#include "image.h"
 
 #include "mlx.h"
+#include "trgb.h"
 #include <stddef.h>
 
 t_image	*image_init(void *mlx, t_image *img, int width, int height)
@@ -18,15 +19,10 @@ void	image_destroy(void *mlx, t_image *img)
 	mlx_destroy_image(mlx, img->image);
 }
 
-void	put_pixel(t_image *img, int x, int y, unsigned int color)
+void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 {
 	char	*dst;
 
-	dst = img->addr + (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-unsigned int	pixel(u_int8_t r, u_int8_t g, u_int8_t b, u_int8_t a)
-{
-	return (r << 16 | g << 8 | b | a << 24);
+	dst = img->addr + (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
+	*(t_trgb *)dst = color;
 }
