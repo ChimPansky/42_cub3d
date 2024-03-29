@@ -1,18 +1,16 @@
 #include "app.h"
 #include "mlx.h"
-#include "scene_description/scene_description.h"
+#include "input_parsing/input_parsing.h"
 
 int	app_init(t_app *app, char *cub_path)
 {
-	t_sprite_sources	sources;
-
 	ft_bzero(app, sizeof(t_app));
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		return (!SUCCESS);
 	if (game_init(&app->game_state) != SUCCESS)
 		return (FAILURE);
-	if (read_scene_description(app, cub_path, &sources) != SUCCESS)
+	if (read_scene_description(app, cub_path) != SUCCESS)
 		return (game_destroy(&app->game_state), FAILURE);
 	graphics_init(app->mlx, &app->gr);
 	return (SUCCESS);
