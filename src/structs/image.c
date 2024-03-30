@@ -39,3 +39,46 @@ void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 	dst = img->addr + (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
 	*(t_trgb *)dst = color;
 }
+
+t_trgb	image_get_pixel_color(t_image *img, t_pixel pix)
+{
+	char	*dst;
+
+	dst = img->addr + (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
+	return *(t_trgb *)dst;
+}
+
+void	image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos)
+{
+	t_trgb	col;
+	t_pixel	pix;
+	t_pixel	dpix;
+
+	pix.x = 0;
+	while (pix.x < src->width)
+	{
+		pix.y = 0;
+		while (pix.y < src->height)
+		{
+			col = image_get_pixel_color(src, pix);
+			dpix.x = insert_pos.x + pix.x;
+			dpix.y = insert_pos.y + pix.y;
+			if (col && dpix.x >= 0 && dpix.y >= 0 && dpix.x < dest->width && dpix.y < dest->height)
+				image_put_pixel(dest, dpix, col);
+			pix.y++;
+		}
+		pix.x++;
+	}
+}
+
+// void	put_transformed_img_to_img(t_image *dest, t_image *src, t_pixel insert_pos, t_pvector trans)
+// {
+// 	//find coords of 4 corners: (+-w/2, +-h/2) * trans: min max x, y
+// 	// rev_tarnsform = (trans.r^-1, -angle)
+// 	// for (x = min_x, x < max_x, y = min_y, y < max_y)
+//  //  dest_vec = (x,y) - insert_pos;
+//  //  src_vec = vec * rev_transform
+//  //  img_pix = (w/2, h/2) + src_vec
+//  //  get_color(src, img_pix)
+//  //  put_pix(dest, (x, y)))
+// }
