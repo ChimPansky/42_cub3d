@@ -71,14 +71,45 @@ void	image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos)
 	}
 }
 
+// wtf i spent 3 h on this func
 // void	put_transformed_img_to_img(t_image *dest, t_image *src, t_pixel insert_pos, t_pvector trans)
 // {
-// 	//find coords of 4 corners: (+-w/2, +-h/2) * trans: min max x, y
-// 	// rev_tarnsform = (trans.r^-1, -angle)
-// 	// for (x = min_x, x < max_x, y = min_y, y < max_y)
-//  //  dest_vec = (x,y) - insert_pos;
-//  //  src_vec = vec * rev_transform
-//  //  img_pix = (w/2, h/2) + src_vec
-//  //  get_color(src, img_pix)
-//  //  put_pix(dest, (x, y)))
+// 	t_pixel	min;
+// 	t_pixel	max;
+
+// 	t_cvector lead = cvector(src->width/2, src->height/2);
+// 	t_cvector proj = cvec_mul_pvec(lead * trans);
+// 	min.x = min(proj.x, -proj.x);
+// 	max.x = max(proj.x, -proj.x);
+// 	min.y = min(proj.y, -proj.y);
+// 	max.y = max(proj.y, -proj.y);
+
+// 	trans.angle *= -1;
+// 	trans.mod = 1 / trans.mod;
+// 	t_pixel cur;
+// 	t_pixel dest_pix;
+// 	cur.x = min.x - 1;
+// 	while (++cur.x <= max.x)
+// 	{
+// 		dest_pix.x = insert_pos.x + cur.x;
+// 		if (dest_pix.x < 0 || dest_pix.x >= dest->width)
+// 			continue;
+// 		cur.y = min.y - 1;
+// 		while (++cur.y <= max.y)
+// 		{
+// 			if (dest_pix.y < 0 || dest_pix.y >= dest->height)
+// 				continue;
+
+
+// 		}
+// 	}
+
+	//find coords of 4 corners: (+-w/2, +-h/2) * trans: min max x, y
+	// rev_tarnsform = (trans.r^-1, -angle)
+	// for (x = min_x, x < max_x, y = min_y, y < max_y)
+ //  dest_vec = (x,y) - insert_pos;
+ //  src_vec = vec * rev_transform
+ //  img_pix = (w/2, h/2) + src_vec
+ //  get_color(src, img_pix)
+ //  put_pix(dest, (x, y)))
 // }
