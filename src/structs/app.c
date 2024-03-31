@@ -19,6 +19,7 @@ int	app_init(t_app *app, char *cub_path)
 void	app_destroy(t_app *app)
 {
 	game_destroy(&app->game_state);
+	sprites_destroy(app->mlx, &app->static_gr.sprites);
 	graphics_destroy(app->mlx, &app->gr);
 	free(app->mlx);
 }

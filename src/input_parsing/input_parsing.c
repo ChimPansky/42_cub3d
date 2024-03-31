@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/21 09:37:46 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/03/30 09:28:13 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 		else
 		{
 			if (add_wall(mlx, &static_gr->sprites, &element) != SUCCESS)
-				return (free(element.tx_path), FAILURE);
+				return (free(element.tx_path),
+					sprites_destroy(mlx, &static_gr->sprites), FAILURE);
 			free(element.tx_path);
 		}
 		elements_read++;
