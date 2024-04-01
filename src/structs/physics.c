@@ -12,4 +12,3 @@ void	update_coords(
 	pos->x += (speed->forw * cos(angle) - speed->ort * sin(angle))
 		* speed_to_coord_coef;
 }
-
