@@ -2,6 +2,7 @@
 # define PLAYER_H
 
 # include "physics.h"
+
 typedef struct s_player
 {
 	t_pos	pos;
