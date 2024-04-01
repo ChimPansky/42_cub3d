@@ -14,8 +14,9 @@ dummy.c
 
 #folders:
 minishell_tester/
-minilibx_resources
-unit_tests
+minilibx_resources/
+unit_tests/
+tests/
 
 # binaries
 *.o
