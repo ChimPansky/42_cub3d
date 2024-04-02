@@ -2,6 +2,12 @@
 #include "mlx.h"
 #include "input_parsing/input_parsing.h"
 
+void	mlx_destroy(void *mlx)
+{
+	mlx_destroy_display(mlx);
+	free(mlx);
+}
+
 int	app_init(t_app *app, char *cub_path)
 {
 	ft_bzero(app, sizeof(t_app));
@@ -9,10 +15,14 @@ int	app_init(t_app *app, char *cub_path)
 	if (!app->mlx)
 		return (!SUCCESS);
 	if (game_init(&app->game_state) != SUCCESS)
-		return (FAILURE);
+		return (mlx_destroy(app->mlx), FAILURE);
 	if (read_scene_description(app, cub_path) != SUCCESS)
-		return (game_destroy(&app->game_state), FAILURE);
-	graphics_init(app->mlx, &app->gr);
+		return (game_destroy(&app->game_state), mlx_destroy(app->mlx),
+			FAILURE);
+	if (graphics_init(app->mlx, &app->gr) != SUCCESS)
+		return (game_destroy(&app->game_state),
+			sprites_destroy(app->mlx, &app->static_gr.sprites),
+			mlx_destroy(app->mlx), FAILURE);
 	return (SUCCESS);
 }
 
@@ -21,5 +31,5 @@ void	app_destroy(t_app *app)
 	game_destroy(&app->game_state);
 	sprites_destroy(app->mlx, &app->static_gr.sprites);
 	graphics_destroy(app->mlx, &app->gr);
-	free(app->mlx);
+	mlx_destroy(app->mlx);
 }
