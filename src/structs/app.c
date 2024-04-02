@@ -2,7 +2,7 @@
 #include "mlx.h"
 #include "input_parsing/input_parsing.h"
 
-void	mlx_destroy(void *mlx)
+static void	mlx_destroy(void *mlx)
 {
 	mlx_destroy_display(mlx);
 	free(mlx);

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/21 09:48:56 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:41:18 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 	return (SUCCESS);
 }
 
-// TODO add errors
 int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 {
 	t_image	*sprite_ptr;

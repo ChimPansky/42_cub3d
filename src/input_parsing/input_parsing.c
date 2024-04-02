@@ -6,12 +6,11 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/02 14:37:48 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:43:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input_parsing.h"
-#include "structs/sprites.h"
 #include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
