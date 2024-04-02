@@ -26,7 +26,6 @@ int	print_error(char *err_msg)
 	return (FAILURE);
 }
 
-// TODO mlx_put_image_to_window inside render?
 int	main_loop(void *data)
 {
 	clock_t	start_time;
