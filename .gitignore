@@ -1,0 +1,29 @@
+#*.pdf
+*.ods
+*.ods#
+
+#*.txt
+*.png
+test.c
+dummy.c
+
+# IDE
+.vscode
+
+#folders:
+minishell_tester/
+minilibx_resources
+unit_tests
+
+# binaries
+*.o
+*.a
+*.out
+cub3d
+dummy
+
+# generated
+tests/tests_output/*
+
+# debug syms
+.nfs*
