@@ -1,6 +1,3 @@
-#TODO https://stackoverflow.com/questions/2394609/makefile-header-dependencies
-
-
 NAME = cub3d
 all: $(NAME)
 
