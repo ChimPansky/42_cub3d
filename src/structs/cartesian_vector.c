@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/01 16:22:42 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:04:15 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
+#include <float.h>
 #include <stdio.h>
 
 t_cvector	cvector(double x, double y)
@@ -56,7 +57,7 @@ void	cvector_normalize(t_cvector *cvec)
 	double		vec_mod;
 
 	vec_mod = cvector_get_mod(cvec);
-	if (vec_mod == 0)
+	if (fabs(vec_mod) < DBL_EPSILON)
 		return ;
 	cvec->x /= vec_mod;
 	cvec->y /= vec_mod;

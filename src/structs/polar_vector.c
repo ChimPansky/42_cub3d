@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/01 16:56:35 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 12:22:51 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ t_pvector	pvector(double r, double phi)
 {
 	t_pvector	result;
 
-	if (r < 0)
-		result.r = 0;
-	else
-		result.r = r;
+	result.r = r;
 	result.phi = phi;
+	if (r < 0)
+	{
+		result.r *= -1;
+		result.phi += M_PI;
+	}
+	result.phi = fmod(result.phi, 2 * M_PI);
 	return (result);
 }
 
@@ -38,13 +41,9 @@ t_pvector	pvector_from_coords(double x, double y)
 	return (result);
 }
 
-t_pvector	pvector_rotate(const t_pvector *pvec, double rot_angle)
+void	pvector_rotate(t_pvector *pvec, double rot_angle)
 {
-	t_pvector	result;
-
-	result.r = pvec->r;
-	result.phi = fmod(pvec->phi + rot_angle, 2 * M_PI);
-	return (result);
+	pvec->phi = fmod(pvec->phi + rot_angle, 2 * M_PI);
 }
 
 void		pvector_print(const t_pvector *pvec)

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/01 16:23:10 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 13:01:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_cartesian_vector
 	double	y;
 }				t_cvector;
 
+// allowed values:
+//	r >= 0.0
+//	phi [-2pi, 2pi]
 typedef struct s_polar_vector
 {
 	double	r;
@@ -41,7 +44,7 @@ void		cvector_print(const t_cvector *cvec);
 t_pvector	pvector(double r, double phi);
 t_pvector	pvector_from_coords(double x, double y);
 void		pvector_scale(t_pvector *pvec, double factor);
-t_pvector	pvector_rotate(const t_pvector *pvec, double rot_angle);
+void		pvector_rotate(t_pvector *pvec, double rot_angle);
 void		pvector_print(const t_pvector *pvec);
 
 #endif  // VECTOR_H
