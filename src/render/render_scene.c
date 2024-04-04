@@ -33,17 +33,14 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 	}
 }
 
-static	double calculate_wall_distance(t_pos pos, t_pvector ray)
-{
-
-}
-
+// beware of negative distance from origin...
 static t_ray_collision	get_wall_collision(t_pos pos, t_pvector ray)
 {
 	t_ray_collision	collision;
 
 	collision.collision_point = pos_create(0.0, 0.0);
-	collision.distance_from_origin = 0.0;
+	collision.distance_from_origin = pos_distance(pos,
+		collision.collision_point);
 	(void)pos;
 	(void)ray;
 	return (collision);

@@ -39,3 +39,8 @@ t_pos	pos_add_pos(t_pos pos1, t_pos pos2)
 	result.y = pos1.y + pos2.y;
 	return (result);
 }
+
+double	pos_distance(t_pos pos1, t_pos pos2)
+{
+	return (sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2)));
+}
