@@ -16,13 +16,6 @@ typedef struct s_speed
 	double	ort;
 }				t_speed;
 
-typedef struct s_ray_collision
-{
-	t_pos				collision_point;
-	double				distance_from_origin;
-	enum e_sprite_types	wall_type;
-}				t_ray_collision;
-
 void	update_coords(
 			t_pos *pos,
 			t_speed *speed,
