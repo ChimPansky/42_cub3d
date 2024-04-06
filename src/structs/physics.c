@@ -13,6 +13,15 @@ void	update_coords(
 		* speed_to_coord_coef;
 }
 
+t_pos	pos_copy(t_pos *source)
+{
+	t_pos	result;
+
+	result.x = source->x;
+	result.y = source->y;
+	return (result);
+}
+
 t_pos	pos_create(double x, double y)
 {
 	t_pos	result;
@@ -43,4 +52,9 @@ t_pos	pos_add_pos(t_pos pos1, t_pos pos2)
 double	pos_distance(t_pos pos1, t_pos pos2)
 {
 	return (sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2)));
+}
+
+void	pos_print(t_pos pos)
+{
+	printf("(%f / %f)\n", pos.x, pos.y);
 }

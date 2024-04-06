@@ -22,8 +22,4 @@ typedef struct s_ray
 	t_ray_collision	collision;
 }				t_ray;
 
-void	ray_set_origin(t_ray *ray, t_pos origin);
-void	ray_set_direction(t_ray *ray, t_pvector direction);
-void	ray_calculate_collision(t_ray *ray, t_map *map);
-
 #endif  // RAYS_H

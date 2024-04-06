@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_scene.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/04/06 16:36:52 by tkasbari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "render.h"
 #include "structs/app.h"
 #include "structs/image.h"
@@ -8,6 +20,7 @@
 #include "structs/vector.h"
 #include "structs/sprites.h"
 #include <math.h>
+#include "../ray_casting/ray_casting.h"
 
 static t_trgb	get_color_from_sprites(t_static_graphics *sprites,
 		t_ray_collision collision, double relative_vertical_screen_pos)
@@ -60,13 +73,14 @@ static t_pos	get_2d_screen_left_corner(t_player *player)
 {
 	t_pos	left_corner;
 
-	left_corner = pos_add_pvec(pos_add_pvec(player->pos,
-		pvector(SCREEN_DIST, player->angle)),
-		pvector(SCREEN_WIDTH / 2, player->angle - M_PI / 2));
+	left_corner = pos_copy(&player->pos);
+	pos_add_pvec(&left_corner, pvector(SCREEN_DIST, player->angle));
+	pos_add_pvec(&left_corner, pvector(SCREEN_WIDTH / 2,
+		player->angle - M_PI / 2));
 	return (left_corner);
 }
 
-// question: calculate distance from player to wall or from
+// question: calculate distance from player to wall OR from
 // screen_pos to wall? for now: from screen_pos
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,
 t_game_state *game)
@@ -81,11 +95,10 @@ t_game_state *game)
 	screen_pos_on_map = get_2d_screen_left_corner(&game->player);
 	while (screen_pix.x < scene_image->width)
 	{
-		ray_set_origin(&player_view, screen_pos_on_map);
-		ray_set_direction(&player_view,
-			pvector_from_coords(
-				screen_pos_on_map.x - game->player.pos.x,
-				screen_pos_on_map.y - game->player.pos.y));
+		player_view.origin = screen_pos_on_map;
+		player_view.direction = pvector_from_coords(
+			screen_pos_on_map.x - game->player.pos.x,
+			screen_pos_on_map.y - game->player.pos.y);
 		ray_calculate_collision(&player_view, &game->map);
 		draw_screen_column(scene_image, sprites, &screen_pix, &player_view);
 		screen_pos_on_map = pos_add_pvec(screen_pos_on_map, screen_vec);
