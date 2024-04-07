@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/07 12:47:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/07 18:45:00 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,15 @@ static void	raycaster_set_directions(t_raycaster *raycaster)
 // make sure that the rc->phi == M_PI comparisons work with double...
 void	raycaster_init(t_raycaster *rc, t_ray *ray)
 {
-	ft_bzero(&rc, sizeof(t_raycaster));
+	ft_bzero(rc, sizeof(t_raycaster));
 	rc->phi = ray->direction.phi;// SEGFAULT
 	raycaster_set_directions(rc);
 	rc->current_pos = ray->origin;
-	if (rc->phi == 0 || rc->phi == M_PI)
+	if (dbl_is_equal(rc->phi, 0.0) || dbl_is_equal(rc->phi, M_PI))
 		rc->ray_step_len = cvector(1.0, 0.0);
 	else if (dbl_is_equal(rc->phi, M_PI / 2)
 		|| dbl_is_equal(rc->phi, 3 * M_PI / 2))
 		rc->ray_step_len = cvector(0.0, 1.0);
-	else if (dbl_is_equal(rc->phi, 0.0)
-		|| dbl_is_equal(rc->phi, M_PI))
-		rc->ray_step_len = cvector(1.0, 0.0);
 	else
 		rc->ray_step_len = cvector(sqrt(1 + pow(tan(ray->direction.phi), 2)),
 							sqrt(1 + pow(1 / tan(ray->direction.phi), 2)));

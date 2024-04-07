@@ -1,0 +1,16 @@
+NO ./sprites/minimal/n.xpm
+SO ./sprites/minimal/s.xpm
+     WE     ./sprites/minimal/w.xpm
+F 0,128,128
+
+EA ./sprites/minimal/e.xpm
+C 0, 255, 255
+1111111111
+1000000001
+1000000001
+1000000001
+1000000001
+1000N00001
+1000000001
+1000000001
+1111111111

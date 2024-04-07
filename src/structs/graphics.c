@@ -8,7 +8,8 @@ int	graphics_init(void *mlx, t_graph *gr)
 	minimap_init(mlx, &gr->minimap);
 	if (NULL == image_init(mlx, &gr->scene, WIN_W, WIN_H))
 		exit(1);
-	mlx_do_key_autorepeatoff(mlx);
+	mlx_do_key_autorepeaton(mlx);	// TODO: delete
+	//mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/07 12:42:50 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/07 19:39:52 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_game_state *game)
 		calculate_ray_wall_collision(&player_view, &game->map);
 		draw_screen_column(scene_image, sprites, &screen_pix, &player_view);
 		screen_pos_on_map = pos_add_pvec(screen_pos_on_map, screen_vec);
+		//screen_pix.x+=10;	// TODO: remove
 		screen_pix.x++;
-		usleep(1000000000);
 	}
 }
