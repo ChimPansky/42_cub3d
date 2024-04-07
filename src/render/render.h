@@ -8,7 +8,7 @@
 
 # define SCREEN_DIST 1.0
 # define SCREEN_WIDTH 2.0
-# define WALL_HEIGHT 100
+# define WALL_HEIGHT 0.8
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state);
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,

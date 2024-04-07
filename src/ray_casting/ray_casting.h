@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:54 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/06 19:47:43 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/07 11:33:31 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_raycaster
 	double		collision_ray_len;
 	t_pos		current_pos;
 	bool		wall_hit;
+	enum e_sprite_types	wall_hit_type;
 }			t_raycaster;
 
 void	raycaster_init(t_raycaster *raycaster, t_ray *ray);

@@ -39,6 +39,9 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
+	ray_casting/ray_casting.c
+
+CB_FILENAMES += \
 	input_parsing/input_parsing.c \
 	input_parsing/parse_floor_ceiling_colors.c \
 	input_parsing/parse_map.c \
