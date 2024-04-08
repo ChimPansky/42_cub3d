@@ -2,9 +2,6 @@
 #include "libft.h"
 #include <float.h>
 
-// can increase factor of DBL_EPSILON to increase tolerance
-#define DBL_TOLERANCE (DBL_EPSILON * 1)
-
 void	skip_spaces(char **str)
 {
 	while (**str == ' ')
