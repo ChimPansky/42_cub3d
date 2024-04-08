@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/07 19:39:52 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:15:38 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "structs/image.h"
 #include "structs/physics.h"
 #include "structs/player.h"
-#include "structs/rays.h"
 #include "structs/trgb.h"
 #include "structs/vector.h"
 #include "structs/sprites.h"
@@ -29,21 +28,23 @@ static t_trgb	get_color_from_sprites(t_static_graphics *sprites,
 		t_ray_collision collision, double rel_vert_screen_pos)
 {
 	double	scaled_wall_h;
-
+	(void)rel_vert_screen_pos;
+	(void)sprites;
 	scaled_wall_h = (1.0 / fmax(collision.distance_from_origin, 1.0))
 						* WALL_HEIGHT;
-	if (rel_vert_screen_pos < (1.0 - scaled_wall_h) / 2)
-		return (sprites->ceiling_col);
-	if (rel_vert_screen_pos > scaled_wall_h + (1.0 - scaled_wall_h) / 2)
-		return (sprites->floor_col);
-	if (collision.wall_type == WALL_NO)
+	 if (rel_vert_screen_pos < (1.0 - scaled_wall_h) / 2)
+	 	return (sprites->ceiling_col);
+	 if (rel_vert_screen_pos > scaled_wall_h + (1.0 - scaled_wall_h) / 2)
+	 	return (sprites->floor_col);
+	if (collision.collision_sprite_type == WALL_NO)
 		return (trgb(0, 255, 0, 0)); // red
-	else if (collision.wall_type == WALL_SO)
+	if (collision.collision_sprite_type == WALL_SO)
 		return (trgb(0, 0, 255, 0)); // green
-	else if (collision.wall_type == WALL_WE)
+	if (collision.collision_sprite_type == WALL_WE)
 		return (trgb(0, 0, 0, 255)); // blue
-	else
+	if (collision.collision_sprite_type == WALL_EA)
 		return (trgb(0, 255, 255, 0)); // yellow
+	return (trgb(0, 0, 0, 0)); // black
 }
 
 static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
@@ -97,6 +98,7 @@ static t_pos	get_2d_screen_left_corner(t_player *player)
 
 // question: calculate distance from player to wall OR from
 // screen_pos to wall? for now: from screen_pos
+#include "cub3d.h" // TODO: remove
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,
 t_game_state *game)
 {
@@ -106,7 +108,8 @@ t_game_state *game)
 	t_pvector		screen_vec;
 
 	screen_pix.x = 0;
-	screen_vec = pvector(1.0 / scene_image->width, game->player.angle + M_PI / 2);
+	screen_vec = pvector(SCREEN_WIDTH / scene_image->width, game->player.angle + M_PI / 2);
+	sprintf(g_screen_info, "Screen Phi: %.2f", screen_vec.phi); // TODO: remove
 	screen_pos_on_map = get_2d_screen_left_corner(&game->player);
 	while (screen_pix.x < scene_image->width)
 	{
@@ -117,7 +120,6 @@ t_game_state *game)
 		calculate_ray_wall_collision(&player_view, &game->map);
 		draw_screen_column(scene_image, sprites, &screen_pix, &player_view);
 		screen_pos_on_map = pos_add_pvec(screen_pos_on_map, screen_vec);
-		//screen_pix.x+=10;	// TODO: remove
 		screen_pix.x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/07 18:45:00 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/08 12:25:20 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static void	raycaster_set_directions(t_raycaster *raycaster)
 	}
 }
 
-// make sure that the rc->phi == M_PI comparisons work with double...
 void	raycaster_init(t_raycaster *rc, t_ray *ray)
 {
 	ft_bzero(rc, sizeof(t_raycaster));
 	rc->phi = ray->direction.phi;// SEGFAULT
+	rc->sprite_collision = NO_SPRITE;
 	raycaster_set_directions(rc);
 	rc->current_pos = ray->origin;
 	if (dbl_is_equal(rc->phi, 0.0) || dbl_is_equal(rc->phi, M_PI))
@@ -76,23 +76,9 @@ void	raycaster_init(t_raycaster *rc, t_ray *ray)
 							sqrt(1 + pow(1 / tan(ray->direction.phi), 2)));
 }
 
-static int get_collision_wall_type(t_raycaster *rc)
-{
-	if (dbl_is_zero(rc->current_pos.x - (int)rc->current_pos.x))
-	{
-		if (rc->x_dir_positive)
-			return (WALL_EA);
-		else
-			return (WALL_WE);
-	}
-	else
-	{
-		if (rc->y_dir_positive)
-			return (WALL_NO);
-		else
-			return (WALL_SO);
-	}
-}
+
+
+
 
 // beware of negative distance from origin...
 // make sure rc.ray_len.x > 0 works with double...
@@ -102,7 +88,7 @@ void	calculate_ray_wall_collision(t_ray *ray, t_map *map)
 
 	raycaster_init(&rc, ray);
 	calculate_first_collision(&rc);
-	while (!rc.wall_hit)
+	while (rc.sprite_collision == NO_SPRITE)
 	{
 		if (!dbl_is_equal(rc.ray_len.x, 0.0) && rc.ray_len.x < rc.ray_len.y)
 		{
@@ -116,19 +102,11 @@ void	calculate_ray_wall_collision(t_ray *ray, t_map *map)
 		}
 		rc.current_pos = pos_add_pvec(ray->origin,
 			pvector(rc.collision_ray_len, rc.phi));
-		if (coord_to_map_sym(map, &rc.current_pos) == WALL_SYM)
-			rc.wall_hit = true;
+		check_for_sprite_collision(map, &rc);
 	}
-	if (rc.wall_hit)
-	{
-		ray->collision.collision_point = rc.current_pos;
-		ray->collision.distance_from_origin = rc.collision_ray_len;
-		ray->collision.wall_type = get_collision_wall_type(&rc);
-	}
-	else	// should never happen: (leaks in this case)
-	{
-		exit(print_error("fatal: No ray collision found :("));
-	}
+	ray->collision.collision_point = rc.current_pos;
+	ray->collision.distance_from_origin = rc.collision_ray_len;
+	ray->collision.collision_sprite_type = rc.sprite_collision;
 
 
 	// ray->collision.collision_point = pos_create(0.0, 0.0);

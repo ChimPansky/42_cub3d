@@ -39,7 +39,8 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	ray_casting/ray_casting.c
+	ray_casting/ray_casting.c \
+	ray_casting/ray_collision.c
 
 CB_FILENAMES += \
 	input_parsing/input_parsing.c \
