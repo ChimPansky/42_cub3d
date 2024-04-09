@@ -6,27 +6,28 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/08 12:22:58 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:46:25 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ray_casting.h"
+#include "cub3d.h"
+#include "../structs/ray.h"
 #include "../utils.h"
 #include "structs/map.h"
 #include "structs/sprites.h"
 
 static t_collision_direction	get_collision_direction(t_raycaster *rc)
 {
-	if (dbl_is_zero(rc->current_pos.x - (int)rc->current_pos.x))
+	if (dbl_is_zero(rc->end_point.x - (int)rc->end_point.x))
 	{
-		if (rc->x_dir_positive)
+		if (rc->map_dir_x > 0)
 			return (COLL_EA);
 		else
 		 	return (COLL_WE);
 	}
 	else
 	{
-		if (rc->y_dir_positive)
+		if (rc->map_dir_y > 0)
 			return (COLL_SO);
 		else
 		 	return (COLL_NO);
@@ -34,18 +35,18 @@ static t_collision_direction	get_collision_direction(t_raycaster *rc)
 }
 
 // Wall order: EA->SO->WE->NO (clockwise like our phi)
-void check_for_sprite_collision(t_map *map, t_raycaster *rc)
+void check_for_sprite_collision(t_map *map, t_ray *ray)
 {
 	t_map_sym				cur_sym;
 	t_collision_direction	coll_dir;
 
-	cur_sym = coord_to_map_sym(map, &rc->current_pos);
+	cur_sym = map->raw_map.buf[ray->rc.map_y][ray->rc.map_x];
 	if (cur_sym == PATH_SYM)
 	{
-		rc->sprite_collision = NO_SPRITE;
+		ray->rc.sprite_collision = NO_SPRITE;
 		return ;
 	}
-	coll_dir = get_collision_direction(rc);
+	coll_dir = get_collision_direction(&ray->rc);
 	if (cur_sym == WALL_SYM)
-		rc->sprite_collision = WALL_EA + coll_dir;
+		ray->rc.sprite_collision = WALL_EA + coll_dir;
 }

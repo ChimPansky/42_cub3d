@@ -18,6 +18,7 @@
 #include <stdio.h>
 
 char g_screen_info[100];	// TODO: remove
+int	g_logfile = 0;			// TODO: remove
 
 static void	print_game_info(t_app *app)
 {
@@ -60,10 +61,13 @@ int	main_loop(void *data)
 	return (0);
 }
 
+#include <fcntl.h>
+
 int	main(int ac, char *av[])
 {
 	t_app	app;
 
+	g_logfile = open("logfile.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (ac < 2)
 		return (print_error("Please provide a scene description "
 				"as parameter (.cub file)."), FAILURE);

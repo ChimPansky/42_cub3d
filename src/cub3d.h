@@ -5,6 +5,7 @@
 #define MSEC_PER_FRAME  1000/FPS
 
 extern char	g_screen_info[100];	// TODO: remove
+extern int g_logfile;
 
 //             |
 //             |
