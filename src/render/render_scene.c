@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/09 16:17:39 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/09 16:51:11 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "structs/vector.h"
 #include "structs/sprites.h"
 #include <math.h>
-#include "../ray_casting/ray_casting.h"
+#include "structs/ray.h"
 
 // relative_vertical_screep_pos: ]0.0, 1.0[; 0.0: top of screen, 1.0: bottom]
 // wall_height: 0.8
