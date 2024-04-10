@@ -6,7 +6,7 @@
 # include "structs/image.h"
 # include "structs/app.h"
 
-# define WALL_HEIGHT 0.5
+# define WALL_HEIGHT 0.8
 # define FOV M_PI / 3	// 60 degrees player field of view
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state);
