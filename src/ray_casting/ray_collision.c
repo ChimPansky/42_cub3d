@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/10 16:02:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:47:24 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 static t_collision_direction	get_collision_direction(t_raycaster *rc)
 {
-	if (fabs(round(rc->end_point.x) - (int)rc->end_point.x)
-		< fabs(round(rc->end_point.y) - (int)rc->end_point.y))
+	if (fabs(rc->end_point.x - round(rc->end_point.x))
+		< fabs(rc->end_point.y - round(rc->end_point.y)))
 	{
 		if (rc->map_dir_x > 0)
 			return (COLL_EA);
