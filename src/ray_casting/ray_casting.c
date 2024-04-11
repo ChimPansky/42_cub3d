@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/09 16:47:24 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/11 17:08:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 static void calculate_first_collision(t_raycaster *rc)
 {
 	if (rc->map_dir_x > 0)
-		rc->x_ray_len = rc->delta_ray.x
-			* ((int)rc->end_point.x + 1 - rc->end_point.x);
+		rc->x_ray_len = rc->delta_ray.x *
+			(ceil(rc->end_point.x) - rc->end_point.x);
 	else
-		rc->x_ray_len = rc->delta_ray.x
-			* (rc->end_point.x - (int)rc->end_point.x);
+		rc->x_ray_len = rc->delta_ray.x *
+			(rc->end_point.x - floor(rc->end_point.x));
 	if (rc->map_dir_y > 0)
-		rc->y_ray_len = rc->delta_ray.y
-			* (rc->end_point.y - (int)rc->end_point.y);
+		rc->y_ray_len = rc->delta_ray.y *
+			(ceil(rc->end_point.y) - rc->end_point.y);
 	else
-		rc->y_ray_len = rc->delta_ray.y
-			* ((int)rc->end_point.y + 1 - rc->end_point.y);
+		rc->y_ray_len = rc->delta_ray.y *
+			(rc->end_point.y - floor(rc->end_point.y));
 }
 
 // differentiate between the 4 quadrants in the trigonometric circle
