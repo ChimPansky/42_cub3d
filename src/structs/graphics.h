@@ -5,7 +5,7 @@
 # include "structs/minimap.h"
 
 # define WIN_W 1920
-# define WIN_H 1200
+# define WIN_H 1080
 
 typedef struct s_graph {
 	void		*win;
