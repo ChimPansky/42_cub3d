@@ -19,6 +19,7 @@ minilibx_resources/
 unit_tests/
 tests/
 test/
+sprites/
 
 # binaries
 *.o

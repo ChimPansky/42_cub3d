@@ -39,3 +39,11 @@ void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 	dst = img->addr + (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
 	*(t_trgb *)dst = color;
 }
+
+t_trgb	image_get_pixel_color(t_image *img, t_pixel *pix)
+{
+	char	*dst;
+
+	dst = img->addr + (pix->y * img->line_length + pix->x * (img->bits_per_pixel / 8));
+	return (*(t_trgb *)dst);
+}

@@ -1,9 +1,9 @@
-NO ./sprites/minimal/n.xpm
-SO ./sprites/minimal/s.xpm
-     WE     ./sprites/minimal/w.xpm
+EA ./sprites/ineia.xpm
+NO ./sprites/el_cap.xpm
+     WE     ./sprites/trebenna.xpm
 F 0,128,128
 
-EA ./sprites/minimal/e.xpm
+SO ./sprites/geyikbayiri.xpm
 C 0, 255, 255
         11111111111111111111111111
         100000000011000000000000101
