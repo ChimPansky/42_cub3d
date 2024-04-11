@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/09 16:51:11 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/10 16:45:45 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,18 @@
 // relative_vertical_screep_pos: ]0.0, 1.0[; 0.0: top of screen, 1.0: bottom]
 // wall_height: 0.8
 // scaled_wall_height: ]0.0, 0.8[; the further from the wall, the smaller
+// fish_eye_remover: make sure that all walls that have the same orthogonal
+// distance from the player have the same height on screen
+// (even though their actual distance might be further away)
 static t_trgb	get_color_from_sprites(t_static_graphics *sprites,
 		t_ray *ray, double rel_vert_screen_pos)
 {
 	double	scaled_wall_h;
+	double	fish_eye_remover;
 
+	fish_eye_remover = 1.0 / cos(ray->rc.angle_btw_ray_and_player);
 	scaled_wall_h = (1.0 / fmax(ray->vec.r, 1.0))
-						* WALL_HEIGHT;
+					* WALL_HEIGHT * fish_eye_remover;
 	 if (rel_vert_screen_pos < (1.0 - scaled_wall_h) / 2)
 	 	return (sprites->ceiling_col);
 	 if (rel_vert_screen_pos > scaled_wall_h + (1.0 - scaled_wall_h) / 2)
@@ -110,6 +115,7 @@ t_game_state *game)
 	while (screen_pix.x < scene_image->width)
 	{
 		ray_reset(&player_view);
+		player_view.rc.angle_btw_ray_and_player = fabs(player_view.vec.phi - game->player.angle);
 		calculate_ray_wall_collision(&player_view, &game->map);
 		draw_screen_column(scene_image, sprites, &screen_pix, &player_view);
 		pvector_rotate(&player_view.vec, FOV / scene_image->width);
