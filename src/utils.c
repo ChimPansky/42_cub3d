@@ -20,12 +20,7 @@ int	print_error(char *err_msg)
 	return (FAILURE);
 }
 
-bool	dbl_is_zero(double number)
+bool	dbl_is_almost_zero(double a)
 {
-	return (number > -DBL_TOLERANCE && number < DBL_TOLERANCE);
-}
-
-bool	dbl_is_equal(double a, double b)
-{
-	return (dbl_is_zero(a - b));
+	return (a < 10e-10);
 }
