@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 17:03:02 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:10:37 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ void		calculate_ray_collision(t_ray *ray, t_map *map);
 static void	raycaster_reset(t_ray *ray);
 static void calculate_first_collision_distance(t_ray *ray);
 static void	check_for_sprite_collision(t_map *map, t_ray *ray);
-static int	get_collision_direction(t_raycaster *raycaster);
+static void	set_collision_direction(t_raycaster *raycaster);
 
-static int	get_collision_direction(t_raycaster *rc)
+static void	set_collision_direction(t_raycaster *rc)
 {
 	if (fabs(rc->collision.point.x - round(rc->collision.point.x))
 		< fabs(rc->collision.point.y - round(rc->collision.point.y)))
 	{
 		if (rc->map_dir_x > 0)
-			return (COLL_EA);
+			rc->collision.direction = COLL_EA;
 		else
-		 	return (COLL_WE);
+		 	rc->collision.direction = COLL_WE;
 	}
 	else
 	{
 		if (rc->map_dir_y > 0)
-			return (COLL_SO);
+			rc->collision.direction = COLL_SO;
 		else
-		 	return (COLL_NO);
+		 	rc->collision.direction = COLL_NO;
 	}
 }
 
@@ -45,7 +45,6 @@ static int	get_collision_direction(t_raycaster *rc)
 static void check_for_sprite_collision(t_map *map, t_ray *ray)
 {
 	t_map_sym				cur_sym;
-	t_collision_direction	coll_dir;
 
 	cur_sym = map->raw_map.buf[ray->raycaster.map_y][ray->raycaster.map_x];
 	if (cur_sym == PATH_SYM)
@@ -53,9 +52,12 @@ static void check_for_sprite_collision(t_map *map, t_ray *ray)
 		ray->raycaster.collision.sprite = NO_SPRITE;
 		return ;
 	}
-	coll_dir = get_collision_direction(&ray->raycaster);
 	if (cur_sym == WALL_SYM)
-		ray->raycaster.collision.sprite = WALL_EA + coll_dir;
+	{
+		set_collision_direction(&ray->raycaster);
+		ray->raycaster.collision.sprite = WALL_EA
+			+ ray->raycaster.collision.direction;
+	}
 }
 
 static void calculate_first_collision_distance(t_ray *ray)

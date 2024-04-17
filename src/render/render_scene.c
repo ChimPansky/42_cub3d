@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 17:34:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:07:31 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 	else
 		relative_x = ray->raycaster.collision.point.y
 			- floor(ray->raycaster.collision.point.y);
-	if (!dbl_is_almost_zero(relative_x))
-		printf("relative_x: %f\n", relative_x);
+	//pos_print(ray->raycaster.collision.point);
+	//printf("collision dist: %f\n", ray->raycaster.collision.distance);
+	//printf("relative_x: %f\n", relative_x);
 	wall = &stat_gr->sprites.walls[ray->raycaster.collision.sprite - 1];
  	sprite_pixel.x = relative_x * wall->width;
  	sprite_pixel.y = ((relative_y - (1.0 - scaled_wall_h) / 2) / scaled_wall_h)
@@ -89,6 +90,7 @@ t_game_state *game)
 
 	window_pixel.x = 0;
 	window_pixel.y = 0;
+	ft_bzero(&player_view, sizeof(t_ray));
 	player_view.origin = game->player.pos;
 	player_view.vec = pvector(1.0, game->player.angle - FOV / 2);
 	player_view.raycaster.fov_center_angle = game->player.angle;
