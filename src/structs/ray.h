@@ -10,21 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RAY_H
+# define RAY_H
+
+#include "vector/vector.h"
+#include "structs/sprites.h"
+# include "structs/map.h"
+
 // for now ray_casting is only used for rendering the walls (finding
 // collision points between
 // player view (a ray with starting position and viewing direction vector)
 // and walls (as defined in map))
 // later ray_casting can be used to find collision points between player and
 // other objects...
-#ifndef RAY_H
-# define RAY_H
-
-#include "structs/physics.h"
-#include "vector/vector.h"
-#include <math.h>
-#include <stdbool.h>
-#include "structs/sprites.h"
-# include "structs/map.h"
 
 typedef enum e_collision_direction
 {
@@ -37,12 +35,12 @@ typedef enum e_collision_direction
 // end_point: the point where the ray currently ends (keeps extending until hit)
 // map_x, map_y: the indizes of the char** map
 // map_dir_x, map_dir_y: x and y direction (1 or -1) depending on quadrants of angle
-// delta_ray.x: y val, if we advance +-1 in x_direction
-// delta_ray.y: x val, if we advance +-1 in y_direction
+// delta_ray.x: y change, if we advance +-1 in x_direction
+// delta_ray.y: x change, if we advance +-1 in y_direction
 // x_ray_len: the length of the ray until the next collision with a vertical wall
 // y_ray_len: the length of the ray until the next collision with a horizontal wall
-// fov_ray_angle: for rendering multiple rays in a field of view:
-// angle between current ray and original viewing direction
+// fov_center_angle: for rendering multiple rays:
+// field of view angle (center, e.g. player direction)
 typedef struct s_raycaster
 {
 	t_pos			end_point;
@@ -61,11 +59,10 @@ typedef struct s_ray
 {
 	t_pos			origin;
 	t_pvector		vec;
-	t_raycaster		rc;
+	t_raycaster		raycaster;
 }				t_ray;
 
-void	raycaster_reset(t_ray *ray);
-void	calculate_ray_wall_collision(t_ray *ray, t_map *map);
-void	check_for_sprite_collision(t_map *map, t_ray *ray);
+void	calculate_ray_collision(t_ray *ray, t_map *map);
+void	raycaster_set_directions(t_ray *ray);
 
 #endif  // RAY_H
