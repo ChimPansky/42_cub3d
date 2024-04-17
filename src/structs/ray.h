@@ -24,13 +24,6 @@
 // later ray_casting can be used to find collision points between player and
 // other objects...
 
-typedef enum e_collision_direction
-{
-	COLL_EA = 0,
-	COLL_SO = 1,
-	COLL_WE = 2,
-	COLL_NO = 3,
-}	t_collision_direction;
 
 // end_point: the point where the ray currently ends (keeps extending until hit)
 // map_x, map_y: the indizes of the char** map
@@ -41,9 +34,26 @@ typedef enum e_collision_direction
 // y_ray_len: the length of the ray until the next collision with a horizontal wall
 // fov_center_angle: for rendering multiple rays:
 // field of view angle (center, e.g. player direction)
+
+typedef enum e_collision_direction
+{
+	COLL_EA = 0,
+	COLL_SO = 1,
+	COLL_WE = 2,
+	COLL_NO = 3,
+}	t_collision_direction;
+
+typedef	struct	s_ray_collision
+{
+	t_pos					point;
+	double					distance;
+	t_sprite_types			sprite;
+	t_collision_direction	direction;
+} 				t_ray_collision;
+
 typedef struct s_raycaster
 {
-	t_pos			end_point;
+	t_ray_collision	collision;
 	int				map_x;
 	int				map_y;
 	int				map_dir_x;
@@ -51,7 +61,6 @@ typedef struct s_raycaster
 	t_cvector		delta_ray;
 	double			x_ray_len;
 	double			y_ray_len;
-	t_sprite_types	sprite_collision;
 	double			fov_center_angle;
 }				t_raycaster;
 
