@@ -1,5 +1,6 @@
 #include "physics.h"
 #include <math.h>
+#include <stdio.h>
 
 void	update_coords(
 			t_pos *pos,

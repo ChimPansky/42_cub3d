@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/11 19:04:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 09:46:57 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "structs/physics.h"
 #include "structs/player.h"
 #include "structs/trgb.h"
-#include "structs/vector.h"
+#include "vector/vector.h"
 #include "structs/sprites.h"
 #include <math.h>
 #include "structs/ray.h"

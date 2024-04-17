@@ -20,7 +20,7 @@
 # define RAY_H
 
 #include "structs/physics.h"
-#include "structs/vector.h"
+#include "vector/vector.h"
 #include <math.h>
 #include <stdbool.h>
 #include "structs/sprites.h"

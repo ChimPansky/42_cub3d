@@ -1,7 +1,7 @@
 #ifndef PHYSICS_H
 # define PHYSICS_H
 
-# include "vector.h"
+# include "../vector/vector.h"
 # include "sprites.h"
 
 typedef struct s_pos
