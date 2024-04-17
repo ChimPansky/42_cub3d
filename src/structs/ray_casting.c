@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/11 17:16:03 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 10:31:07 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ static void	raycaster_set_directions(t_ray *ray)
 	}
 }
 
-void	ray_reset(t_ray *ray)
+void	raycaster_reset(t_ray *ray)
 {
-	ray->vec.r = 0;
 	ray->rc.end_point = ray->origin;
 	ray->rc.map_x = (int)ray->origin.x;
 	ray->rc.map_y = (int)ray->origin.y;
@@ -73,7 +72,7 @@ void	ray_reset(t_ray *ray)
 
 void	calculate_ray_wall_collision(t_ray *ray, t_map *map)
 {
-	ray_reset(ray);
+	raycaster_reset(ray);
 	calculate_first_collision(&ray->rc);
 	while (ray->rc.sprite_collision == NO_SPRITE)
 	{

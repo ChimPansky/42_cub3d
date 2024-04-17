@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 09:46:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 10:39:26 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 	double	fish_eye_remover;
 	double	rel_x;
 
-	fish_eye_remover = 1.0 / cos(ray->rc.angle_btw_ray_and_player);
+	fish_eye_remover = 1.0 / cos(fabs(ray->vec.phi - ray->rc.fov_center_angle));
 	scaled_wall_h = (1.0 / fmax(ray->vec.r, 1.0))
 					* WALL_HEIGHT * fish_eye_remover;
 	 if (rel_vert_screen_pos < (1.0 - scaled_wall_h) / 2)
 	 	return (stat_gr->ceiling_col);
 	 if (rel_vert_screen_pos > scaled_wall_h + (1.0 - scaled_wall_h) / 2)
 	 	return (stat_gr->floor_col);
-	// printf("end_point_x: %f, floor(end_point(x)): %f\n", ray->rc.end_point.x, floor(ray->rc.end_point.x));
-	// printf("rel_x: %f\n", rel_x);
 
 	if (ray->rc.sprite_collision == WALL_NO || ray->rc.sprite_collision == WALL_SO)
 		rel_x = ray->rc.end_point.x - floor(ray->rc.end_point.x);
@@ -79,43 +77,6 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 	}
 }
 
-
-// static t_ray_collision	get_wall_collision(t_pos pos, t_pvector ray)
-// {
-// 	t_ray_collision	collision;
-
-// 	collision.collision_point = pos_create(0.0, 0.0);
-// 	collision.distance_from_origin = pos_distance(pos,
-// 		collision.collision_point);
-// 	(void)pos;
-// 	(void)ray;
-// 	return (collision);
-// }
-
-// get the left corner of the screen plane by starting from player_position,
-// then advancing SCREEN_DIST into direction of player_angle and then turning
-// to the left by 90 degrees and advancing by half of the SCREEN_WIDTH:
-//	L----SCREEN----R
-//	       |
-//	       |
-//	    PLA YER
-// static t_pos	get_2d_screen_left_corner(t_player *player)
-// {
-// 	t_pos	left_corner;
-
-// 	// left_corner = pos_copy(&player->pos);
-// 	// pos_add_pvec(&left_corner, pvector(SCREEN_DIST, player->angle));
-// 	// pos_add_pvec(&left_corner, pvector(SCREEN_WIDTH / 2,
-// 	// 	player->angle - M_PI / 2));
-// 	left_corner = pos_add_pvec(pos_add_pvec(player->pos,
-// 		pvector(SCREEN_DIST, player->angle)),
-// 		pvector(SCREEN_WIDTH / 2, player->angle - M_PI / 2));
-// 	return (left_corner);
-// }
-
-// question: calculate distance from player to wall OR from
-// screen_pos to wall? for now: from screen_pos
-#include "cub3d.h" // TODO: remove
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,
 t_game_state *game)
 {
@@ -125,11 +86,11 @@ t_game_state *game)
 	screen_pix.x = 0;
 	player_view.origin = game->player.pos;
 	player_view.vec = pvector(1.0, game->player.angle - FOV / 2);
+	player_view.rc.fov_center_angle = game->player.angle;
 	while (screen_pix.x < scene_image->width)
 	{
-		ray_reset(&player_view);
-		player_view.rc.angle_btw_ray_and_player = fabs(player_view.vec.phi - game->player.angle);
 		calculate_ray_wall_collision(&player_view, &game->map);
+
 		draw_screen_column(scene_image, sprites, &screen_pix, &player_view);
 		pvector_rotate(&player_view.vec, FOV / scene_image->width);
 		screen_pix.x++;

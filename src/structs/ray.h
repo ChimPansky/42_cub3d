@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// for now ray_casting is only used for rendering the screen contents (finding
+// for now ray_casting is only used for rendering the walls (finding
 // collision points between
 // player view (a ray with starting position and viewing direction vector)
 // and walls (as defined in map))
@@ -41,6 +41,8 @@ typedef enum e_collision_direction
 // delta_ray.y: x val, if we advance +-1 in y_direction
 // x_ray_len: the length of the ray until the next collision with a vertical wall
 // y_ray_len: the length of the ray until the next collision with a horizontal wall
+// fov_ray_angle: for rendering multiple rays in a field of view:
+// angle between current ray and original viewing direction
 typedef struct s_raycaster
 {
 	t_pos			end_point;
@@ -52,7 +54,7 @@ typedef struct s_raycaster
 	double			x_ray_len;
 	double			y_ray_len;
 	t_sprite_types	sprite_collision;
-	double			angle_btw_ray_and_player;
+	double			fov_center_angle;
 }				t_raycaster;
 
 typedef struct s_ray
@@ -62,7 +64,7 @@ typedef struct s_ray
 	t_raycaster		rc;
 }				t_ray;
 
-void	ray_reset(t_ray *ray);
+void	raycaster_reset(t_ray *ray);
 void	calculate_ray_wall_collision(t_ray *ray, t_map *map);
 void	check_for_sprite_collision(t_map *map, t_ray *ray);
 
