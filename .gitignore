@@ -17,6 +17,8 @@ minishell_tester/
 minilibx_resources/
 unit_tests/
 tests/
+sprites/
+cub_files/
 
 # binaries
 *.o
