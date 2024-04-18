@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 19:07:31 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:35:50 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "structs/sprites.h"
 #include <math.h>
 #include "structs/ray.h"
+//#include "log.h"
 
 void			render_scene(t_image *scene_image, t_static_graphics *sprites,
 t_game_state *game);
@@ -34,7 +35,6 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 // fish_eye_remover: make sure that all walls that have the same orthogonal
 // distance from the player have the same height on screen
 // (even though their actual distance might be further away)
-#include <stdio.h>
 static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 		t_ray *ray, double relative_y)
 {
@@ -57,9 +57,6 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 	else
 		relative_x = ray->raycaster.collision.point.y
 			- floor(ray->raycaster.collision.point.y);
-	//pos_print(ray->raycaster.collision.point);
-	//printf("collision dist: %f\n", ray->raycaster.collision.distance);
-	//printf("relative_x: %f\n", relative_x);
 	wall = &stat_gr->sprites.walls[ray->raycaster.collision.sprite - 1];
  	sprite_pixel.x = relative_x * wall->width;
  	sprite_pixel.y = ((relative_y - (1.0 - scaled_wall_h) / 2) / scaled_wall_h)
@@ -71,14 +68,21 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 	t_pixel window_pixel, t_ray *player_view)
 {
 	t_trgb	color;
-	int		window_y;
 
- 	window_y = 0;
-	while  (window_y < screen_img->height)
+ 	window_pixel.y = 0;
+	#ifdef LOGGING
+		if (g_i < 100)
+			printf("Drawing screen column window_pixel.x: %d\n", window_pixel.x);
+	#endif
+	while  (window_pixel.y < screen_img->height)
 	{
-		color = get_color_from_sprites(sprites, player_view, (double)window_y / screen_img->height);
+		color = get_color_from_sprites(sprites, player_view, (double)window_pixel.y / screen_img->height);
 		image_put_pixel(screen_img, window_pixel, color);
-		window_y++;
+		#ifdef LOGGING
+		if (g_i < 100)
+			printf("put_pixel(%d, %d, %d)\n", window_pixel.x, window_pixel.y, color);
+		#endif
+		window_pixel.y++;
 	}
 }
 
@@ -101,4 +105,7 @@ t_game_state *game)
 		pvector_rotate(&player_view.vec, FOV / scene_image->width);
 		window_pixel.x++;
 	}
+	#ifdef LOGGING
+		g_i++;
+	#endif
 }

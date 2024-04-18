@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 19:10:37 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/18 12:35:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "physics.h"
 #include "sprites.h"
 #include <math.h>
+//#include "log.h"
 
 void		calculate_ray_collision(t_ray *ray, t_map *map);
 static void	raycaster_reset(t_ray *ray);
@@ -91,8 +92,14 @@ static void	raycaster_reset(t_ray *ray)
 	ray->raycaster.collision.sprite = NO_SPRITE;
 }
 
+
+
 void	calculate_ray_collision(t_ray *ray, t_map *map)
 {
+	#ifdef LOGGING
+		if (g_i < 100)
+			printf("Calculating ray collision\n");
+	#endif
 	raycaster_reset(ray);
 	calculate_first_collision_distance(ray);
 	while (ray->raycaster.collision.sprite == NO_SPRITE)
@@ -111,8 +118,33 @@ void	calculate_ray_collision(t_ray *ray, t_map *map)
 			ray->raycaster.y_ray_len += ray->raycaster.delta_ray.y;
 			ray->raycaster.map_y += ray->raycaster.map_dir_y;
 		}
+		#ifdef LOGGING
+			if (g_i < 100)
+				printf("check_for_sprite_collision\n");
+		#endif
 		check_for_sprite_collision(map, ray);
 		ray->raycaster.collision.point = pos_add_pvec(ray->origin,
 			pvector(ray->raycaster.collision.distance, ray->vec.phi));
+		#ifdef LOGGING
+			if (g_i == 0)
+			{
+				printf("coll_distance: %f\n", ray->raycaster.collision.distance);
+				printf("coll_point: ");
+				pos_print(ray->raycaster.collision.point);
+				printf("coll_dir: %d\n", ray->raycaster.collision.direction);
+				printf("coll_sprite: %d\n", ray->raycaster.collision.sprite);
+			}
+		#endif
 	}
+	#ifdef LOGGING
+		if (g_i == 0)
+		{
+			printf("FOUND COLLISION\n");
+			printf("coll_distance: %f\n", ray->raycaster.collision.distance);
+			printf("coll_point: ");
+			pos_print(ray->raycaster.collision.point);
+			printf("coll_dir: %d\n", ray->raycaster.collision.direction);
+			printf("coll_sprite: %d\n\n", ray->raycaster.collision.sprite);
+		}
+	#endif
 }

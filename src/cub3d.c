@@ -15,10 +15,13 @@
 #include <time.h>
 #include "cub3d.h"
 
+/*
+#include "log.h"
+int g_i = 0;
+*/
 #include <stdio.h>
 
 char g_screen_info[100];	// TODO: remove
-int	g_logfile = 0;			// TODO: remove
 
 static void	print_game_info(t_app *app)
 {
@@ -67,7 +70,15 @@ int	main(int ac, char *av[])
 {
 	t_app	app;
 
-	g_logfile = open("logfile.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	#ifdef LOGGING
+		int fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd < 0)
+			return (print_error("Failed to open log file."), FAILURE);
+		dup2(fd, 1);
+		dup2(fd, 2);
+		close(fd);
+		printf("LOGGING ENABLED\n");
+	#endif
 	if (ac < 2)
 		return (print_error("Please provide a scene description "
 				"as parameter (.cub file)."), FAILURE);
