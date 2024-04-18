@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 12:35:50 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/18 17:29:19 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,69 @@
 #include "structs/sprites.h"
 #include <math.h>
 #include "structs/ray.h"
-//#include "log.h"
 
-void			render_scene(t_image *scene_image, t_static_graphics *sprites,
-t_game_state *game);
-static void		draw_screen_column(t_image *screen_img,
-	t_static_graphics *sprites,	t_pixel  window_pixel, t_ray *player_view);
-static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
-		t_ray *ray, double relative_y);
+void			render_scene(
+					t_image *scene_image,
+					t_static_graphics *sprites,
+					t_game_state *game);
+static void		draw_screen_column(
+					t_image *screen_img,
+					t_static_graphics *sprites,
+					t_pixel window_pixel,
+					t_ray *player_view);
+static t_trgb	get_color_from_sprites(
+					t_static_graphics *stat_gr,
+					t_ray *ray, double relative_y);
 
-// relative_vertical_screep_pos: ]0.0, 1.0[; 0.0: top of screen, 1.0: bottom]
-// wall_height: 0.8
-// scaled_wall_height: ]0.0, 0.8[; the further from the wall, the smaller
-// fish_eye_remover: make sure that all walls that have the same orthogonal
+static t_trgb	get_color_from_wall(
+					t_static_graphics *stat_gr,
+					t_ray_collision *collision,
+					double relative_y,
+					double scaled_wall_h)
+{
+	t_image	*wall;
+	t_pixel	sprite_pixel;
+	double	relative_x;
+
+	wall = &stat_gr->sprites.walls[collision->sprite - 1];
+	relative_x = 0.0;
+	if (collision->sprite == WALL_EA)
+		relative_x = collision->point.y - floor(collision->point.y);
+	else if (collision->sprite == WALL_SO)
+		relative_x = 1 - (collision->point.x - floor(collision->point.x));
+	else if (collision->sprite == WALL_WE)
+		relative_x = 1 - (collision->point.y - floor(collision->point.y));
+	else if (collision->sprite == WALL_NO)
+		relative_x = collision->point.x - floor(collision->point.x);
+	sprite_pixel.x = relative_x * wall->width;
+	sprite_pixel.y = ((relative_y - (1.0 - scaled_wall_h) / 2) / scaled_wall_h)
+		* wall->height;
+	return (image_get_pixel_color(wall, &sprite_pixel));
+}
+
+// relative_y: ]0.0, 1.0[; 0.0: top of screen, 1.0: bottom]
+// scaled_wall_height: the further from the wall, the lower the wall
+// using 1/cos to remove fish eye effect, that means
+// making sure that all walls that have the same orthogonal
 // distance from the player have the same height on screen
 // (even though their actual distance might be further away)
 static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 		t_ray *ray, double relative_y)
 {
-	t_image	*wall;
-	double	scaled_wall_h;
-	t_pixel	sprite_pixel;
-	double	relative_x;
+	double	scaled_wall_height;
 
-	scaled_wall_h = (1.0 / fmax(ray->raycaster.collision.distance, 1.0))
-		* WALL_HEIGHT *
-		(1.0 / cos(fabs(ray->vec.phi - ray->raycaster.fov_center_angle)));
-	if (relative_y < (1.0 - scaled_wall_h) / 2)
-	 	return (stat_gr->ceiling_col);
-	if (relative_y > scaled_wall_h + (1.0 - scaled_wall_h) / 2)
-	 	return (stat_gr->floor_col);
-	if (ray->raycaster.collision.sprite == WALL_NO
-		|| ray->raycaster.collision.sprite == WALL_SO)
-		relative_x = ray->raycaster.collision.point.x
-			- floor(ray->raycaster.collision.point.x);
-	else
-		relative_x = ray->raycaster.collision.point.y
-			- floor(ray->raycaster.collision.point.y);
-	wall = &stat_gr->sprites.walls[ray->raycaster.collision.sprite - 1];
- 	sprite_pixel.x = relative_x * wall->width;
- 	sprite_pixel.y = ((relative_y - (1.0 - scaled_wall_h) / 2) / scaled_wall_h)
-		* wall->height;
-	return (image_get_pixel_color(wall, &sprite_pixel));
+	scaled_wall_height = (1.0 / fmax(ray->raycaster.collision.distance, 1.0))
+		* WALL_HEIGHT
+		* (1.0 / cos(fabs(ray->vec.phi - ray->raycaster.fov_center_angle)));
+	if (relative_y < (1.0 - scaled_wall_height) / 2)
+		return (stat_gr->ceiling_col);
+	if (relative_y > scaled_wall_height + (1.0 - scaled_wall_height) / 2)
+		return (stat_gr->floor_col);
+	return (get_color_from_wall(
+			stat_gr,
+			&ray->raycaster.collision,
+			relative_y,
+			scaled_wall_height));
 }
 
 static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
@@ -69,19 +90,12 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 {
 	t_trgb	color;
 
- 	window_pixel.y = 0;
-	#ifdef LOGGING
-		if (g_i < 100)
-			printf("Drawing screen column window_pixel.x: %d\n", window_pixel.x);
-	#endif
-	while  (window_pixel.y < screen_img->height)
+	window_pixel.y = 0;
+	while (window_pixel.y < screen_img->height)
 	{
-		color = get_color_from_sprites(sprites, player_view, (double)window_pixel.y / screen_img->height);
+		color = get_color_from_sprites(sprites, player_view,
+				(double)window_pixel.y / screen_img->height);
 		image_put_pixel(screen_img, window_pixel, color);
-		#ifdef LOGGING
-		if (g_i < 100)
-			printf("put_pixel(%d, %d, %d)\n", window_pixel.x, window_pixel.y, color);
-		#endif
 		window_pixel.y++;
 	}
 }
@@ -105,7 +119,4 @@ t_game_state *game)
 		pvector_rotate(&player_view.vec, FOV / scene_image->width);
 		window_pixel.x++;
 	}
-	#ifdef LOGGING
-		g_i++;
-	#endif
 }

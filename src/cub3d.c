@@ -15,10 +15,10 @@
 #include <time.h>
 #include "cub3d.h"
 
-/*
+
 #include "log.h"
 int g_i = 0;
-*/
+
 #include <stdio.h>
 
 char g_screen_info[100];	// TODO: remove
