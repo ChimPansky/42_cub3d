@@ -6,10 +6,11 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/21 09:38:03 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:47:27 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "structs/game_state.h"
 #include "utils.h"
 #include "input_parsing.h"
 #include <math.h>
@@ -29,7 +30,7 @@ int	check_walls_row_col(t_charptr_array raw_map, int row_col_check,
 			cur_char = raw_map.buf[row_col_to_check][i];
 		else
 			cur_char = raw_map.buf[i][row_col_to_check];
-		if (ft_strchr("NSWE", cur_char))
+		if (ft_strchr("NSWED", cur_char))
 			cur_char = PATH;
 		if (cur_char == PATH && (i == max_index - 1
 				|| (last_char != PATH && last_char != WALL)))
@@ -82,29 +83,40 @@ static int	set_player_pos_and_angle(t_player *player,
 		player->angle = M_PI + M_PI_2;
 	return (SUCCESS);
 }
+#include <stdio.h>
+static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
+{
+	if (ft_strchr("NSWE", game->map.raw_map.buf[row][col]))
+	{
+		if (set_player_pos_and_angle(&game->player, col, row,
+				game->map.raw_map.buf[row][col]) != SUCCESS)
+			return (FAILURE);
+		game->map.raw_map.buf[row][col] = PATH;
+	}
+	else if (game->map.raw_map.buf[row][col] == 'D')
+	{
+		if (door_add(&game->doors, col, row, false) != SUCCESS)
+			return (print_error("Malloc error adding door"), FAILURE);
+	}
+	return (SUCCESS);
+}
 
-static int	check_for_invalid_chars_and_player(t_player *player,
-	t_map *map)
+static int	parse_map_symbols(t_game_state *game)
 {
 	size_t	row;
 	size_t	col;
 
 	row = 0;
-	while (row < map->raw_map.sz)
+	while (row < game->map.raw_map.sz)
 	{
 		col = 0;
-		while (col < map->width)
+		while (col < game->map.width)
 		{
-			if (!ft_strchr(MAP_SYMBOLS, map->raw_map.buf[row][col]))
+			if (!ft_strchr(MAP_SYMBOLS, game->map.raw_map.buf[row][col]))
 				return (print_error("Found invalid character in map"),
 					FAILURE);
-			if (ft_strchr("NSWE", map->raw_map.buf[row][col]))
-			{
-				if (set_player_pos_and_angle(player, col, row,
-						map->raw_map.buf[row][col]) != SUCCESS)
-					return (FAILURE);
-				map->raw_map.buf[row][col] = PATH;
-			}
+			if (handle_map_symbol(game, row, col) != SUCCESS)
+				return (FAILURE);
 			col++;
 		}
 		row++;
@@ -122,8 +134,7 @@ int	read_and_validate_map(t_game_state *game, int scene_fd)
 		return (FAILURE);
 	if (game->map.height < 3 || game->map.width < 3)
 		return (print_error("Map too small."));
-	if (check_for_invalid_chars_and_player(&game->player, &game->map)
-		!= SUCCESS)
+	if (parse_map_symbols(game) != SUCCESS)
 		return (FAILURE);
 	if (game->player.pos.x == 0.0)
 		return (print_error("Map has no player."));

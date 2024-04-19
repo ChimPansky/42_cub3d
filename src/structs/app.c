@@ -2,6 +2,7 @@
 #include "mlx.h"
 #include "input_parsing/input_parsing.h"
 
+#include <stdio.h>
 int	app_init(t_app *app, char *cub_path)
 {
 	ft_bzero(app, sizeof(t_app));
@@ -12,6 +13,7 @@ int	app_init(t_app *app, char *cub_path)
 		return (FAILURE);
 	if (read_scene_description(app, cub_path) != SUCCESS)
 		return (game_destroy(&app->game_state), FAILURE);
+	doors_print(app->game_state.doors);
 	graphics_init(app->mlx, &app->gr);
 	return (SUCCESS);
 }

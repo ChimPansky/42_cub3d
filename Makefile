@@ -48,6 +48,7 @@ CB_FILENAMES += \
 
 CB_FILENAMES += \
 	structs/app.c \
+	structs/door.c \
 	structs/game_state.c \
 	structs/graphics.c \
 	structs/image.c \

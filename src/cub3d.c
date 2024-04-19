@@ -16,8 +16,8 @@
 #include "cub3d.h"
 
 
-#include "log.h"
-int g_i = 0;
+//#include "log.h"
+//int g_i = 0;
 
 #include <stdio.h>
 
