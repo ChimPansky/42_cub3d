@@ -90,4 +90,5 @@ int	main(int ac, char *av[])
 	mlx_loop_hook(app.mlx, main_loop, &app);
 	mlx_loop(app.mlx);
 	app_destroy(&app);
+	return (SUCCESS);
 }

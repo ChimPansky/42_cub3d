@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 15:47:27 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/19 15:55:15 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	set_player_pos_and_angle(t_player *player,
 		player->angle = M_PI + M_PI_2;
 	return (SUCCESS);
 }
-#include <stdio.h>
+
 static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
 {
 	if (ft_strchr("NSWE", game->map.raw_map.buf[row][col]))
