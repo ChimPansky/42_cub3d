@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/29 09:10:53 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:43:11 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include "../structs/sprites.h"
 
 static int	extract_element_type_from_line(char **str,
 		t_scene_element *element)
@@ -33,7 +34,7 @@ static int	extract_element_type_from_line(char **str,
 		element->scene_type = CEILING;
 	else
 		return (print_error("Found unknown texture element "
-				"in scene description."), FAILURE);
+				"in scene description.", NULL), FAILURE);
 	if (element->scene_type == CEILING || element->scene_type == FLOOR)
 		(*str) += 2;
 	else
@@ -63,7 +64,7 @@ static int	get_next_element(int scene_fd, t_scene_element *element)
 			return (perror("get_next_element: get_next_line"), FAILURE);
 		if (line.str == NULL)
 			return (print_error("Missing texture element "
-					"in scene description."), FAILURE);
+					"in scene description.", NULL), FAILURE);
 		if (ft_string_is_empty(line.str))
 			free(ptr_free);
 		else
@@ -94,7 +95,8 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 		}
 		else
 		{
-			if (add_wall(mlx, &static_gr->sprites, &element) != SUCCESS)
+			if (add_sprite_img(mlx, &static_gr->sprites, element.scene_type,
+				element.tx_path) != SUCCESS)
 				return (free(element.tx_path), FAILURE);
 			free(element.tx_path);
 		}
@@ -109,10 +111,10 @@ int	read_scene_description(t_app *app, char *fpath)
 
 	if (ft_file_check_extension(fpath, ".cub") == false
 		|| ft_strlen(fpath) < 5)
-		return (print_error("Could not open scene description file."));
+		return (print_error("Could not open scene description file.", NULL));
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
-		return (print_error("Scene description must be a .cub file."));
+		return (print_error("Scene description must be a .cub file.", NULL));
 	if (read_walls_floor_ceiling(app->mlx, &app->static_gr, scene_fd)
 		!= SUCCESS
 		|| read_and_validate_map(&app->game_state, scene_fd) != SUCCESS)

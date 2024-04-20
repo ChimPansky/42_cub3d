@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 17:07:39 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 12:35:26 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_trgb	get_color_from_picture(
 	t_pixel	sprite_pixel;
 	double	relative_x;
 
-	sprite_img = &stat_gr->sprites.walls[collision->sprite - 1];
+	sprite_img = &stat_gr->sprites.images[collision->sprite];
 	relative_x = 0.0;
 	if (collision->direction == COLL_EA)
 		relative_x = collision->point.y - floor(collision->point.y);

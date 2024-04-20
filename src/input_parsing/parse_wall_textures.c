@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/29 09:11:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:20:37 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,6 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 		return (perror("extract_tx_path_from_line: ft_strdup"), FAILURE);
 	if (ft_file_check_extension(*tx_path, ".xpm") == false)
 		return (free(*tx_path), print_error("Wall textures "
-				"in scene description have to be .xpm files."));
-	return (SUCCESS);
-}
-
-// TODO add errors
-int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
-{
-	t_image	*sprite_ptr;
-
-	sprite_ptr = NULL;
-	if (element->scene_type == NORTH)
-		sprite_ptr = &sprites->wall_no;
-	else if (element->scene_type == SOUTH)
-		sprite_ptr = &sprites->wall_so;
-	else if (element->scene_type == WEST)
-		sprite_ptr = &sprites->wall_we;
-	else if (element->scene_type == EAST)
-		sprite_ptr = &sprites->wall_ea;
-	else
-		return (print_error("critical: add_tx_wall: invalid scene_type."));
-	if (sprite_ptr->image != NULL)
-		return (print_error("Found duplicate wall element in "
-				"scene description."));
-	if (image_init_from_xpm(mlx, sprite_ptr, element->tx_path) == NULL)
-		return (FAILURE);
+				"in scene description have to be .xpm files.", NULL));
 	return (SUCCESS);
 }

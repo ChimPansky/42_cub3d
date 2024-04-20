@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/25 13:08:28 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:36:02 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ typedef enum e_row_col_check {
 
 typedef enum e_scene_type
 {
-	NORTH,
-	SOUTH,
-	WEST,
-	EAST,
-	FLOOR,
-	CEILING,
-	WALLS_FLOOR_CEILING_COUNT,
-	UNKNOWN
+	UNKNOWN = 99,
+	EAST = 0,
+	SOUTH = 1,
+	WEST = 2,
+	NORTH = 3,
+	FLOOR = 4,
+	CEILING = 5,
+	WALLS_FLOOR_CEILING_COUNT = 6,
 }			t_scene_type;
 
 typedef struct s_scene_element
@@ -63,7 +63,8 @@ typedef struct s_scene_element
 int		read_scene_description(t_app *app, char *fpath);
 
 // parse_wall_textures.c:
-int		add_wall(void *mlx, t_sprites *sprites, t_scene_element *element);
+int		add_sprite_img(void *mlx,
+			t_sprites *sprites, int type, char *img_path);
 int		extract_tx_path_from_line(char **str, char **tx_path);
 
 // pars_floor_ceiling_colors.c

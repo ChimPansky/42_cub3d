@@ -59,6 +59,7 @@ CB_FILENAMES += \
 	structs/player.c \
 	structs/ray.c \
 	structs/ray2.c \
+	structs/sprites.c \
 	structs/trgb.c \
 
 CB_FILENAMES += \
@@ -87,6 +88,6 @@ fclean: clean
 re: fclean all
 
 valgrind:
-	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME)
+	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME) cub_files/valid/01_subject_map_random_pix.cub
 
 .PHONY: all bonus clean fclean re test

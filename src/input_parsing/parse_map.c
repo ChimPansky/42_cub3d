@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 15:55:15 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:20:30 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static int	check_walls(t_map map)
 	{
 		if (check_walls_row_col(map.raw_map, ROW_CHECK, row++, map.width)
 			!= SUCCESS)
-			return (print_error("Map not surrounded by walls"));
+			return (print_error("Map not surrounded by walls", NULL));
 	}
 	while (col < map.width)
 	{
 		if (check_walls_row_col(map.raw_map, COL_CHECK, col++, map.height)
 			!= SUCCESS)
-			return (print_error("Map not surrounded by walls"));
+			return (print_error("Map not surrounded by walls", NULL));
 	}
 	return (SUCCESS);
 }
@@ -70,7 +70,7 @@ static int	set_player_pos_and_angle(t_player *player,
 {
 	if (player->pos.x != 0.0)
 		return (print_error("Found multiple starting positions "
-				"for player in map"));
+				"for player in map", NULL));
 	player->pos.x = x + 0.5;
 	player->pos.y = y + 0.5;
 	if (direction == PLAYER_E)
@@ -96,7 +96,7 @@ static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
 	else if (game->map.raw_map.buf[row][col] == 'D')
 	{
 		if (door_add(&game->doors, col, row, false) != SUCCESS)
-			return (print_error("Malloc error adding door"), FAILURE);
+			return (print_error("Malloc error adding door", NULL), FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -113,7 +113,7 @@ static int	parse_map_symbols(t_game_state *game)
 		while (col < game->map.width)
 		{
 			if (!ft_strchr(MAP_SYMBOLS, game->map.raw_map.buf[row][col]))
-				return (print_error("Found invalid character in map"),
+				return (print_error("Found invalid character in map", NULL),
 					FAILURE);
 			if (handle_map_symbol(game, row, col) != SUCCESS)
 				return (FAILURE);
@@ -133,11 +133,11 @@ int	read_and_validate_map(t_game_state *game, int scene_fd)
 	if (equalize_string_lengths(&game->map) != SUCCESS)
 		return (FAILURE);
 	if (game->map.height < 3 || game->map.width < 3)
-		return (print_error("Map too small."));
+		return (print_error("Map too small.", NULL));
 	if (parse_map_symbols(game) != SUCCESS)
 		return (FAILURE);
 	if (game->player.pos.x == 0.0)
-		return (print_error("Map has no player."));
+		return (print_error("Map has no player.", NULL));
 	if (check_walls(game->map) != SUCCESS)
 		return (FAILURE);
 	return (SUCCESS);
