@@ -31,6 +31,7 @@ dummy
 
 # generated
 tests/tests_output/*
+log.txt
 
 # debug syms
 .nfs*

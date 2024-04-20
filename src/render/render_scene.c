@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 17:29:19 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:38:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,8 @@ t_game_state *game)
 	window_pixel.x = 0;
 	window_pixel.y = 0;
 	ft_bzero(&player_view, sizeof(t_ray));
-	player_view.origin = game->player.pos;
-	player_view.vec = pvector(1.0, game->player.angle - FOV / 2);
-	player_view.raycaster.fov_center_angle = game->player.angle;
+	player_view = ray_copy(&game->player.view);
+	pvector_rotate(&player_view.vec, - (FOV / 2));
 	while (window_pixel.x < scene_image->width)
 	{
 		calculate_ray_collision(&player_view, &game->map);
