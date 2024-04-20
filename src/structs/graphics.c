@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 14:06:54 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 14:50:55 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	graphics_init(void *mlx, t_graph *gr)
 {
 	int	screen_width;
 	int	screen_height;
-	printf("DOING LE GRAPHICS, EH?\n");
 
 	mlx_get_screen_size(mlx, &screen_width, &screen_height);
 	gr->win = mlx_new_window(mlx,
