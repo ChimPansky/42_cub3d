@@ -29,6 +29,8 @@ int	key_release_hook(int key_code, t_app *app)
 {
 	if (key_code == XK_Escape)
 		mlx_loop_end(app->mlx);
+	else if (key_code == XK_e)
+		player_trigger_action(app);
 	else
 		process_tracked_keys(key_code, &app->inputs, false);
 	return (0);
