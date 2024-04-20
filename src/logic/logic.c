@@ -13,7 +13,7 @@ void	change_state_for_next_frame(t_game_state *game_state)
 	t_player	*player;
 
 	player = &game_state->player;
-	player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
-	update_coords(&player->pos, &player->speed, player->angle,
+	player->view.vec.phi += player->rot_speed * PLAYER_RAD_PER_FRAME;
+	update_coords(&player->view.origin, &player->speed, player->view.vec.phi,
 		PLAYER_SPEED_FIELD_PER_FRAME);
 }

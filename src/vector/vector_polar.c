@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 09:43:43 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:23:52 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ t_pvector	pvector_from_coords(double x, double y)
 
 	result.r = sqrt(x * x + y * y);
 	result.phi = fmod(atan2(y, x) + 2 * M_PI, 2 * M_PI);
+	return (result);
+}
+
+t_pvector	pvector_copy(t_pvector *pvec)
+{
+	t_pvector	result;
+
+	result.r = pvec->r;
+	result.phi = pvec->phi;
 	return (result);
 }
 

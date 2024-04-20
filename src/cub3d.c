@@ -16,8 +16,8 @@
 #include "cub3d.h"
 
 
-//#include "log.h"
-//int g_i = 0;
+// #include "log.h"
+// int g_i = 0;
 
 #include <stdio.h>
 
@@ -30,9 +30,9 @@ static void	print_game_info(t_app *app)
 
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 10, 0,
 	"DEBUG INFO:");
-	sprintf(player, "Player: %.2f, %.2f", app->game_state.player.pos.x,
-		app->game_state.player.pos.y);
-	sprintf(phi, "Player Phi: %.2f", fmod(app->game_state.player.angle + 2*M_PI, 2*M_PI));
+	sprintf(player, "Player: %.2f, %.2f", app->game_state.player.view.origin.y,
+		app->game_state.player.view.origin.y);
+	sprintf(phi, "Player Phi: %.2f", fmod(app->game_state.player.view.vec.phi + 2*M_PI, 2*M_PI));
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 20, 0,
 	player);
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 30, 0,
@@ -86,7 +86,7 @@ int	main(int ac, char *av[])
 		return (print_error("Too many arguments!", NULL), FAILURE);
 	if (app_init(&app, av[1]) != SUCCESS)
 		return (FAILURE);
-	set_hooks(&app);
+	set_hooks(&app); // Why do we lose the gr->win ptr when we enter set_hooks???
 	mlx_loop_hook(app.mlx, main_loop, &app);
 	mlx_loop(app.mlx);
 	app_destroy(&app);

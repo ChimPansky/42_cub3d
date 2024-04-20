@@ -70,6 +70,8 @@ typedef struct s_ray
 	t_raycaster		raycaster;
 }				t_ray;
 
+t_ray	ray(t_pos *origin, t_pvector *pvec);
+t_ray	ray_copy(t_ray *ray);
 void	calculate_ray_collision(t_ray *ray, t_map *map);
 void	raycaster_set_directions(t_ray *ray);
 

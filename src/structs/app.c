@@ -23,8 +23,11 @@ int	app_init(t_app *app, char *cub_path)
 			sprites_destroy(app->mlx, &app->static_gr.sprites),
 			ptr_mlx_destroy(app->mlx), FAILURE);
 	if (add_sprite_img(app->mlx, &app->static_gr.sprites, DOOR_SPRITE,
-		DOOR_SPRITE_PATH) != SUCCESS
-		|| graphics_init(app->mlx, &app->gr) != SUCCESS)
+		DOOR_SPRITE_PATH) != SUCCESS)
+		return (game_destroy(&app->game_state),
+			sprites_destroy(app->mlx, &app->static_gr.sprites),
+			ptr_mlx_destroy(app->mlx), FAILURE);
+	if (graphics_init(app->mlx, &app->gr) != SUCCESS)
 		return (game_destroy(&app->game_state),
 			sprites_destroy(app->mlx, &app->static_gr.sprites),
 			ptr_mlx_destroy(app->mlx), FAILURE);

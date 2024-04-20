@@ -2,6 +2,7 @@
 #include "mlx.h"
 #include <X11/keysym.h>
 #include <unistd.h>
+#include "../structs/player.h"
 
 void	process_tracked_keys(int key_code, t_inputs *inputs, bool is_pressed)
 {
@@ -30,7 +31,7 @@ int	key_release_hook(int key_code, t_app *app)
 	if (key_code == XK_Escape)
 		mlx_loop_end(app->mlx);
 	else if (key_code == XK_e)
-		player_trigger_action(app);
+		player_trigger_action(&app->game_state);
 	else
 		process_tracked_keys(key_code, &app->inputs, false);
 	return (0);

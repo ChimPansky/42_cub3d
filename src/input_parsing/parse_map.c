@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 11:20:30 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 13:57:31 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,21 @@ static int	check_walls(t_map map)
 static int	set_player_pos_and_angle(t_player *player,
 	size_t x, size_t y, char direction)
 {
-	if (player->pos.x != 0.0)
+
+	if (player->view.origin.x != 0.0)
 		return (print_error("Found multiple starting positions "
 				"for player in map", NULL));
-	player->pos.x = x + 0.5;
-	player->pos.y = y + 0.5;
+	player->view.origin.x = x + 0.5;
+	player->view.origin.y = y + 0.5;
+
 	if (direction == PLAYER_E)
-		player->angle = 0.0;
+		player->view.vec.phi = 0.0;
 	else if (direction == PLAYER_S)
-		player->angle = M_PI_2;
+		player->view.vec.phi = M_PI_2;
 	else if (direction == PLAYER_W)
-		player->angle = M_PI;
+		player->view.vec.phi = M_PI;
 	else if (direction == PLAYER_N)
-		player->angle = M_PI + M_PI_2;
+		player->view.vec.phi = M_PI + M_PI_2;
 	return (SUCCESS);
 }
 
@@ -136,7 +138,7 @@ int	read_and_validate_map(t_game_state *game, int scene_fd)
 		return (print_error("Map too small.", NULL));
 	if (parse_map_symbols(game) != SUCCESS)
 		return (FAILURE);
-	if (game->player.pos.x == 0.0)
+	if (game->player.view.origin.x == 0.0)
 		return (print_error("Map has no player.", NULL));
 	if (check_walls(game->map) != SUCCESS)
 		return (FAILURE);
