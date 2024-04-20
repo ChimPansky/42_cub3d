@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 13:21:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 15:14:35 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static int	check_walls(t_map map)
 static int	set_player_pos_and_angle(t_player *player,
 	size_t x, size_t y, char direction)
 {
-
 	if (player->view.origin.x != 0.0)
 		return (print_error("Found multiple starting positions "
 				"for player in map"));
@@ -81,6 +80,7 @@ static int	set_player_pos_and_angle(t_player *player,
 		player->view.vec.phi = M_PI;
 	else if (direction == PLAYER_N)
 		player->view.vec.phi = M_PI + M_PI_2;
+	player->view.raycaster.fov_center_angle = player->view.vec.phi;
 	return (SUCCESS);
 }
 
