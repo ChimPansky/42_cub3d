@@ -13,24 +13,12 @@ logfile.txt
 # IDE
 .vscode
 
-#folders:
-minishell_tester/
-minilibx_resources/
-unit_tests/
-tests/
-test/
-sprites/
-cub_files/
-
 # binaries
 *.o
 *.a
 *.out
 cub3d
 dummy
-
-# generated
-tests/tests_output/*
 
 # debug syms
 .nfs*

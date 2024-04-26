@@ -58,7 +58,8 @@ CB_FILENAMES += \
 	structs/player.c \
 	structs/ray.c \
 	structs/ray2.c \
-	structs/trgb.c \
+	structs/sprites.c \
+	structs/trgb.c
 
 CB_FILENAMES += \
 	vector/vector_cartesian.c \

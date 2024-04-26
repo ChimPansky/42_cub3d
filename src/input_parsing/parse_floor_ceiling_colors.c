@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/25 14:13:58 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:41:28 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	add_floor_ceiling(t_static_graphics *static_gr, t_scene_element *element)
 	return (SUCCESS);
 }
 
-void	print_trgb(t_trgb color)	//TODO: remove
+void	print_trgb(t_trgb color)
 {
 	ft_printf("t: %d; r: %d; g: %d; b: %d\n",
 		color >> 24, (color >> 16) % 256, (color >> 8) % 256, color % 256);

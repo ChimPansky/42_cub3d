@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/29 09:10:53 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/02 14:43:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 		if (element.scene_type == FLOOR || element.scene_type == CEILING)
 		{
 			if (add_floor_ceiling(static_gr, &element) != SUCCESS)
-				return (FAILURE);
+				return (sprites_destroy(mlx, &static_gr->sprites), FAILURE);
 		}
 		else
 		{
 			if (add_wall(mlx, &static_gr->sprites, &element) != SUCCESS)
-				return (free(element.tx_path), FAILURE);
+				return (free(element.tx_path),
+					sprites_destroy(mlx, &static_gr->sprites), FAILURE);
 			free(element.tx_path);
 		}
 		elements_read++;
@@ -114,8 +115,10 @@ int	read_scene_description(t_app *app, char *fpath)
 	if (scene_fd == -1)
 		return (print_error("Scene description must be a .cub file."));
 	if (read_walls_floor_ceiling(app->mlx, &app->static_gr, scene_fd)
-		!= SUCCESS
-		|| read_and_validate_map(&app->game_state, scene_fd) != SUCCESS)
-		return (close(scene_fd), FAILURE);
+		!= SUCCESS)
+			return (close(scene_fd), FAILURE);
+	if (read_and_validate_map(&app->game_state, scene_fd) != SUCCESS)
+		return (sprites_destroy(app->mlx, &app->static_gr.sprites),
+			close(scene_fd), FAILURE);
 	return (close(scene_fd), SUCCESS);
 }

@@ -29,7 +29,6 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 	return (SUCCESS);
 }
 
-// TODO add errors
 int	add_wall(void *mlx, t_sprites *sprites, t_scene_element *element)
 {
 	t_image	*sprite_ptr;

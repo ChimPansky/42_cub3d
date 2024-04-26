@@ -23,4 +23,6 @@ typedef union u_sprites
 	t_image	walls[4];
 }		t_sprites;
 
+void	sprites_destroy(void *mlx, t_sprites *sprites);
+
 #endif  // SPRITES_H
