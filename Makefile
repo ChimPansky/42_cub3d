@@ -56,10 +56,16 @@ CB_FILENAMES += \
 	structs/minimap.c \
 	structs/physics.c \
 	structs/player.c \
+	structs/ray.c \
+	structs/ray2.c \
 	structs/sprites.c \
-	structs/trgb.c \
-	structs/cartesian_vector.c \
-	structs/polar_vector.c
+	structs/trgb.c
+
+CB_FILENAMES += \
+	vector/vector_cartesian.c \
+	vector/vector_cartesian2.c \
+	vector/vector_polar.c \
+	vector/vector_utilities.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

@@ -1,30 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.h                                         :+:      :+:    :+:   */
+/*   vector_utilities.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 18:01:22 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:23 by tkasbari         ###   ########.fr       */
+/*   Created: 2024/04/17 09:38:05 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/04/17 09:43:33 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-# define GRAPHICS_H
+#include <stdbool.h>
+#include "vector.h"
+#include <stdio.h>
 
-# include "structs/image.h"
-# include "structs/minimap.h"
+bool	dbl_is_almost_zero(double a)
+{
+	if (a == 0)
+		return (true);
+	if (a < 0 && a > -10e-10)
+		return (true);
+	if (a > 0 && a < 10e-10)
+		return (true);
+	return (false);
+}
 
-# define WIN_SIZE_FACTOR 0.90
+void	cvector_print(const t_cvector *cvec)
+{
+	printf("(%f/%f)\n", cvec->x, cvec->y);
+}
 
-typedef struct s_graph {
-	void		*win;
-	t_minimap	minimap;
-	t_image		scene;
-}		t_graph;
-
-int		graphics_init(void *mlx, t_graph *gr);
-void	graphics_destroy(void *mlx, t_graph *gr);
-
-#endif  // GRAPHICS_H
+void	pvector_print(const t_pvector *pvec)
+{
+	printf("(%f, %f)\n", pvec->r, pvec->phi);
+}
