@@ -1,11 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphics.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/18 18:01:22 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/04/18 18:01:23 by tkasbari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
 # include "structs/image.h"
 # include "structs/minimap.h"
 
-# define WIN_W 1920
-# define WIN_H 1080
+# define WIN_SIZE_FACTOR 0.90
 
 typedef struct s_graph {
 	void		*win;
