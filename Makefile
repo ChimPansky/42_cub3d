@@ -1,6 +1,3 @@
-#TODO https://stackoverflow.com/questions/2394609/makefile-header-dependencies
-
-
 NAME = cub3d
 all: $(NAME)
 
@@ -60,7 +57,9 @@ CB_FILENAMES += \
 	structs/physics.c \
 	structs/player.c \
 	structs/sprites.c \
-	structs/trgb.c
+	structs/trgb.c \
+	structs/cartesian_vector.c \
+	structs/polar_vector.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

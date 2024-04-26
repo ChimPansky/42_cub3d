@@ -2,7 +2,6 @@
 #include "mlx.h"
 #include "libft.h"
 
-// TODO add checks
 int	graphics_init(void *mlx, t_graph *gr)
 {
 	gr->win = mlx_new_window(mlx, WIN_W, WIN_H, "cub3d");

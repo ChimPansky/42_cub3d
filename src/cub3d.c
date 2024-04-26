@@ -15,7 +15,6 @@
 #include <time.h>
 #include "cub3d.h"
 
-// TODO mlx_put_image_to_window inside render?
 int	main_loop(void *data)
 {
 	clock_t	start_time;
