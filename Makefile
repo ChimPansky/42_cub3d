@@ -39,10 +39,6 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	ray_casting/ray_casting.c \
-	ray_casting/ray_collision.c
-
-CB_FILENAMES += \
 	input_parsing/input_parsing.c \
 	input_parsing/parse_floor_ceiling_colors.c \
 	input_parsing/parse_map.c \
@@ -60,6 +56,8 @@ CB_FILENAMES += \
 	structs/minimap.c \
 	structs/physics.c \
 	structs/player.c \
+	structs/ray.c \
+	structs/ray2.c \
 	structs/trgb.c \
 
 CB_FILENAMES += \
