@@ -10,22 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// for now ray_casting is only used for rendering the screen contents (finding
+#ifndef RAY_H
+# define RAY_H
+
+# include "vector/vector.h"
+# include "structs/sprites.h"
+# include "structs/map.h"
+
+// for now ray_casting is only used for rendering the walls (finding
 // collision points between
 // player view (a ray with starting position and viewing direction vector)
 // and walls (as defined in map))
 // later ray_casting can be used to find collision points between player and
 // other objects...
-#ifndef RAY_H
-# define RAY_H
-
-#include "structs/physics.h"
-#include "vector/vector.h"
-#include <math.h>
-#include <stdbool.h>
-#include "structs/sprites.h"
-# include "structs/map.h"
-
 typedef enum e_collision_direction
 {
 	COLL_EA = 0,
@@ -34,16 +31,28 @@ typedef enum e_collision_direction
 	COLL_NO = 3,
 }	t_collision_direction;
 
-// end_point: the point where the ray currently ends (keeps extending until hit)
+typedef struct s_ray_collision
+{
+	t_pos					point;
+	double					distance;
+	t_sprite_types			sprite;
+	t_collision_direction	direction;
+}				t_ray_collision;
+
+// collision: collision-coordinates, distance, direction and type of sprite hit
+//	of the ray_collision with a map_square that is	not a path
 // map_x, map_y: the indizes of the char** map
-// map_dir_x, map_dir_y: x and y direction (1 or -1) depending on quadrants of angle
-// delta_ray.x: y val, if we advance +-1 in x_direction
-// delta_ray.y: x val, if we advance +-1 in y_direction
-// x_ray_len: the length of the ray until the next collision with a vertical wall
-// y_ray_len: the length of the ray until the next collision with a horizontal wall
+// map_dir_x, map_dir_y: x and y direction (1 or -1) depending on
+//	quadrants of angle
+// delta_ray.x: y change, if we advance +-1 in x_direction
+// delta_ray.y: x change, if we advance +-1 in y_direction
+// x_ray_len: the length of the ray until the next collision with a vert wall
+// y_ray_len: the length of the ray until the next collision with a horiz wall
+// fov_center_angle: for rendering multiple rays:
+// field of view angle (center, e.g. player direction)
 typedef struct s_raycaster
 {
-	t_pos			end_point;
+	t_ray_collision	collision;
 	int				map_x;
 	int				map_y;
 	int				map_dir_x;
@@ -51,19 +60,17 @@ typedef struct s_raycaster
 	t_cvector		delta_ray;
 	double			x_ray_len;
 	double			y_ray_len;
-	t_sprite_types	sprite_collision;
-	double			angle_btw_ray_and_player;
+	double			fov_center_angle;
 }				t_raycaster;
 
 typedef struct s_ray
 {
 	t_pos			origin;
 	t_pvector		vec;
-	t_raycaster		rc;
+	t_raycaster		raycaster;
 }				t_ray;
 
-void	ray_reset(t_ray *ray);
-void	calculate_ray_wall_collision(t_ray *ray, t_map *map);
-void	check_for_sprite_collision(t_map *map, t_ray *ray);
+void	calculate_ray_collision(t_ray *ray, t_map *map);
+void	raycaster_set_directions(t_ray *ray);
 
 #endif  // RAY_H
