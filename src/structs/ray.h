@@ -20,7 +20,8 @@
 # define RAY_H
 
 #include "structs/physics.h"
-#include "structs/vector.h"
+#include "vector/vector.h"
+#include <math.h>
 #include <stdbool.h>
 #include "structs/sprites.h"
 # include "structs/map.h"
@@ -51,6 +52,7 @@ typedef struct s_raycaster
 	double			x_ray_len;
 	double			y_ray_len;
 	t_sprite_types	sprite_collision;
+	double			angle_btw_ray_and_player;
 }				t_raycaster;
 
 typedef struct s_ray

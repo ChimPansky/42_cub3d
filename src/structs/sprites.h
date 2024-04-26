@@ -15,10 +15,10 @@ typedef enum	e_sprite_types
 typedef union u_sprites
 {
 	struct {
-		t_image	wall_no;
-		t_image	wall_so;
 		t_image	wall_ea;
+		t_image	wall_so;
 		t_image	wall_we;
+		t_image	wall_no;
 	};
 	t_image	walls[4];
 }		t_sprites;

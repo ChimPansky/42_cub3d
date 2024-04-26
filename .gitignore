@@ -19,6 +19,8 @@ minilibx_resources/
 unit_tests/
 tests/
 test/
+sprites/
+cub_files/
 
 # binaries
 *.o

@@ -6,15 +6,14 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/02 13:01:22 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 09:43:19 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-#include "math.h"
-#include <stdio.h>
+#include <stdbool.h>
 
 typedef struct s_cartesian_vector
 {
@@ -46,5 +45,7 @@ t_pvector	pvector_from_coords(double x, double y);
 void		pvector_scale(t_pvector *pvec, double factor);
 void		pvector_rotate(t_pvector *pvec, double rot_angle);
 void		pvector_print(const t_pvector *pvec);
+
+bool		dbl_is_almost_zero(double a);
 
 #endif  // VECTOR_H
