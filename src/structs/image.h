@@ -2,6 +2,7 @@
 # define MLX_UTILS_H
 
 # include <sys/types.h>
+# include "trgb.h"
 
 typedef struct s_image {
 	void	*image;
@@ -24,5 +25,6 @@ t_image			*image_init_from_xpm(void *mlx, t_image *img, char *xpm_path);
 void			image_destroy(void *mlx, t_image *img);
 
 void			image_put_pixel(t_image *img, t_pixel pix, unsigned int color);
+t_trgb			image_get_pixel_color(t_image *img, t_pixel *pix);
 
 #endif  // MLX_UTILS_H

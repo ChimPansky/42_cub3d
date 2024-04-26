@@ -8,6 +8,7 @@
 #test files:
 test.c
 dummy.c
+logfile.txt
 
 # IDE
 .vscode
@@ -17,6 +18,7 @@ minishell_tester/
 minilibx_resources/
 unit_tests/
 tests/
+test/
 sprites/
 cub_files/
 

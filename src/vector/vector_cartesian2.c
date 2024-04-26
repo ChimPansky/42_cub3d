@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.h                                         :+:      :+:    :+:   */
+/*   cartesian_vector2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 18:01:22 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:23 by tkasbari         ###   ########.fr       */
+/*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/04/17 09:41:47 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-# define GRAPHICS_H
+#include "vector.h"
 
-# include "structs/image.h"
-# include "structs/minimap.h"
+void	cvector_normalize(t_cvector *cvec)
+{
+	double		vec_mod;
 
-# define WIN_SIZE_FACTOR 0.90
-
-typedef struct s_graph {
-	void		*win;
-	t_minimap	minimap;
-	t_image		scene;
-}		t_graph;
-
-int		graphics_init(void *mlx, t_graph *gr);
-void	graphics_destroy(void *mlx, t_graph *gr);
-
-#endif  // GRAPHICS_H
+	vec_mod = cvector_get_mod(cvec);
+	if (dbl_is_almost_zero(vec_mod))
+		return ;
+	cvec->x /= vec_mod;
+	cvec->y /= vec_mod;
+}

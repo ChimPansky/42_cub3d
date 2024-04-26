@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cartesian_vector.c                                 :+:      :+:    :+:   */
+/*   vector_cartesian.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/02 12:04:15 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/17 09:43:50 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
-#include <float.h>
-#include <stdio.h>
+#include <math.h>
 
 t_cvector	cvector(double x, double y)
 {
@@ -50,20 +49,4 @@ t_cvector	cvector_rotate(const t_cvector *cvec, double rot_angle)
 	result.x = cvec->x * cos(rot_angle) - cvec->y * sin(rot_angle);
 	result.y = cvec->x * sin(rot_angle) + cvec->y * cos(rot_angle);
 	return (result);
-}
-
-void	cvector_normalize(t_cvector *cvec)
-{
-	double		vec_mod;
-
-	vec_mod = cvector_get_mod(cvec);
-	if (fabs(vec_mod) < DBL_EPSILON)
-		return ;
-	cvec->x /= vec_mod;
-	cvec->y /= vec_mod;
-}
-
-void	cvector_print(const t_cvector *cvec)
-{
-	printf("(%f/%f)\n", cvec->x, cvec->y);
 }
