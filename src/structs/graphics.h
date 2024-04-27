@@ -18,7 +18,8 @@
 
 # define WIN_SIZE_FACTOR 0.50
 
-typedef struct s_graph {
+typedef struct s_graph
+{
 	void		*win;
 	t_minimap	minimap;
 	t_image		scene;
