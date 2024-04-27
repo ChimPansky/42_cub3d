@@ -7,7 +7,6 @@
 
 #test files:
 test.c
-dummy.c
 logfile.txt
 
 # IDE
