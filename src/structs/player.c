@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:42:05 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 18:41:01 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:26:39 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	player_door_action(t_game_state *game, t_ray *player_view)
 {
 	t_door	*door;
 
-	door = door_get(game->doors, player_view->raycaster.map_x, player_view->raycaster.map_y);
+	door = door_get(game->map.doors, player_view->raycaster.map_x,
+		player_view->raycaster.map_y);
 	if (door)
 	{
 		printf("Door found\n");

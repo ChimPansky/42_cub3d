@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 12:47:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:40:56 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	graphics_init(void *mlx, t_graph *gr)
 			screen_width * WIN_SIZE_FACTOR,
 			screen_height * WIN_SIZE_FACTOR))
 		exit(1);
-	mlx_do_key_autorepeaton(mlx);// TODO: delete
-	//mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
+	//mlx_do_key_autorepeaton(mlx);// TODO: delete
+	mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
 	return (SUCCESS);
 }
 
