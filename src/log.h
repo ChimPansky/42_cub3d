@@ -5,6 +5,5 @@
 # ifdef LOGGING
 #  include <fcntl.h>
 #  include <stdio.h>
-	extern int	g_i;
 # endif
 #endif

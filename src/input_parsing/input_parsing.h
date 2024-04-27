@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 11:36:02 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 13:07:01 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "structs/trgb.h"
 # include "structs/app.h"
+# include "structs/sprites.h"
 
 # define MAP_SYMBOLS "01NSWE D"
 # define FLOOR_CEILING_TRANSPARENCY 50

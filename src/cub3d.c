@@ -14,6 +14,7 @@
 #include "utils.h"
 #include <time.h>
 #include "cub3d.h"
+#include "log.h"
 
 
 //#include "log.h"
@@ -63,8 +64,6 @@ int	main_loop(void *data)
 		usleep((MSEC_PER_FRAME - msec_passed) * 1000);
 	return (0);
 }
-
-#include <fcntl.h>
 
 int	main(int ac, char *av[])
 {
