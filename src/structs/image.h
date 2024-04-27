@@ -4,7 +4,8 @@
 # include <sys/types.h>
 # include "structs/trgb.h"
 
-typedef struct s_image {
+typedef struct s_image
+{
 	void	*image;
 	char	*addr;
 	int		bits_per_pixel;

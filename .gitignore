@@ -4,23 +4,21 @@
 
 #*.txt
 *.png
+
+#test files:
 test.c
+logfile.txt
+log.txt
 
 # IDE
 .vscode
-
-#folders:
-minishell_tester/
-minilibx_resources
 
 # binaries
 *.o
 *.a
 *.out
 cub3d
-
-# generated
-tests/tests_output/*
+dummy
 
 # debug syms
 .nfs*

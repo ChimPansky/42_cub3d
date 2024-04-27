@@ -3,7 +3,8 @@
 
 typedef unsigned int	t_trgb;
 
-// string to color
-// 4 chars to color
+t_trgb	trgb(int t, int r, int g, int b);
+
+int     trgb_parse(char **str, t_trgb *trgb);
 
 #endif  // TRGB_H

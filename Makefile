@@ -1,6 +1,3 @@
-#TODO https://stackoverflow.com/questions/2394609/makefile-header-dependencies
-
-
 NAME = cub3d
 all: $(NAME)
 
@@ -27,7 +24,8 @@ LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
 SOURCE_DIR = src
 
 CB_FILENAMES = \
-	cub3d.c
+	cub3d.c \
+	utils.c
 
 CB_FILENAMES += \
 	hooks/key_hooks.c \
@@ -41,11 +39,12 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	scene_description/floor_ceiling_validation.c \
-	scene_description/map_validation.c \
-	scene_description/scene_description.c \
-	scene_description/utilities.c \
-	scene_description/walls_validation.c
+	input_parsing/input_parsing.c \
+	input_parsing/parse_floor_ceiling_colors.c \
+	input_parsing/parse_map.c \
+	input_parsing/parse_wall_textures.c \
+	input_parsing/prepare_map.c \
+	input_parsing/utilities.c
 
 CB_FILENAMES += \
 	structs/app.c \
@@ -57,7 +56,16 @@ CB_FILENAMES += \
 	structs/minimap.c \
 	structs/physics.c \
 	structs/player.c \
+	structs/ray.c \
+	structs/ray2.c \
+	structs/sprites.c \
 	structs/trgb.c
+
+CB_FILENAMES += \
+	vector/vector_cartesian.c \
+	vector/vector_cartesian2.c \
+	vector/vector_polar.c \
+	vector/vector_utilities.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 

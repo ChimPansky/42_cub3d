@@ -1,7 +1,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-int	print_error(char *err_msg);
+#define FPS             60
+#define MSEC_PER_FRAME  1000/FPS
+
 
 //             |
 //             |

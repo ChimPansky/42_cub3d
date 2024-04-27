@@ -1,26 +1,35 @@
 #include "app.h"
 #include "mlx.h"
-#include "scene_description/scene_description.h"
+#include "input_parsing/input_parsing.h"
+
+static void	ptr_mlx_destroy(void *mlx)
+{
+	mlx_destroy_display(mlx);
+	free(mlx);
+}
 
 int	app_init(t_app *app, char *cub_path)
 {
-	t_sprite_sources	sources;
-
 	ft_bzero(app, sizeof(t_app));
 	app->mlx = mlx_init();
 	if (!app->mlx)
 		return (!SUCCESS);
 	if (game_init(&app->game_state) != SUCCESS)
-		return (FAILURE);
-	if (read_scene_description(app, cub_path, &sources) != SUCCESS)
-		return (game_destroy(&app->game_state), FAILURE);
-	graphics_init(app->mlx, &app->gr);
+		return (ptr_mlx_destroy(app->mlx), FAILURE);
+	if (read_scene_description(app, cub_path) != SUCCESS)
+		return (game_destroy(&app->game_state), ptr_mlx_destroy(app->mlx),
+			FAILURE);
+	if (graphics_init(app->mlx, &app->gr) != SUCCESS)
+		return (game_destroy(&app->game_state),
+			sprites_destroy(app->mlx, &app->static_gr.sprites),
+			ptr_mlx_destroy(app->mlx), FAILURE);
 	return (SUCCESS);
 }
 
 void	app_destroy(t_app *app)
 {
 	game_destroy(&app->game_state);
+	sprites_destroy(app->mlx, &app->static_gr.sprites);
 	graphics_destroy(app->mlx, &app->gr);
-	free(app->mlx);
+	ptr_mlx_destroy(app->mlx);
 }
