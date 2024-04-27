@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 14:02:23 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 15:18:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:24:56 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../structs/map.h"
 #include "input_parsing.h"
 
-int		door_validate(t_map map, size_t col, size_t row)
+int		door_validate(t_map map, int col, int row)
 {
 	char	up;
 	char	down;

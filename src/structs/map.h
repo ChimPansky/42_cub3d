@@ -18,8 +18,8 @@ typedef struct s_map
 	t_charptr_array	raw_map;
 	t_map_sym		**map;
 	t_door			*doors;
-	size_t			width;
-	size_t			height;
+	int				width;
+	int				height;
 }			t_map;
 
 t_map_sym	coord_to_map_sym(t_map *map, t_pos *coord);

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 17:03:22 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:30:16 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	set_collision_direction(t_raycaster *rc)
 // Wall order: EA->SO->WE->NO (clockwise like our phi)
 static void	check_for_sprite_collision(t_map *map, t_ray *ray)
 {
-	t_map_sym				cur_sym;
+	t_map_sym	cur_sym;
 
 	cur_sym = map->raw_map.buf[ray->raycaster.map_y][ray->raycaster.map_x];
 	if (cur_sym == PATH_SYM)
@@ -115,5 +115,7 @@ void	calculate_ray_collision(t_ray *ray, t_map *map)
 		ray->raycaster.collision.point = pos_add_pvec(ray->origin,
 				pvector(ray->raycaster.collision.distance, ray->vec.phi));
 		check_for_sprite_collision(map, ray);
+		if (ray->raycaster.collision.distance > MAX_RAY_LEN || ray->raycaster.map_x < 0 || ray->raycaster.map_y < 0 || ray->raycaster.map_x >= map->width || ray->raycaster.map_y >= map->height)
+			ray->raycaster.collision.sprite = INFINTY_SPRITE;
 	}
 }

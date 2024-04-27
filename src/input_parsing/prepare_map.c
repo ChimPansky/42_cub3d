@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 11:20:43 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:28:07 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 
 int	equalize_string_lengths(t_map *map)
 {
-	size_t	row;
+	int	row;
 
 	row = 0;
-	while (row < map->raw_map.sz)
+	while (row < (int)map->raw_map.sz)
 	{
-		if (ft_strlen(map->raw_map.buf[row]) < map->width)
+		if ((int)ft_strlen(map->raw_map.buf[row]) < map->width)
 		{
 			map->raw_map.buf[row] = ft_strrpad(map->raw_map.buf[row], ' ',
 					map->width, true);

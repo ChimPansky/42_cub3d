@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 14:11:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:26:39 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		extract_trgb_from_line(char **str, t_trgb *trgb);
 int		read_and_validate_map(t_game_state *game, int scene_fd);
 
 // parse_doors.c
-int		door_validate(t_map map, size_t col, size_t row);
+int		door_validate(t_map map, int col, int row);
 
 // prepare_map.c
 int		fill_raw_map(t_map *map, int scene_fd);

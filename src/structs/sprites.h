@@ -13,6 +13,7 @@ typedef enum	e_sprite_types
 	WALL_WE = 2,
 	WALL_NO = 3,
 	DOOR_SPRITE = 4,
+	INFINTY_SPRITE = 5,
 }		t_sprite_types;
 
 typedef union u_sprites

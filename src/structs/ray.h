@@ -17,6 +17,8 @@
 # include "structs/sprites.h"
 # include "structs/map.h"
 
+# define MAX_RAY_LEN 1000
+
 // for now ray_casting is only used for rendering the walls (finding
 // collision points between
 // player view (a ray with starting position and viewing direction vector)

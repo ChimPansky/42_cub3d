@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 17:29:39 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 17:31:38 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:19:30 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define WALL_HEIGHT 1.0
 // 60 degrees player field of view
 # define FOV M_PI / 3
+# define INFINITY_COL 0x00000000
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state);
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,

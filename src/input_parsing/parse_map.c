@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 19:20:04 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 21:27:10 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int	check_walls_row_col(t_charptr_array raw_map, int row_col_check,
 
 static int	check_walls(t_map map)
 {
-	size_t	row;
-	size_t	col;
+	int	row;
+	int	col;
 
 	row = 0;
 	col = 0;
@@ -84,7 +84,7 @@ static int	set_player_pos_and_angle(t_player *player,
 	return (SUCCESS);
 }
 
-static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
+static int	handle_map_symbol(t_game_state *game, int row, int col)
 {
 	if (ft_strchr("NSWE", game->map.raw_map.buf[row][col]))
 	{
@@ -105,11 +105,11 @@ static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
 
 static int	parse_map_symbols(t_game_state *game)
 {
-	size_t	row;
-	size_t	col;
+	int	row;
+	int	col;
 
 	row = 0;
-	while (row < game->map.raw_map.sz)
+	while (row < (int)game->map.raw_map.sz)
 	{
 		col = 0;
 		while (col < game->map.width)
