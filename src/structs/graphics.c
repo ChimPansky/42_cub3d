@@ -37,6 +37,5 @@ void	graphics_destroy(void *mlx, t_graph *gr)
 {
 	minimap_destroy(mlx, &gr->minimap);
 	image_destroy(mlx, &gr->scene);
-	mlx_destroy_window(mlx, gr->win);
 	mlx_do_key_autorepeaton(mlx);
 }

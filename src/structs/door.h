@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graphics.h                                         :+:      :+:    :+:   */
+/*   door.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 18:01:22 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:23 by tkasbari         ###   ########.fr       */
+/*   Created: 2024/04/18 21:14:32 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/04/19 14:35:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAPHICS_H
-# define GRAPHICS_H
+#ifndef DOOR_H
+# define DOOR_H
 
-# include "structs/image.h"
-# include "structs/minimap.h"
+# include <stdbool.h>
 
-# define WIN_SIZE_FACTOR 0.50
-
-typedef struct s_graph
+typedef struct s_door
 {
-	void		*win;
-	t_minimap	minimap;
-	t_image		scene;
-}		t_graph;
+	int				map_x;
+	int				map_y;
+	bool			is_open;
+	struct s_door	*next;
+}				t_door;
 
-int		graphics_init(void *mlx, t_graph *gr);
-void	graphics_destroy(void *mlx, t_graph *gr);
+int		door_add(t_door **doors, int map_x, int map_y, bool is_open);
+void	doors_destroy(t_door **doors);
+t_door	*door_get(t_door *doors, int map_x, int map_y);
+void	doors_print(t_door *doors);
 
-#endif  // GRAPHICS_H
+#endif  // DOOR_H

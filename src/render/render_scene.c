@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 17:29:19 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 12:35:26 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,30 +34,30 @@ static t_trgb	get_color_from_sprites(
 					t_static_graphics *stat_gr,
 					t_ray *ray, double relative_y);
 
-static t_trgb	get_color_from_wall(
+static t_trgb	get_color_from_picture(
 					t_static_graphics *stat_gr,
 					t_ray_collision *collision,
 					double relative_y,
 					double scaled_wall_h)
 {
-	t_image	*wall;
+	t_image	*sprite_img;
 	t_pixel	sprite_pixel;
 	double	relative_x;
 
-	wall = &stat_gr->sprites.walls[collision->sprite - 1];
+	sprite_img = &stat_gr->sprites.images[collision->sprite];
 	relative_x = 0.0;
-	if (collision->sprite == WALL_EA)
+	if (collision->direction == COLL_EA)
 		relative_x = collision->point.y - floor(collision->point.y);
-	else if (collision->sprite == WALL_SO)
+	else if (collision->direction == COLL_SO)
 		relative_x = 1 - (collision->point.x - floor(collision->point.x));
-	else if (collision->sprite == WALL_WE)
+	else if (collision->direction == COLL_WE)
 		relative_x = 1 - (collision->point.y - floor(collision->point.y));
-	else if (collision->sprite == WALL_NO)
+	else if (collision->direction == COLL_NO)
 		relative_x = collision->point.x - floor(collision->point.x);
-	sprite_pixel.x = relative_x * wall->width;
+	sprite_pixel.x = relative_x * sprite_img->width;
 	sprite_pixel.y = ((relative_y - (1.0 - scaled_wall_h) / 2) / scaled_wall_h)
-		* wall->height;
-	return (image_get_pixel_color(wall, &sprite_pixel));
+		* sprite_img->height;
+	return (image_get_pixel_color(sprite_img, &sprite_pixel));
 }
 
 // relative_y: ]0.0, 1.0[; 0.0: top of screen, 1.0: bottom]
@@ -78,7 +78,7 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 		return (stat_gr->ceiling_col);
 	if (relative_y > scaled_wall_height + (1.0 - scaled_wall_height) / 2)
 		return (stat_gr->floor_col);
-	return (get_color_from_wall(
+	return (get_color_from_picture(
 			stat_gr,
 			&ray->raycaster.collision,
 			relative_y,

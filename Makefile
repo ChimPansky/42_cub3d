@@ -40,6 +40,7 @@ CB_FILENAMES += \
 
 CB_FILENAMES += \
 	input_parsing/input_parsing.c \
+	input_parsing/parse_doors.c \
 	input_parsing/parse_floor_ceiling_colors.c \
 	input_parsing/parse_map.c \
 	input_parsing/parse_wall_textures.c \
@@ -48,6 +49,7 @@ CB_FILENAMES += \
 
 CB_FILENAMES += \
 	structs/app.c \
+	structs/door.c \
 	structs/game_state.c \
 	structs/graphics.c \
 	structs/image.c \
@@ -87,6 +89,6 @@ fclean: clean
 re: fclean all
 
 valgrind:
-	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME)
+	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME) cub_files/valid/01_subject_map_random_pix.cub
 
 .PHONY: all bonus clean fclean re test

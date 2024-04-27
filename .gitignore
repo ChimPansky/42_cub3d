@@ -7,7 +7,6 @@
 
 #test files:
 test.c
-logfile.txt
 log.txt
 
 # IDE
@@ -19,6 +18,9 @@ log.txt
 *.out
 cub3d
 dummy
+
+# generated
+tests/tests_output/*
 
 # debug syms
 .nfs*
