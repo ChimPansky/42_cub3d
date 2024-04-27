@@ -46,6 +46,9 @@ void		pvector_scale(t_pvector *pvec, double factor);
 void		pvector_rotate(t_pvector *pvec, double rot_angle);
 void		pvector_print(const t_pvector *pvec);
 
+t_cvector	cvector_from_pvector(t_pvector *pvec);
+t_pvector	pvector_from_cvector(t_cvector *cvec);
+
 bool		dbl_is_almost_zero(double a);
 
 #endif  // VECTOR_H

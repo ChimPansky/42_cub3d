@@ -22,15 +22,6 @@ t_cvector	cvector(double x, double y)
 	return (result);
 }
 
-t_cvector	cvector_from_angle(double angle)
-{
-	t_cvector	result;
-
-	result.x = cos(angle);
-	result.y = sin(angle);
-	return (result);
-}
-
 t_cvector	cvector_add(const t_cvector *cvec1, const t_cvector *cvec2)
 {
 	return (cvector(cvec1->x + cvec2->x, cvec1->y + cvec2->y));

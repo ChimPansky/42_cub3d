@@ -40,6 +40,14 @@ void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 	*(t_trgb *)dst = color;
 }
 
+t_pixel			pixel(int x, int y)
+{
+	t_pixel	pix;
+
+	pix.x = x;
+	pix.y = y;
+	return (pix);
+}
 
 void	image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos)
 {
@@ -72,45 +80,82 @@ t_trgb	image_get_pixel_color(t_image *img, t_pixel *pix)
 	return (*(t_trgb *)dst);
 }
 
-// wtf i spent 3 h on this func
-// void	put_transformed_img_to_img(t_image *dest, t_image *src, t_pixel insert_pos, t_pvector trans)
-// {
-// 	t_pixel	min;
-// 	t_pixel	max;
+#include "vector/vector.h"
+#include <math.h>
 
-// 	t_cvector lead = cvector(src->width/2, src->height/2);
-// 	t_cvector proj = cvec_mul_pvec(lead * trans);
-// 	min.x = min(proj.x, -proj.x);
-// 	max.x = max(proj.x, -proj.x);
-// 	min.y = min(proj.y, -proj.y);
-// 	max.y = max(proj.y, -proj.y);
+double min(double a, double b)
+{
+	if (a < b)
+		return a;
+	return b;
+}
 
-// 	trans.angle *= -1;
-// 	trans.mod = 1 / trans.mod;
-// 	t_pixel cur;
-// 	t_pixel dest_pix;
-// 	cur.x = min.x - 1;
-// 	while (++cur.x <= max.x)
-// 	{
-// 		dest_pix.x = insert_pos.x + cur.x;
-// 		if (dest_pix.x < 0 || dest_pix.x >= dest->width)
-// 			continue;
-// 		cur.y = min.y - 1;
-// 		while (++cur.y <= max.y)
-// 		{
-// 			if (dest_pix.y < 0 || dest_pix.y >= dest->height)
-// 				continue;
+double max(double a, double b)
+{
+	if (a > b)
+		return a;
+	return b;
+}
 
+t_cvector	cvector_mul_pvector(t_cvector *cvec, t_pvector *pvec)
+{
+	t_cvector result;
 
-// 		}
-// 	}
+	result.x = cvec->x * pvec->r * cos(pvec->phi) - cvec->y * pvec->r * sin(pvec->phi);
+	result.y = cvec->x * pvec->r * sin(pvec->phi) + cvec->y * pvec->r * cos(pvec->phi);
+	return (result);
+}
 
-	//find coords of 4 corners: (+-w/2, +-h/2) * trans: min max x, y
-	// rev_tarnsform = (trans.r^-1, -angle)
-	// for (x = min_x, x < max_x, y = min_y, y < max_y)
- //  dest_vec = (x,y) - insert_pos;
- //  src_vec = vec * rev_transform
- //  img_pix = (w/2, h/2) + src_vec
- //  get_color(src, img_pix)
- //  put_pix(dest, (x, y)))
-// }
+bool is_pixel_on_pict(t_image *image, t_pixel *pix)
+{
+	if (pix->x < 0 || pix->x >= image->width)
+		return (false);
+	if (pix->y < 0 || pix->y >= image->height)
+		return (false);
+	return (true);
+}
+
+void	image_put_transformed_to_image(
+		t_image *dest,
+		t_image *src,
+		t_pixel insert_pos,
+		t_pvector trans)
+{
+	// lead is the vector from center to one of the corners
+	t_cvector src_center = cvector(src->width / 2., src->height / 2.);
+	t_cvector proj = cvector_mul_pvector(&src_center, &trans);
+
+	// get the rect of transformed size
+	int trans_radius = cvector_get_mod(&src_center) * trans.r + 1;
+
+	// reverse transform to get pix from dest on source
+	trans.phi *= -1;
+	trans.r = 1 / trans.r;
+
+	t_pixel cur;
+	t_pixel dest_pix;
+	t_pixel src_pix;
+	t_trgb	col;
+
+	cur.x = -trans_radius - 1;
+	while (++cur.x <= trans_radius)
+	{
+		dest_pix.x = insert_pos.x + cur.x;
+		cur.y = -trans_radius - 1;
+		while (++cur.y <= trans_radius)
+		{
+			dest_pix.y = insert_pos.y + cur.y;
+			if (!is_pixel_on_pict(dest, &dest_pix))
+				continue;
+			t_cvector vec = cvector(cur.x, cur.y);
+			proj = cvector_mul_pvector(&vec, &trans);
+			src_pix.x = src_center.x + proj.x;
+			src_pix.y = src_center.y + proj.y;
+			if (!is_pixel_on_pict(src, &src_pix))
+				continue;
+			col = image_get_pixel_color(src, &src_pix);
+			if (col)
+				image_put_pixel(dest, dest_pix, col);
+		}
+	}
+}
