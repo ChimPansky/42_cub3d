@@ -11,6 +11,6 @@ int	game_init(t_game_state *game)
 
 void	game_destroy(t_game_state *game)
 {
-	doors_destroy(&game->doors);
+	doors_destroy(&game->map.doors);
 	charptr_array_destroy(&game->map.raw_map);
 }

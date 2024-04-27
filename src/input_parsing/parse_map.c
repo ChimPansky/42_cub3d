@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 14:13:18 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:20:04 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
 	{
 		if (door_validate(game->map, col, row) != SUCCESS)
 			return (print_error("Invalid door placement", NULL), FAILURE);
-		if (door_add(&game->doors, col, row, false) != SUCCESS)
+		if (door_add(&game->map.doors, col, row, false) != SUCCESS)
 			return (print_error("Malloc error adding door", NULL), FAILURE);
 	}
 	return (SUCCESS);
