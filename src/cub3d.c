@@ -14,7 +14,7 @@
 #include "utils.h"
 #include <time.h>
 #include "cub3d.h"
-#include "log.h"
+//#include "log.h"
 
 
 //#include "log.h"
