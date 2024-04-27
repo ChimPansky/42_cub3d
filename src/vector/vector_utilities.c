@@ -53,3 +53,14 @@ t_pvector	pvector_from_cvector(t_cvector *cvec)
 	result.phi = acos(cvec->x/result.r);
 	return (result);
 }
+
+t_cvector	cvector_mul_pvector(t_cvector *cvec, t_pvector *pvec)
+{
+	t_cvector result;
+
+	result.x = cvec->x * pvec->r * cos(pvec->phi)
+		- cvec->y * pvec->r * sin(pvec->phi);
+	result.y = cvec->x * pvec->r * sin(pvec->phi)
+		+ cvec->y * pvec->r * cos(pvec->phi);
+	return (result);
+}

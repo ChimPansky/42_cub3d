@@ -1,6 +1,8 @@
 #include "render.h"
 #include <sys/types.h>
 #include "structs/trgb.h"
+#include "vector/vector.h"
+#include <math.h>
 
 static void	minimap_pixel_to_coord(
 	t_minimap *minimap, t_pixel *pix, t_pos *coord, t_pos *center)
@@ -18,8 +20,6 @@ static void	minimap_pixel_to_coord(
 }
 
 
-#include "vector/vector.h"
-#include <math.h>
 static void	render_player(t_minimap *minimap, t_player *player)
 {
 	t_pixel	pix;
@@ -35,7 +35,6 @@ static void	render_player(t_minimap *minimap, t_player *player)
 		&minimap->image, &minimap->coursor,
 		pixel(minimap->width / 2, minimap->height / 2),
 		pvector(1, player->angle + M_PI_2));
-	// image_put_to_image(&minimap->image, &minimap->coursor, pix);
 }
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state)

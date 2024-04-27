@@ -48,7 +48,7 @@ void		pvector_print(const t_pvector *pvec);
 
 t_cvector	cvector_from_pvector(t_pvector *pvec);
 t_pvector	pvector_from_cvector(t_cvector *cvec);
-
+t_cvector	cvector_mul_pvector(t_cvector *cvec, t_pvector *pvec);
 bool		dbl_is_almost_zero(double a);
 
 #endif  // VECTOR_H
