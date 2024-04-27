@@ -1,9 +1,14 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#define FPS             60
-#define MSEC_PER_FRAME  1000/FPS
-
+# ifndef FAILURE
+#  define FAILURE 1
+# endif
+# ifndef SUCCESS
+#  define SUCCESS 0
+# endif
+# define FPS             60
+# define MSEC_PER_FRAME  1000/FPS
 
 //             |
 //             |

@@ -14,11 +14,11 @@
 #include "utils.h"
 #include <time.h>
 #include "cub3d.h"
-#include "log.h"
+//#include "log.h"
 
 
-#include "log.h"
-int g_i = 0;
+//#include "log.h"
+//int g_i = 0;
 
 #include <stdio.h>
 
@@ -72,7 +72,7 @@ int	main(int ac, char *av[])
 	#ifdef LOGGING
 		int fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd < 0)
-			return (print_error("Failed to open log file."), FAILURE);
+			return (print_error("Failed to open log file.", NULL), FAILURE);
 		dup2(fd, 1);
 		dup2(fd, 2);
 		close(fd);
@@ -80,13 +80,14 @@ int	main(int ac, char *av[])
 	#endif
 	if (ac < 2)
 		return (print_error("Please provide a scene description "
-				"as parameter (.cub file)."), FAILURE);
+				"as parameter (.cub file).", NULL), FAILURE);
 	if (ac > 2)
-		return (print_error("Too many arguments!"), FAILURE);
+		return (print_error("Too many arguments!", NULL), FAILURE);
 	if (app_init(&app, av[1]) != SUCCESS)
 		return (FAILURE);
 	set_hooks(&app);
 	mlx_loop_hook(app.mlx, main_loop, &app);
 	mlx_loop(app.mlx);
 	app_destroy(&app);
+	return (SUCCESS);
 }

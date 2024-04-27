@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/03/21 09:38:21 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/20 11:20:43 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	fill_raw_map(t_map *map, int scene_fd)
 				empty_lines = true;
 		}
 		else if (empty_lines)
-			return (free(line.str), print_error("Found empty line(s) in map"));
+			return (free(line.str), print_error("Found empty line(s) in map", NULL));
 		else
 			charptr_array_add_allocated_str(&map->raw_map, &line.str);
 	}

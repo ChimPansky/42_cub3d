@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 17:36:00 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/19 17:03:22 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ static void	check_for_sprite_collision(t_map *map, t_ray *ray)
 		ray->raycaster.collision.sprite = NO_SPRITE;
 		return ;
 	}
+	set_collision_direction(&ray->raycaster);
 	if (cur_sym == WALL_SYM)
-	{
-		set_collision_direction(&ray->raycaster);
 		ray->raycaster.collision.sprite = WALL_EA
 			+ ray->raycaster.collision.direction;
-	}
+	else if (cur_sym == DOOR_SYM)
+		ray->raycaster.collision.sprite = DOOR_SPRITE;
 }
 
 static void	calculate_first_collision_distance(t_ray *ray)
