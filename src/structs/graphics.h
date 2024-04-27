@@ -16,9 +16,10 @@
 # include "structs/image.h"
 # include "structs/minimap.h"
 
-# define WIN_SIZE_FACTOR 0.90
+# define WIN_SIZE_FACTOR 0.50
 
-typedef struct s_graph {
+typedef struct s_graph
+{
 	void		*win;
 	t_minimap	minimap;
 	t_image		scene;
