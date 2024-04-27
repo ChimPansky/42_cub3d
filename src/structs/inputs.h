@@ -11,6 +11,8 @@ typedef struct s_inputs
 	bool	d;
 	bool	right;
 	bool	left;
+	int		mouse_dx;
+	int		mouse_dy;
 }		t_inputs;
 
 #endif  // INPUTS_H
