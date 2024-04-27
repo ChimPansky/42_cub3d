@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:01:22 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/18 18:01:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:41:33 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "structs/image.h"
 # include "structs/minimap.h"
 
-# define WIN_SIZE_FACTOR 0.90
+# define WIN_SIZE_FACTOR 0.50
 
 typedef struct s_graph {
 	void		*win;

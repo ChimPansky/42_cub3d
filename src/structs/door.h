@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:14:32 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 14:35:22 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:40:35 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define DOOR_H
 
 # include <stdbool.h>
+
+#define DOOR_TOGGLE_DISTANCE 1.0
 
 typedef struct s_door
 {

@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 17:55:21 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 18:13:07 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ t_ray	ray_init(t_pos pos, double angle)
 
 	ray.origin = pos;
 	ray.vec = pvector(1.0, angle);
-	raycaster_set_directions(&ray);
-	raycaster_reset(&ray);
 	return (ray);
 }
