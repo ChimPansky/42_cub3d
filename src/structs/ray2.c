@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 13:16:10 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 17:55:21 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ void	raycaster_set_directions(t_ray *ray)
 		ray->raycaster.map_dir_x = 1;
 		ray->raycaster.map_dir_y = -1;
 	}
+}
+
+t_ray	ray_init(t_pos pos, double angle)
+{
+	t_ray	ray;
+
+	ray.origin = pos;
+	ray.vec = pvector(1.0, angle);
+	raycaster_set_directions(&ray);
+	raycaster_reset(&ray);
+	return (ray);
 }
