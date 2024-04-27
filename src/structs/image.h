@@ -3,6 +3,7 @@
 
 # include <sys/types.h>
 # include "structs/trgb.h"
+#include "vector/vector.h"
 
 typedef struct s_image
 {
@@ -31,7 +32,6 @@ void			image_put_pixel(t_image *img, t_pixel pix, t_trgb color);
 t_trgb			image_get_pixel_color(t_image *img, t_pixel *pix);
 void			image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos);
 
-#include "vector/vector.h"
 void	image_put_transformed_to_image(
 		t_image *dest,
 		t_image *src,
