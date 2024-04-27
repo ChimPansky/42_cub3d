@@ -28,5 +28,7 @@ t_trgb	minimap_color_by_map_sym(t_map_sym sym)
 		return (MM_PATH_COL);
 	else if (sym == WALL_SYM)
 		return (MM_WALL_COL);
+	else if (sym == DOOR_SYM)
+		return (MM_DOOR_COL);
 	return (MM_UNDEFINED_COL);
 }
