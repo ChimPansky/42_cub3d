@@ -40,6 +40,38 @@ void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 	*(t_trgb *)dst = color;
 }
 
+t_pixel			pixel(int x, int y)
+{
+	t_pixel	pix;
+
+	pix.x = x;
+	pix.y = y;
+	return (pix);
+}
+
+void	image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos)
+{
+	t_trgb	col;
+	t_pixel	pix;
+	t_pixel	dpix;
+
+	pix.x = 0;
+	while (pix.x < src->width)
+	{
+		pix.y = 0;
+		while (pix.y < src->height)
+		{
+			col = image_get_pixel_color(src, &pix);
+			dpix.x = insert_pos.x + pix.x;
+			dpix.y = insert_pos.y + pix.y;
+			if (col && dpix.x >= 0 && dpix.y >= 0 && dpix.x < dest->width && dpix.y < dest->height)
+				image_put_pixel(dest, dpix, col);
+			pix.y++;
+		}
+		pix.x++;
+	}
+}
+
 t_trgb	image_get_pixel_color(t_image *img, t_pixel *pix)
 {
 	char	*dst;

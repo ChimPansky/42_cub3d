@@ -53,6 +53,7 @@ CB_FILENAMES += \
 	structs/game_state.c \
 	structs/graphics.c \
 	structs/image.c \
+	structs/image_to_image_transformed.c \
 	structs/inputs.c \
 	structs/map.c \
 	structs/minimap.c \

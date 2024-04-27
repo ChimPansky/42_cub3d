@@ -6,7 +6,7 @@ void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 	game_state->player.speed.forw = inputs->w - inputs->s;
 	game_state->player.speed.ort = inputs->d - inputs->a;
 	game_state->player.rot_speed = inputs->right - inputs->left;
-	game_state->player.angle += inputs->mouse_dx * 0.0007;
+	game_state->player.angle += inputs->mouse_dx * PLAYER_RAD_PER_MOUSE_PIX;
 	inputs->mouse_dx = 0;
 	inputs->mouse_dy = 0;
 }
