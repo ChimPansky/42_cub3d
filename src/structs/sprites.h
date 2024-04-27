@@ -3,8 +3,7 @@
 
 # include "image.h"
 
-//#define DOOR_SPRITE_PATH "textures/door.xpm"
-#define DOOR_SPRITE_PATH "sprites/door.xpm"
+#define SPRITE_DOOR_PATH "sprites/door.xpm"
 
 typedef enum	e_sprite_types
 {
