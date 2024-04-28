@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 19:40:56 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:27:12 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	graphics_init(void *mlx, t_graph *gr)
 			screen_width * WIN_SIZE_FACTOR,
 			screen_height * WIN_SIZE_FACTOR))
 		exit(1);
-	//mlx_do_key_autorepeaton(mlx);// TODO: delete
-	mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
+	mlx_do_key_autorepeaton(mlx);// TODO: delete
+	mlx_mouse_move(mlx, gr->win, gr->scene.width/2, gr->scene.height/2);
+	mlx_mouse_hide(mlx, gr->win);
+	mlx_do_key_autorepeaton(mlx);// TODO: delete
+	//mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
 	return (SUCCESS);
 }
 
@@ -38,4 +41,6 @@ void	graphics_destroy(void *mlx, t_graph *gr)
 	minimap_destroy(mlx, &gr->minimap);
 	image_destroy(mlx, &gr->scene);
 	mlx_do_key_autorepeaton(mlx);
+	mlx_mouse_show(mlx, gr->win);
+
 }

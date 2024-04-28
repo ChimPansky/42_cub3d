@@ -1,9 +1,9 @@
-EA ./sprites/jellyfish.xpm
-NO ./sprites/molamola.xpm
-     WE     ./sprites/whale.xpm
+EA ./resources/sprites/jellyfish.xpm
+NO ./resources/sprites/molamola.xpm
+     WE     ./resources/sprites/whale.xpm
 F 50, 52, 168
 
-SO ./sprites/turtle.xpm
+SO ./resources/sprites/turtle.xpm
 C 50, 52, 168
 
 1111111111111111111

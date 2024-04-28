@@ -1,0 +1,16 @@
+EA ./resources/sprites/ineia.xpm
+NO ./resources/sprites/el_cap.xpm
+     WE     ./resources/sprites/trebenna.xpm
+F 0,128,128
+
+SO ./resources/sprites/geyikbayiri.xpm
+C 0, 255, 255
+1111111111
+1000000001
+100N000001
+1000000001
+1000000001
+1000000001
+1000000001
+1000000001
+1111111111

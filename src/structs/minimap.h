@@ -21,7 +21,7 @@
 # define MM_UNDEFINED_COL 0x0000FF00
 # define MM_PLAYER_COL 0x00FF0000
 
-# define COURSOR_PATH "sprites/coursor.xpm"
+# define COURSOR_PATH "resources/sprites/coursor.xpm"
 
 typedef struct s_minimap
 {

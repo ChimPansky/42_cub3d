@@ -1,27 +1,33 @@
 NAME = cub3D
+
 all: $(NAME)
 
-LIBMLX = mlx/libmlx_Linux.a
-$(LIBMLX):
-	cd mlx && ./configure
-
-include libft/colors.mk
-LIBFT = libft/libft.a
-$(LIBFT):
-	@make -C libft all clean
-
-lft:
-	@make -C libft all clean
-
-.PHONY: lft
+SOURCE_DIR = src
+BUILD_DIR = build
 
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-Wpedantic
+CFLAGS = -Wall -Werror -Wextra -Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
-# CFLAGS += -O3
-IFLAGS = -I/usr/include -Ilibft -Imlx -Isrc
-LFLAGS = -Llibft -lft -Lmlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lm -lz
-SOURCE_DIR = src
+
+IFLAGS = -I/usr/include -I$(SOURCE_DIR)
+LFLAGS = -lm -L/usr/lib -lXext -lX11 -lz
+
+LIBMLX = libs/mlx/libmlx_Linux.a
+$(LIBMLX):
+	cd libs/mlx && ./configure
+IFLAGS += -Ilibs/mlx
+LFLAGS += -Llibs/mlx -lmlx_Linux
+
+include libs/libft/colors.mk
+LIBFT = libs/libft/libft.a
+$(LIBFT):
+	@make -C libs/libft all clean
+IFLAGS += -Ilibs/libft
+LFLAGS += -Llibs/libft -lft
+
+.PHONY: lft
+lft:
+	@make -C libs/libft all clean
 
 CB_FILENAMES = \
 	cub3d.c \
@@ -71,18 +77,21 @@ CB_FILENAMES += \
 	vector/vector_utilities.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
-
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
+DEP = $(OBJ:%.o=%.d)
 
 $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
 
-%.o : %.c $(CB_HEADER)
-	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+$(BUILD_DIR)/%.o : %.c
+	mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(IFLAGS) -MMD -c $< -o $@
+
+-include $(DEP)
 
 clean:
-	rm -f $(OBJ)
+	rm -fr $(BUILD_DIR)
 
 fclean: clean
 	rm -f $(NAME)
