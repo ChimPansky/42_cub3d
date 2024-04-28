@@ -60,12 +60,3 @@ void	render_minimap(t_minimap *minimap, t_game_state *game_state)
 	}
 	render_player(minimap, &game_state->player);
 }
-
-
-/*
-
-one frame: start position, end position, intersections with x=n, y=n
-if x + dx in the wall, stop before, speed = 0
-
-
-*/
