@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 all: $(NAME)
 
 LIBMLX = mlx/libmlx_Linux.a
