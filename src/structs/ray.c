@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 17:03:22 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:33:50 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "map.h"
 #include "physics.h"
 #include "sprites.h"
+#include "structs/door.h"
 #include <math.h>
 //#include "log.h"
 
@@ -58,7 +59,7 @@ static void	check_for_sprite_collision(t_map *map, t_ray *ray)
 	if (cur_sym == WALL_SYM)
 		ray->raycaster.collision.sprite = WALL_EA
 			+ ray->raycaster.collision.direction;
-	else if (cur_sym == DOOR_SYM)
+	else if (cur_sym == DOOR_SYM && !door_is_open(map->doors, ray->raycaster.map_x, ray->raycaster.map_y))
 		ray->raycaster.collision.sprite = DOOR_SPRITE;
 }
 

@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:14:29 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/19 15:39:07 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/27 19:31:03 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "door.h"
+#include <stdbool.h>
 #include <stdlib.h>
 #include "../cub3d.h"
 #include <stdio.h>
@@ -88,6 +89,16 @@ void	doors_print(t_door *doors)
 		door_print(doors);
 		doors = doors->next;
 	}
+}
+
+bool	door_is_open(t_door *doors, int map_x, int map_y)
+{
+	t_door	*door;
+
+	door = door_get(doors, map_x, map_y);
+	if (door == NULL)
+		return (false);
+	return (door->is_open);
 }
 
 // int main()

@@ -88,7 +88,7 @@ $(BUILD_DIR)/%.o : %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(IFLAGS) -MMD -c $< -o $@
 
-include $(DEP)
+-include $(DEP)
 
 clean:
 	rm -fr $(BUILD_DIR)

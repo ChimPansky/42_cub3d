@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 12:47:06 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/28 18:27:12 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	graphics_destroy(void *mlx, t_graph *gr)
 	image_destroy(mlx, &gr->scene);
 	mlx_do_key_autorepeaton(mlx);
 	mlx_mouse_show(mlx, gr->win);
-	
+
 }
