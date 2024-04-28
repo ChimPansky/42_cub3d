@@ -1,0 +1,12 @@
+NO ./resources/sprites/minimal/n.xpm
+SO ./resources/sprites/minimal/s.xpm
+WE ./resources/sprites/minimal/w.xpm
+EA ./resources/sprites/minimal/e.xpm
+F 100,100,100
+C 200,200,200
+
+11111
+1N001
+10001
+10001
+11111

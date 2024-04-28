@@ -1,0 +1,14 @@
+EA ./resources/sprites/jellyfish.xpm
+NO ./resources/sprites/molamola.xpm
+     WE     ./resources/sprites/whale.xpm
+F 50, 52, 168
+
+SO ./resources/sprites/turtle.xpm
+C 50, 52, 168
+
+1111111111111111111
+1000N00000000000001
+1000000000000000001
+1000000000000000001
+1001000000000000001
+1111111111111111111
