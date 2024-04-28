@@ -1,5 +1,7 @@
 NAME = cub3D
 
+all: $(NAME)
+
 SOURCE_DIR = src
 BUILD_DIR = build
 
@@ -78,9 +80,6 @@ SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP = $(OBJ:%.o=%.d)
 
-
-all: $(NAME)
-
 $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)Executable $(NAME) created!$(DEF_COLOR)"
@@ -89,7 +88,7 @@ $(BUILD_DIR)/%.o : %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(IFLAGS) -MMD -c $< -o $@
 
--include $(DEP)
+include $(DEP)
 
 clean:
 	rm -fr $(BUILD_DIR)
