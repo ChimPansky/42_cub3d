@@ -73,5 +73,6 @@ typedef struct s_ray
 
 void	calculate_ray_collision(t_ray *ray, t_map *map);
 void	raycaster_set_directions(t_ray *ray);
+t_ray	ray_init(t_pos pos, double angle);
 
 #endif  // RAY_H
