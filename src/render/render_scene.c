@@ -71,13 +71,15 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 {
 	double	scaled_wall_height;
 
-	scaled_wall_height = (1.0 / fmax(ray->raycaster.collision.distance, 1.0))
+	scaled_wall_height = (1.0 / ray->raycaster.collision.distance)
 		* WALL_HEIGHT
 		* (1.0 / cos(fabs(ray->vec.phi - ray->raycaster.fov_center_angle)));
 	if (relative_y < (1.0 - scaled_wall_height) / 2)
 		return (stat_gr->ceiling_col);
 	if (relative_y > scaled_wall_height + (1.0 - scaled_wall_height) / 2)
 		return (stat_gr->floor_col);
+	if (ray->raycaster.collision.sprite == NO_SPRITE)
+		return (trgb(0, 0, 255, 0));
 	return (get_color_from_picture(
 			stat_gr,
 			&ray->raycaster.collision,

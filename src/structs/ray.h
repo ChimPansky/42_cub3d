@@ -12,10 +12,11 @@
 
 #ifndef RAY_H
 # define RAY_H
-
 # include "vector/vector.h"
 # include "structs/sprites.h"
 # include "structs/map.h"
+
+# define MAX_RAY_DISTANCE 500
 
 // for now ray_casting is only used for rendering the walls (finding
 // collision points between

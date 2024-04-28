@@ -4,11 +4,7 @@
 # include "../vector/vector.h"
 # include "sprites.h"
 
-typedef struct s_pos
-{
-	double	x;
-	double	y;
-}				t_pos;
+typedef t_cvector t_pos;
 
 typedef struct s_speed
 {

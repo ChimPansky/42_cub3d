@@ -45,9 +45,10 @@ static void	set_collision_direction(t_raycaster *rc)
 // Wall order: EA->SO->WE->NO (clockwise like our phi)
 static void	check_for_sprite_collision(t_map *map, t_ray *ray)
 {
-	t_map_sym				cur_sym;
+	t_map_sym	cur_sym;
+	t_pos		pos = cvector(ray->raycaster.map_x, ray->raycaster.map_y);
 
-	cur_sym = map->raw_map.buf[ray->raycaster.map_y][ray->raycaster.map_x];
+	cur_sym = coord_to_map_sym(map, &pos);
 	if (cur_sym == PATH_SYM)
 	{
 		ray->raycaster.collision.sprite = NO_SPRITE;
@@ -98,7 +99,8 @@ void	calculate_ray_collision(t_ray *ray, t_map *map)
 	#endif
 	raycaster_reset(ray);
 	calculate_first_collision_distance(ray);
-	while (ray->raycaster.collision.sprite == NO_SPRITE)
+	while (ray->raycaster.collision.sprite == NO_SPRITE
+		&& ray->raycaster.collision.distance < MAX_RAY_DISTANCE)
 	{
 		if (ray->raycaster.x_ray_len < ray->raycaster.y_ray_len)
 		{
