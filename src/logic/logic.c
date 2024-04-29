@@ -16,45 +16,6 @@ void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 	inputs->mouse_dy = 0;
 }
 
-bool	player_can_move_orth(t_game_state *game)
-{
-	t_ray		move_ray;
-
-	if (game->player.speed.ort > 0)
-		move_ray = ray_init(game->player.pos, game->player.angle + M_PI / 2);
-	else
-		move_ray = ray_init(game->player.pos, game->player.angle - M_PI / 2);
-	calculate_ray_collision(&move_ray, &game->map);
-	if (move_ray.raycaster.collision.distance
-		< PLAYER_SPEED_FIELD_PER_FRAME)
-		return (false);
-	return (true);
-}
-
-
-bool	player_can_move_forw(t_game_state *game)
-{
-	t_ray		move_ray;
-
-	if (game->player.speed.forw > 0)
-		move_ray = ray_init(game->player.pos, game->player.angle);
-	else
-		move_ray = ray_init(game->player.pos, game->player.angle + M_PI);
-	calculate_ray_collision(&move_ray, &game->map);
-	if (move_ray.raycaster.collision.distance
-		< PLAYER_SPEED_FIELD_PER_FRAME)
-		return (false);
-	return (true);
-}
-
-// static void	calc_pos_change(t_game_state *game, t_cvector *pos_change)
-// {
-// 	pos_change->x = (game->player.speed.forw * cos(game->player.angle)
-// 		- game->player.speed.ort * sin(game->player.angle)) * PLAYER_SPEED_FIELD_PER_FRAME;
-// 	pos_change->y = (game->player.speed.forw * sin(game->player.angle)
-// 		+ game->player.speed.ort * cos(game->player.angle)) * PLAYER_SPEED_FIELD_PER_FRAME;
-// }
-
 static double get_slide_angle(t_ray *move_ray)
 {
 	if (move_ray->raycaster.collision.direction == COLL_EA)
@@ -108,13 +69,6 @@ static void	apply_collision_to_pos_change(t_game_state *game, t_pvector *pos_cha
 	pos_change_len = pos_change->r;
 	pvector_scale(pos_change, move_until_collision_scale);
 	slide_angle = get_slide_angle(&move_ray);
-	// if (move_ray.raycaster.collision.direction == COLL_EA
-	// 	|| move_ray.raycaster.collision.direction == COLL_WE)
-	// 	slide_angle = M_PI / 2;
-	// else
-	// 	slide_angle = 0;
-	// if (move_ray.raycaster.collision.angle > M_PI_2)
-	// 	slide_angle += M_PI;
 	slide_along_sprite = pvector(pos_change_len
 		* (1 - move_until_collision_scale), slide_angle);
 	printf("slide_along_sprite: %f, %f\n", slide_along_sprite.r, slide_along_sprite.phi);
@@ -138,10 +92,5 @@ void	change_state_for_next_frame(t_game_state *game_state)
 		(player->speed.forw * sin(player->angle) + player->speed.ort
 		* cos(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME);
 	apply_collision_to_pos_change(game_state, &pos_change);
-
-	// calc_pos_change(game_state, &pos_change);
 	player->pos = pos_add_pvec(player->pos, pos_change);
-
-	// update_coords(&player->pos, &player->speed, player->angle,
-	// 	PLAYER_SPEED_FIELD_PER_FRAME);
 }
