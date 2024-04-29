@@ -1,3 +1,3 @@
--I./libft
--I./mlx
+-I./libs/libft
+-I./libs/mlx
 -I./src

@@ -44,7 +44,7 @@ static t_trgb	get_color_from_picture(
 	t_pixel	sprite_pixel;
 	double	relative_x;
 
-	sprite_img = &stat_gr->sprites.images[collision->sprite];
+	sprite_img = &stat_gr->sprites.array[collision->sprite];
 	relative_x = 0.0;
 	if (collision->direction == COLL_EA)
 		relative_x = collision->point.y - floor(collision->point.y);

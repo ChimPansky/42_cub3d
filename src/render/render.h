@@ -23,7 +23,7 @@
 // 60 degrees player field of view
 # define FOV M_PI / 3
 
-void	render_minimap(t_minimap *minimap, t_game_state *game_state);
+void	render_minimap(t_minimap *minimap, t_static_graphics *static_gr, t_game_state *game_state);
 void	render_scene(t_image *scene_image, t_static_graphics *sprites,
 			t_game_state *game);
 
