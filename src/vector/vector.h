@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:40 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/17 09:43:19 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:31:52 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		cvector_print(const t_cvector *cvec);
 t_pvector	pvector(double r, double phi);
 t_pvector	pvector_from_coords(double x, double y);
 void		pvector_scale(t_pvector *pvec, double factor);
+void		pvector_add_pvector(t_pvector *pvec, t_pvector addition);
 void		pvector_rotate(t_pvector *pvec, double rot_angle);
 void		pvector_print(const t_pvector *pvec);
 
