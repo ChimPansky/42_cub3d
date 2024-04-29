@@ -29,7 +29,8 @@ t_image	*image_init_from_xpm(void *mlx, t_image *img, char *xpm_path)
 
 void	image_destroy(void *mlx, t_image *img)
 {
-	mlx_destroy_image(mlx, img->image);
+	if (img->image)
+		mlx_destroy_image(mlx, img->image);
 }
 
 void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)

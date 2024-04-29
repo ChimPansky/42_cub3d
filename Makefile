@@ -10,13 +10,13 @@ CFLAGS = -Wall -Werror -Wextra -Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
 
 IFLAGS = -I/usr/include -I$(SOURCE_DIR)
-LFLAGS = -lm -L/usr/lib -lXext -lX11 -lz
+LFLAGS = -lm
 
 LIBMLX = libs/mlx/libmlx_Linux.a
 $(LIBMLX):
 	cd libs/mlx && ./configure
 IFLAGS += -Ilibs/mlx
-LFLAGS += -Llibs/mlx -lmlx_Linux
+LFLAGS += -Llibs/mlx -lmlx_Linux -L/usr/lib -lXext -lX11 -lz
 
 include libs/libft/colors.mk
 LIBFT = libs/libft/libft.a
