@@ -22,6 +22,6 @@ typedef struct s_map
 	size_t			height;
 }			t_map;
 
-t_map_sym	coord_to_map_sym(t_map *map, t_pos *coord);
+t_map_sym	coord_to_map_sym(t_map *map, t_pos coord);
 
 #endif  // MAP_H

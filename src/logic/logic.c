@@ -1,4 +1,6 @@
 #include "logic.h"
+#include "structs/map.h"
+#include "structs/physics.h"
 #include "structs/player.h"
 #include "structs/ray.h"
 #include <math.h>
@@ -16,81 +18,114 @@ void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 	inputs->mouse_dy = 0;
 }
 
-static double get_slide_angle(t_ray *move_ray)
+static double	add_sliding_movement(t_raycaster *rc, t_pvector *movement)
 {
-	if (move_ray->raycaster.collision.direction == COLL_EA)
+	if (rc->collision.direction == COLL_EA)
 	{
-		if (move_ray->vec.phi > M_PI_2)
-			return (3 * M_PI_2);
+		if (rc->map_dir_y > 0)
+			movement->phi = M_PI_2;
 		else
-			return (M_PI / 2);
+			movement->phi = 3 * M_PI_2;
 	}
-	if (move_ray->raycaster.collision.direction == COLL_WE)
+	if (rc->collision.direction == COLL_WE)
 	{
-		if (move_ray->vec.phi > M_PI)
-			return (3 * M_PI_2);
+		if (rc->map_dir_y > 0)
+			movement->phi = M_PI_2;
 		else
-			return (M_PI / 2);
+			movement->phi = 3 * M_PI_2;
 	}
-	if (move_ray->raycaster.collision.direction == COLL_NO)
+	if (rc->collision.direction == COLL_NO)
 	{
-		if (move_ray->vec.phi > 3 * M_PI_2)
-			return (0);
+		if (rc->map_dir_x > 0)
+			movement->phi = 0;
 		else
-			return (M_PI);
+			movement->phi = M_PI;
 	}
-	if (move_ray->raycaster.collision.direction == COLL_SO)
+	if (rc->collision.direction == COLL_SO)
 	{
-		if (move_ray->vec.phi > M_PI_2)
-			return (M_PI);
+		if (rc->map_dir_x > 0)
+			movement->phi = 0;
 		else
-			return (0);
+			movement->phi = M_PI;
 	}
 	return (0);
 }
 
 #include <stdio.h>
-static void	apply_collision_to_pos_change(t_game_state *game, t_pvector *pos_change)
+static void move_player(t_game_state *game, t_pvector *movement)
 {
-	t_ray		move_ray;
-	double		move_until_collision_scale;
-	t_pvector	slide_along_sprite;
-	double		slide_angle;
-	double		pos_change_len;
+	t_ray	move_ray;
+	double	remaining_distance;
+	double	coll_distance;
+	int		i;
 
-	move_ray = ray_init(game->player.pos, pos_change->phi);
-	calculate_ray_collision(&move_ray, &game->map);
-	move_until_collision_scale = 1.0;
-	if (move_ray.raycaster.collision.distance < PLAYER_SPEED_FIELD_PER_FRAME)
-		move_until_collision_scale = move_ray.raycaster.collision.distance
-			/ PLAYER_SPEED_FIELD_PER_FRAME;
-	printf("pos_change before scale: %f, %f\n", pos_change->r, pos_change->phi);
-	printf("collision_angle: %f\n", move_ray.raycaster.collision.angle / M_PI * 180);
-	pos_change_len = pos_change->r;
-	pvector_scale(pos_change, move_until_collision_scale);
-	slide_angle = get_slide_angle(&move_ray);
-	slide_along_sprite = pvector(pos_change_len
-		* (1 - move_until_collision_scale), slide_angle);
-	printf("slide_along_sprite: %f, %f\n", slide_along_sprite.r, slide_along_sprite.phi);
-	pvector_add_pvector(pos_change, slide_along_sprite);
-	printf("pos_change + slide: %f, %f\n", pos_change->r, pos_change->phi / M_PI * 180);
+	i = 0;
+	remaining_distance = movement->r;
+	while (remaining_distance > 0)
+	{
+		// if (i > 5)
+		// 	break ;
+		move_ray = ray_init(game->player.pos, movement->phi);
+		calculate_ray_collision(&move_ray, &game->map);
+
+		coll_distance = move_ray.raycaster.collision.distance;
+		if (movement->r > coll_distance - 0.0000001)
+		{
+			if (fabs(fabs(move_ray.vec.phi - move_ray.raycaster.collision.normal_angle) - M_PI) < 0.1)
+			{
+				printf("ORTHOGONAL COLLISION\n");
+				break;
+			}
+			movement->r = coll_distance - 0.0000001;
+		}
+
+		game->player.pos = pos_add_pvec(game->player.pos, *movement);
+		remaining_distance = fmax(remaining_distance - movement->r, 0); // adjust remaining distance: eliminate x or y part of vector (depending form map_x_dir and map_y_dir)
+		movement->r = remaining_distance;
+		if (remaining_distance > 0)
+			add_sliding_movement(&move_ray.raycaster, movement);
+		printf("player-pos: %f, %f\n", game->player.pos.x, game->player.pos.y);
+		printf("MOVING: %d\n", i++);
+		printf("remaining_distance: %f\n", remaining_distance);
+		printf("coll_distance: %f\n", coll_distance);
+		printf("movement->r: %f\n", movement->r);
+		printf("movement->phi: %f\n", movement->phi);
+	}
+}
+
+void	adjust_player_distance_from_walls(t_game_state *game)
+{
+	t_pos	*pos = &game->player.pos;
+
+	if (pos->x - floor(pos->x) < PLAYER_COLLISION_RADIUS
+		&& coord_to_map_sym(&game->map, cvector(pos->x - 1, pos->y)) == WALL_SYM)
+		pos->x = floor(pos->x) + PLAYER_COLLISION_RADIUS;
+	if (pos->y - floor(pos->y) < PLAYER_COLLISION_RADIUS
+	&& coord_to_map_sym(&game->map, cvector(pos->x, pos->y - 1)) == WALL_SYM)
+		pos->y = floor(pos->y) + PLAYER_COLLISION_RADIUS;
+	if (ceil(pos->x) - pos->x < PLAYER_COLLISION_RADIUS
+		&& coord_to_map_sym(&game->map, cvector(pos->x + 1, pos->y)) == WALL_SYM)
+		pos->x = ceil(pos->x) - PLAYER_COLLISION_RADIUS;
+	if (ceil(pos->y) - pos->y < PLAYER_COLLISION_RADIUS
+		&& coord_to_map_sym(&game->map, cvector(pos->x, pos->y + 1)) == WALL_SYM)
+		pos->y = ceil(pos->y) - PLAYER_COLLISION_RADIUS;
 }
 
 void	change_state_for_next_frame(t_game_state *game_state)
 {
 	t_player	*player;
-	t_pvector	pos_change;
+	t_pvector	movement;
 
 	player = &game_state->player;
 	if (!dbl_is_almost_zero(player->rot_speed))
 		player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
 	if (dbl_is_almost_zero(player->speed.forw) && dbl_is_almost_zero(player->speed.ort))
 		return ;
-	pos_change = pvector_from_coords(
+	movement = pvector_from_coords(
 		(player->speed.forw * cos(player->angle) - player->speed.ort
 		* sin(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME,
 		(player->speed.forw * sin(player->angle) + player->speed.ort
 		* cos(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME);
-	apply_collision_to_pos_change(game_state, &pos_change);
-	player->pos = pos_add_pvec(player->pos, pos_change);
+	move_player(game_state, &movement);
+	adjust_player_distance_from_walls(game_state);
 }

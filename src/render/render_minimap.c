@@ -53,7 +53,7 @@ void	render_minimap(t_minimap *minimap, t_game_state *game_state)
 				minimap, &pix, &coord, &game_state->player.pos);
 			image_put_pixel(&minimap->image, pix,
 				minimap_color_by_map_sym(
-					coord_to_map_sym(&game_state->map, &coord)));
+					coord_to_map_sym(&game_state->map, coord)));
 			++pix.y;
 		}
 		++pix.x;

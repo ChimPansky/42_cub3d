@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/29 13:52:42 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/30 21:33:10 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,22 @@ static void	set_collision_direction(t_raycaster *rc)
 
 static void	set_collision_angle(t_ray *ray)
 {
-	double	sprite_angle;
-
-	if (ray->raycaster.collision.direction == COLL_EA
-		|| ray->raycaster.collision.direction == COLL_WE)
-		sprite_angle = M_PI / 2;
-	else
-		sprite_angle = 0;
-	ray->raycaster.collision.angle = ray->vec.phi - sprite_angle;
+	if (ray->raycaster.collision.direction == COLL_EA)
+		ray->raycaster.collision.normal_angle = M_PI;
+	else if (ray->raycaster.collision.direction == COLL_SO)
+		ray->raycaster.collision.normal_angle = M_PI_2;
+	else if (ray->raycaster.collision.direction == COLL_WE)
+		ray->raycaster.collision.normal_angle = 0;
+	else if (ray->raycaster.collision.direction == COLL_NO)
+		ray->raycaster.collision.normal_angle = 3 * M_PI_2;
 }
 
 // Wall order: EA->SO->WE->NO (clockwise like our phi)
 static void	check_for_sprite_collision(t_map *map, t_ray *ray)
 {
 	t_map_sym	cur_sym;
-	t_pos		pos = cvector(ray->raycaster.map_x, ray->raycaster.map_y);
 
-	cur_sym = coord_to_map_sym(map, &pos);
+	cur_sym = coord_to_map_sym(map, cvector(ray->raycaster.map_x, ray->raycaster.map_y));
 	if (cur_sym == PATH_SYM)
 	{
 		ray->raycaster.collision.sprite = NO_SPRITE;
