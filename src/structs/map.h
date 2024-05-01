@@ -23,5 +23,6 @@ typedef struct s_map
 }			t_map;
 
 t_map_sym	coord_to_map_sym(t_map *map, t_pos coord);
+bool		coords_are_collidable(t_map *map, t_pos coord);
 
 #endif  // MAP_H
