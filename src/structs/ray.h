@@ -38,7 +38,7 @@ typedef struct s_ray_collision
 	double					distance;
 	t_sprite_types			sprite;
 	t_collision_direction	direction;
-	double					normal_angle;
+	double					orth_angle;
 }				t_ray_collision;
 
 // collision: collision-coordinates, distance, direction and type of sprite hit

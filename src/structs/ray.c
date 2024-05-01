@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/30 21:33:10 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:08:32 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ static void	set_collision_direction(t_raycaster *rc)
 static void	set_collision_angle(t_ray *ray)
 {
 	if (ray->raycaster.collision.direction == COLL_EA)
-		ray->raycaster.collision.normal_angle = M_PI;
+		ray->raycaster.collision.orth_angle = 0;
 	else if (ray->raycaster.collision.direction == COLL_SO)
-		ray->raycaster.collision.normal_angle = M_PI_2;
+		ray->raycaster.collision.orth_angle = M_PI_2;
 	else if (ray->raycaster.collision.direction == COLL_WE)
-		ray->raycaster.collision.normal_angle = 0;
+		ray->raycaster.collision.orth_angle = M_PI;
 	else if (ray->raycaster.collision.direction == COLL_NO)
-		ray->raycaster.collision.normal_angle = 3 * M_PI_2;
+		ray->raycaster.collision.orth_angle = 3 * M_PI_2;
 }
 
 // Wall order: EA->SO->WE->NO (clockwise like our phi)
