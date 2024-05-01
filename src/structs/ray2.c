@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 18:13:07 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:40:48 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
+#include "vector/vector.h"
 #include <math.h>
 
 // differentiate between the 4 quadrants in the trigonometric circle
@@ -36,6 +37,12 @@ void	raycaster_set_directions(t_ray *ray)
 		ray->raycaster.map_dir_x = 1;
 		ray->raycaster.map_dir_y = -1;
 	}
+	if (dbl_is_almost_zero(ray->vec.phi - M_PI / 2)
+		|| dbl_is_almost_zero(ray->vec.phi - 3 * M_PI / 2))
+		ray->raycaster.map_dir_x = 0;
+	if (dbl_is_almost_zero(ray->vec.phi)
+		|| dbl_is_almost_zero(ray->vec.phi - M_PI))
+		ray->raycaster.map_dir_y = 0;
 }
 
 t_ray	ray_init(t_pos pos, double angle)

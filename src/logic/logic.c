@@ -1,5 +1,9 @@
 #include "logic.h"
+#include "structs/physics.h"
+#include "structs/player.h"
 #include <math.h>
+#include <stdbool.h>
+#include "./vector/vector.h"
 
 void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 {
@@ -16,7 +20,12 @@ void	change_state_for_next_frame(t_game_state *game_state)
 	t_player	*player;
 
 	player = &game_state->player;
-	player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
-	update_coords(&player->pos, &player->speed, player->angle,
-		PLAYER_SPEED_FIELD_PER_FRAME);
+	if (!dbl_is_almost_zero(player->rot_speed))
+		player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
+	if (dbl_is_almost_zero(player->speed.forw)
+		&& dbl_is_almost_zero(player->speed.ort))
+		return ;
+
+	player_move(game_state);
+	player_adjust_player_distance_from_walls(game_state);
 }
