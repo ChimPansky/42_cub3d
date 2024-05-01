@@ -18,18 +18,14 @@ void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 void	change_state_for_next_frame(t_game_state *game_state)
 {
 	t_player	*player;
-	t_pvector	movement;
 
 	player = &game_state->player;
 	if (!dbl_is_almost_zero(player->rot_speed))
 		player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
-	if (dbl_is_almost_zero(player->speed.forw) && dbl_is_almost_zero(player->speed.ort))
+	if (dbl_is_almost_zero(player->speed.forw)
+		&& dbl_is_almost_zero(player->speed.ort))
 		return ;
-	movement = pvector_from_coords(
-		(player->speed.forw * cos(player->angle) - player->speed.ort
-		* sin(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME,
-		(player->speed.forw * sin(player->angle) + player->speed.ort
-		* cos(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME);
-	move_player(game_state, &movement);
-	adjust_player_distance_from_walls(game_state);
+
+	player_move(game_state);
+	player_adjust_player_distance_from_walls(game_state);
 }

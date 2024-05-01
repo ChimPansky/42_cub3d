@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:42:05 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/01 11:32:27 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/01 11:43:07 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void move_until_collision(t_pvector * movement_vec,
 	game->player.pos = pos_add_pvec(game->player.pos, *movement_vec);
 }
 
-void	adjust_player_distance_from_walls(t_game_state *game)
+void	player_adjust_player_distance_from_walls(t_game_state *game)
 {
 	t_pos	*pos = &game->player.pos;
 
@@ -73,19 +73,27 @@ void	adjust_player_distance_from_walls(t_game_state *game)
 		pos->y = ceil(pos->y) - PLAYER_COLLISION_RADIUS;
 }
 
-void move_player(t_game_state *game, t_pvector *movement_vec)
+void player_move(t_game_state *game)
 {
-	t_ray	movement_ray;
-	double	remaining_distance;
+	t_player	*player;
+	t_pvector	movement_vec;
+	t_ray		movement_ray;
+	double		remaining_distance;
 
-	remaining_distance = movement_vec->r;
-	move_until_collision(movement_vec, &movement_ray, game);
-	remaining_distance = remaining_distance - movement_vec->r;
+	player = &game->player;
+	movement_vec = pvector_from_coords(
+		(player->speed.forw * cos(player->angle) - player->speed.ort
+		* sin(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME,
+		(player->speed.forw * sin(player->angle) + player->speed.ort
+		* cos(player->angle)) * PLAYER_SPEED_FIELD_PER_FRAME);
+	remaining_distance = movement_vec.r;
+	move_until_collision(&movement_vec, &movement_ray, game);
+	remaining_distance = remaining_distance - movement_vec.r;
 	if (!(remaining_distance > 0))
 		return ;
-	movement_vec->r = remaining_distance;
-	calculate_sliding_movement(&movement_ray.raycaster, movement_vec);
-	move_until_collision(movement_vec, &movement_ray, game);
+	movement_vec.r = remaining_distance;
+	calculate_sliding_movement(&movement_ray.raycaster, &movement_vec);
+	move_until_collision(&movement_vec, &movement_ray, game);
 }
 
 static void	player_door_action(t_game_state *game, t_ray *player_view)

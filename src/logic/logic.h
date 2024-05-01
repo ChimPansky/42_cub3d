@@ -6,7 +6,6 @@
 # include <math.h>
 #include "cub3d.h"
 
-# define PLAYER_SPEED_FIELD_PER_FRAME	1. / FPS * 2
 # define PLAYER_RAD_PER_FRAME			M_PI * 2. / FPS / 5
 # define PLAYER_RAD_PER_MOUSE_PIX		0.0007
 
