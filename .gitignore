@@ -13,10 +13,12 @@ log.txt
 .vscode
 
 # binaries
+build
 *.o
+*.d
 *.a
 *.out
-cub3d
+cub3D
 dummy
 
 # generated

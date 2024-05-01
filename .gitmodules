@@ -1,7 +1,6 @@
-[submodule "libft"]
-	path = libs/libft
-	url = git@github.com:ChimPansky/42_libft.git
-	branch = cub3d
 [submodule "mlx"]
 	path = libs/mlx
 	url = https://github.com/42Paris/minilibx-linux.git
+[submodule "libs/libft"]
+	path = libs/libft
+	url = git@github.com:ChimPansky/42_libft.git

@@ -94,8 +94,8 @@ static void	calculate_first_collision_distance(t_ray *ray)
 static void	raycaster_reset(t_ray *ray)
 {
 	ft_bzero(&ray->raycaster.collision, sizeof(t_ray_collision));
-	ray->raycaster.map_x = (int)ray->origin.x;
-	ray->raycaster.map_y = (int)ray->origin.y;
+	ray->raycaster.map_x = (int)ray->origin.x - (ray->origin.x < 0);
+	ray->raycaster.map_y = (int)ray->origin.y - (ray->origin.y < 0);
 	raycaster_set_directions(ray);
 	ray->raycaster.delta_ray = cvector(sqrt(1 + pow(tan(ray->vec.phi), 2)),
 			sqrt(1 + pow(1 / tan(ray->vec.phi), 2)));

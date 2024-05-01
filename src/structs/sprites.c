@@ -9,7 +9,7 @@ int	add_sprite_img(void *mlx, t_sprites *sprites,
 {
 	t_image	*sprite_ptr;
 
-	sprite_ptr = &sprites->images[sprite_type];
+	sprite_ptr = &sprites->array[sprite_type];
 	if (sprite_ptr->image != NULL)
 		return (print_error("Found duplicate texture: ", img_path));
 	if (image_init_from_xpm(mlx, sprite_ptr, img_path) == NULL)
@@ -20,14 +20,20 @@ int	add_sprite_img(void *mlx, t_sprites *sprites,
 
 void	sprites_destroy(void *mlx, t_sprites *sprites)
 {
-	if (sprites->wall_ea.image)
-		mlx_destroy_image(mlx, sprites->wall_ea.image);
-	if (sprites->wall_so.image)
-		mlx_destroy_image(mlx, sprites->wall_so.image);
-	if (sprites->wall_we.image)
-		mlx_destroy_image(mlx, sprites->wall_we.image);
-	if (sprites->wall_no.image)
-		mlx_destroy_image(mlx, sprites->wall_no.image);
-	if (sprites->door.image)
-		mlx_destroy_image(mlx, sprites->door.image);
+	int	i;
+
+	i = 0;
+	while (i < MAX_SPRITE)
+		image_destroy(mlx, &sprites->array[i++]);
+}
+
+int	load_native_sprites(void *mlx, t_sprites *sprites)
+{
+	if (add_sprite_img(mlx, sprites, MINIMAP_CURSOR, MINIMAP_CURSOR_PATH) != SUCCESS)
+		return (!SUCCESS);
+	if (add_sprite_img(mlx, sprites, DOOR_SPRITE, DOOR_SPRITE_PATH) != SUCCESS)
+		return (!SUCCESS);
+	// if (add_sprite_img(mlx, sprites, LEG_ANIMATION, LEG_ANIMATION_PATH) != SUCCESS)
+	// 	return (!SUCCESS);
+	return (SUCCESS);
 }

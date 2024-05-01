@@ -55,7 +55,7 @@ int	main_loop(void *data)
 	render_scene(&app->gr.scene, &app->static_gr, &app->game_state);
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.scene.image, 0, 0);
-	render_minimap(&app->gr.minimap, &app->game_state);
+	render_minimap(&app->gr.minimap, &app->static_gr, &app->game_state);
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.minimap.image.image, MM_X, MM_Y);
 	print_game_info(app);
