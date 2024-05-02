@@ -3,7 +3,7 @@
 #include "vector/vector.h"
 #include <math.h>
 
-bool is_pixel_on_pict(t_image *image, t_pixel *pix)
+static bool is_pixel_on_pict(t_image *image, t_pixel *pix)
 {
 	if (pix->x < 0 || pix->x >= image->width)
 		return (false);
@@ -23,7 +23,6 @@ static t_trgb	map_pixel(t_image *src, t_cvector pix_vec, t_cvector src_center, t
 	if (!is_pixel_on_pict(src, &src_pix))
 		return 0;
 	return image_get_pixel_color(src, &src_pix);
-
 }
 
 void	image_put_transformed_to_image(
@@ -52,5 +51,28 @@ void	image_put_transformed_to_image(
 			if (col)
 				image_put_pixel(dest, dest_pix, col);
 		}
+	}
+}
+
+void	image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos, t_pixel start, t_pixel end)
+{
+	t_trgb	col;
+	t_pixel	pix;
+	t_pixel	dpix;
+
+	pix.y = start.y;
+	while (pix.y < end.y)
+	{
+		pix.x = start.x;
+		while (pix.x < end.x)
+		{
+			col = image_get_pixel_color(src, &pix);
+			dpix.x = insert_pos.x + pix.x - start.x;
+			dpix.y = insert_pos.y + pix.y - start.y;
+			if (col && is_pixel_on_pict(dest, &dpix))
+				image_put_pixel(dest, dpix, col);
+			pix.x++;
+		}
+		pix.y++;
 	}
 }

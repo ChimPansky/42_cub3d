@@ -31,6 +31,5 @@ typedef struct s_player
 
 void 	player_move(t_game_state *game);
 void	player_adjust_player_distance_from_walls(t_game_state *game);
-void	player_trigger_action(t_game_state *game);
 
 #endif  // PLAYER_H

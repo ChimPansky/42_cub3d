@@ -21,10 +21,6 @@
 #include <math.h>
 #include "structs/ray.h"
 
-void			render_scene(
-					t_image *scene_image,
-					t_static_graphics *sprites,
-					t_game_state *game);
 static void		draw_screen_column(
 					t_image *screen_img,
 					t_static_graphics *sprites,
@@ -102,8 +98,30 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 	}
 }
 
-void	render_scene(t_image *scene_image, t_static_graphics *sprites,
-t_game_state *game)
+void animation_put_to_image(t_image *dest, t_pixel insert_pos, t_animation *anim)
+{
+	const int		idx = anim->frames_since_start++ / anim->frames_per_sprite;
+	const t_pixel	start = pixel(anim->one_sprite_size.x * idx, 0);
+	const t_pixel	end = pixel(anim->one_sprite_size.x * (idx + 1), anim->one_sprite_size.y);
+
+	if (idx >= anim->sprites_num)
+	{
+		anim->frames_since_start = 0;
+		anim->play = false;
+		return ;
+	}
+	image_put_to_image(dest, anim->sprites, insert_pos, start, end);
+}
+
+void	render_leg(t_image *scene_image, t_animation *leg)
+{
+	const t_pixel	insert_pos
+		= pixel((scene_image->width - leg->one_sprite_size.x) / 2,
+				scene_image->height - leg->one_sprite_size.y);
+	animation_put_to_image(scene_image, insert_pos, leg);
+}
+
+void	render_scene(t_app *app)
 {
 	t_pixel			window_pixel;
 	t_ray			player_view;
@@ -111,14 +129,16 @@ t_game_state *game)
 	window_pixel.x = 0;
 	window_pixel.y = 0;
 	ft_bzero(&player_view, sizeof(t_ray));
-	player_view.origin = game->player.pos;
-	player_view.vec = pvector(1.0, game->player.angle - FOV / 2);
-	player_view.raycaster.fov_center_angle = game->player.angle;
-	while (window_pixel.x < scene_image->width)
+	player_view.origin = app->game_state.player.pos;
+	player_view.vec = pvector(1.0, app->game_state.player.angle - FOV / 2);
+	player_view.raycaster.fov_center_angle = app->game_state.player.angle;
+	while (window_pixel.x < app->gr.scene.width)
 	{
-		calculate_ray_collision(&player_view, &game->map);
-		draw_screen_column(scene_image, sprites, window_pixel, &player_view);
-		pvector_rotate(&player_view.vec, FOV / scene_image->width);
+		calculate_ray_collision(&player_view, &app->game_state.map);
+		draw_screen_column(&app->gr.scene, &app->static_gr, window_pixel, &player_view);
+		pvector_rotate(&player_view.vec, FOV / app->gr.scene.width);
 		window_pixel.x++;
 	}
+	if (app->gr.leg.play)
+		render_leg(&app->gr.scene, &app->gr.leg);
 }
