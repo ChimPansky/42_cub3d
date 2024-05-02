@@ -73,7 +73,7 @@ void	player_trigger_action(t_app *app)
 	if (player_view.raycaster.collision.sprite == DOOR_SPRITE
 		&& player_view.raycaster.collision.distance < DOOR_TOGGLE_DISTANCE)
 		player_door_action(&app->game_state, &player_view);
-	if (app->god_mode)
+	if (app->test)
 	{
 		if (coord_to_map_sym(&app->game_state.map, cvector(player_view.raycaster.map_x, player_view.raycaster.map_y)))
 			app->game_state.map.raw_map.buf[player_view.raycaster.map_y][player_view.raycaster.map_x] = PATH_SYM;

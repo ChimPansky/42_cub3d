@@ -39,10 +39,7 @@ void check_last_inputs(t_app *app)
 		&& app->inputs.last_inputs[2] == XK_a
 		&& app->inputs.last_inputs[6] == XK_l
 		&& app->inputs.last_inputs[0] == XK_h)
-	{
-		app->god_mode = true;
-		write(1, "you are cheater", 15);
-	}
+		app->test = true;
 }
 
 int	key_release_hook(int key_code, t_app *app)
