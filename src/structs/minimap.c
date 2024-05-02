@@ -4,13 +4,14 @@
 #include "structs/image.h"
 #include "libft.h"
 
-int	minimap_init(void *mlx, t_minimap *minimap)
+int	minimap_init(void *mlx, t_minimap *minimap, t_image *cursor)
 {
 	minimap->width = MM_W;
 	minimap->height = MM_H;
 	minimap->offset_x = MM_X;
 	minimap->offset_y = MM_Y;
 	minimap->pix_per_field = MM_PIXEL_PER_FIELD;
+	minimap->cursor = cursor;
 	if (NULL
 		== image_init(mlx, &minimap->image, minimap->width, minimap->height))
 		return (!SUCCESS);

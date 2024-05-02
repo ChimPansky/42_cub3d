@@ -15,6 +15,7 @@
 
 # include "structs/image.h"
 # include "structs/minimap.h"
+# include "animation.h"
 
 # define WIN_SIZE_FACTOR 0.50
 
@@ -23,9 +24,10 @@ typedef struct s_graph
 	void		*win;
 	t_minimap	minimap;
 	t_image		scene;
+	t_animation	leg;
 }		t_graph;
 
-int		graphics_init(void *mlx, t_graph *gr);
+int		graphics_init(void *mlx, t_graph *gr, t_sprites *sprites);
 void	graphics_destroy(void *mlx, t_graph *gr);
 
 #endif  // GRAPHICS_H

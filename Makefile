@@ -54,12 +54,13 @@ CB_FILENAMES += \
 	input_parsing/utilities.c
 
 CB_FILENAMES += \
+	structs/animation.c \
 	structs/app.c \
 	structs/door.c \
 	structs/game_state.c \
 	structs/graphics.c \
 	structs/image.c \
-	structs/image_to_image_transformed.c \
+	structs/image_to_image.c \
 	structs/inputs.c \
 	structs/map.c \
 	structs/minimap.c \

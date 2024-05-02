@@ -8,7 +8,7 @@ typedef struct s_game_state
 {
 	t_map		map;
 	t_player	player;
-}			t_game_state;
+}		t_game_state;
 
 int		game_init(t_game_state *game_state);
 void	game_destroy(t_game_state *game_state);

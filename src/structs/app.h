@@ -21,6 +21,7 @@ typedef struct s_app
 	t_graph				gr;
 	t_inputs			inputs;
 	t_static_graphics	static_gr;
+	bool				test;
 }		t_app;
 
 int		app_init(t_app *app, char *cub_path);

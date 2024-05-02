@@ -29,9 +29,10 @@ typedef struct s_minimap
 	int		offset_x;
 	int		offset_y;
 	double	pix_per_field;
+	t_image	*cursor;
 }		t_minimap;
 
-int		minimap_init(void *mlx, t_minimap *minimap);
+int		minimap_init(void *mlx, t_minimap *minimap, t_image *cursor);
 void	minimap_destroy(void *mlx, t_minimap *minimap);
 t_trgb	minimap_color_by_map_sym(t_map_sym sym);
 
