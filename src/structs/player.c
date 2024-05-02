@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:42:05 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/01 11:43:07 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:00:12 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ static void	player_door_action(t_game_state *game, t_ray *player_view)
 		{
 			printf("Opening door\n");
 			door->is_open = true;
+			door->opening_time = game->timer;
 		}
 	}
 	else
