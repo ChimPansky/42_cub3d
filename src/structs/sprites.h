@@ -3,7 +3,7 @@
 
 # include "image.h"
 
-# define DOOR_SPRITE_PATH "resources/sprites/door5.xpm"
+# define DOOR_SPRITE_PATH "resources/sprites/door.xpm"
 # define MINIMAP_CURSOR_PATH "resources/sprites/coursor.xpm"
 // # define LEG_ANIMATION_PATH "resources/sprites/leg.xpm"
 
