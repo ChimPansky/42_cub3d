@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:42:05 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/02 14:00:12 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:21:03 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ static void	player_door_action(t_game_state *game, t_ray *player_view)
 		{
 			printf("Opening door\n");
 			door->is_open = true;
-			door->opening_time = game->timer;
 		}
 	}
 	else
@@ -134,6 +133,6 @@ void	player_trigger_action(t_game_state *game)
 	printf("Collision point: (%f, %f)\n", player_view.raycaster.collision.point.x, player_view.raycaster.collision.point.y);
 	printf("map_coordinates: (%d, %d)\n", player_view.raycaster.map_x, player_view.raycaster.map_y);
 	if (player_view.raycaster.collision.sprite == DOOR_SPRITE
-		&& player_view.raycaster.collision.distance < DOOR_TOGGLE_DISTANCE)
+		&& player_view.raycaster.collision.distance < DOOR_OPENING_DISTANCE)
 		player_door_action(game, &player_view);
 }

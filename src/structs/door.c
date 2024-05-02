@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:14:29 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/02 14:56:28 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:20:31 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ void	doors_check_and_close(t_game_state *game, t_door **doors)
 	t_door	*current_door;
 
 	current_door = *doors;
+	// while (current_door != NULL)
+	// {
+	// 	if (current_door->is_open
+	// 		&& (game->timer - current_door->opening_time) > DOOR_CLOSING_TIME
+	// 		&& !((int)game->player.pos.x == current_door->map_x
+	// 		&& (int)game->player.pos.y == current_door->map_y))
+	// 		current_door->is_open = false;
+	// 	current_door = current_door->next;
+	// }
 	while (current_door != NULL)
 	{
 		if (current_door->is_open
-			&& (game->timer - current_door->opening_time) > DOOR_CLOSING_TIME
-			&& !((int)game->player.pos.x == current_door->map_x
-			&& (int)game->player.pos.y == current_door->map_y))
+			&& (abs((int)game->player.pos.x - current_door->map_x) > DOOR_CLOSING_DISTANCE
+			|| (abs((int)game->player.pos.y - current_door->map_y) > DOOR_CLOSING_DISTANCE)))
 			current_door->is_open = false;
 		current_door = current_door->next;
 	}
