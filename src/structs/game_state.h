@@ -8,6 +8,7 @@ typedef struct s_game_state
 {
 	t_map		map;
 	t_player	player;
+	size_t		timer;
 }			t_game_state;
 
 int		game_init(t_game_state *game_state);

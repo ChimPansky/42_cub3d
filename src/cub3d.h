@@ -7,8 +7,10 @@
 # ifndef SUCCESS
 #  define SUCCESS 0
 # endif
-# define FPS             60
-# define MSEC_PER_FRAME  1000/FPS
+
+// between 1% and 100%
+# define GAME_SPEED 80
+# define FPS        60
 
 //             |
 //             |
