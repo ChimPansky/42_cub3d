@@ -72,7 +72,7 @@ void	player_trigger_action(t_app *app)
 	printf("Collision point: (%f, %f)\n", player_view.raycaster.collision.point.x, player_view.raycaster.collision.point.y);
 	printf("map_coordinates: (%d, %d)\n", player_view.raycaster.map_x, player_view.raycaster.map_y);
 	if (player_view.raycaster.collision.sprite == DOOR_SPRITE
-		&& player_view.raycaster.collision.distance < DOOR_TOGGLE_DISTANCE)
+		&& player_view.raycaster.collision.distance < DOOR_OPENING_DISTANCE)
 		player_door_action(&app->game_state, &player_view);
 	if (app->test)
 	{
