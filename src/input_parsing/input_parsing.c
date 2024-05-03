@@ -90,6 +90,7 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 	elements_read = 0;
 	while (elements_read < WALLS_FLOOR_CEILING_COUNT)
 	{
+		ft_bzero(&element, sizeof(t_scene_element));
 		if (get_next_element(scene_fd, &element) != SUCCESS)
 			return (sprites_destroy(mlx, &static_gr->sprites), FAILURE);
 		if (element.scene_type == FLOOR || element.scene_type == CEILING)
