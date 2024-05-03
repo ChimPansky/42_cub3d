@@ -7,6 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
 /*   Updated: 2024/05/03 11:16:57 by tkasbari         ###   ########.fr       */
+
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +65,16 @@ static int	get_next_element(int scene_fd, t_scene_element *element)
 		if (line.error)
 			return (perror("get_next_element: get_next_line"), FAILURE);
 		if (line.str == NULL)
-			return (print_error("Missing texture element "
-					"in scene description.", NULL), FAILURE);
-		if (ft_string_is_empty(line.str))
+			return (print_error("Missing texture element.", NULL));
+		if (string_is_empty(line.str))
 			free(ptr_free);
 		else
 		{
 			if (extract_element_from_line(&line.str, element) != SUCCESS)
 				return (free(ptr_free), FAILURE);
+			if (!string_is_empty(line.str))
+				return (print_error("Unexpected token near ", line.str),
+					free(ptr_free), free(element->tx_path), FAILURE);
 			free(ptr_free);
 			break ;
 		}

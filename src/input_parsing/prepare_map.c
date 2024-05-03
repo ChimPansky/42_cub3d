@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 11:20:43 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/03 15:11:43 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	fill_raw_map(t_map *map, int scene_fd)
 		line = get_next_line_no_nl(scene_fd);
 		if (line.str == NULL)
 			break ;
-		if (ft_string_is_empty(line.str))
+		if (string_is_empty(line.str))
 		{
 			free(line.str);
 			if (map->raw_map.sz > 0)
