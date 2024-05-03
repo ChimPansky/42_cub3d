@@ -100,6 +100,6 @@ fclean: clean
 re: fclean all
 
 valgrind:
-	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME) cub_files/valid/01_subject_map_random_pix.cub
+	valgrind --trace-children=yes --track-origins=yes --leak-check=full --show-leak-kinds=all --track-fds=all ./$(NAME) resources/scene_descriptions/01_test.cub
 
 .PHONY: all bonus clean fclean re test

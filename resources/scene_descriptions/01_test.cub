@@ -1,0 +1,17 @@
+NO ./resources/sprites/minimal/n.xpm
+SO ./resources/sprites/minimal/.xpm
+EA ./resources/sprites/minimal/e.xpm
+WE     ./resources/sprites/minimal/w.xpm
+
+F 0,128,128
+C 0, 255, 255
+
+1111111111
+1000000001
+100N000001
+1000000001
+1000000001
+1000000001
+1000000001
+1000000001
+1111111111
