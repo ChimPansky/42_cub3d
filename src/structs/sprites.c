@@ -1,6 +1,5 @@
 #include "sprites.h"
 #include "image.h"
-#include "mlx.h"
 #include "libft.h"
 #include "utils.h"
 
