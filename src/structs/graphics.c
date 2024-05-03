@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/28 18:27:12 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:07:04 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	graphics_init(void *mlx, t_graph *gr, t_sprites *sprites)
 		exit(1);
 	mlx_do_key_autorepeaton(mlx);// TODO: delete
 	mlx_mouse_move(mlx, gr->win, gr->scene.width/2, gr->scene.height/2);
-	mlx_mouse_hide(mlx, gr->win);
+	mlx_mouse_hide(mlx, gr->win); // this causes leaks! 31567 bytes in 400 blocks
 	mlx_do_key_autorepeaton(mlx);// TODO: delete
 	//mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
 	return (SUCCESS);
@@ -44,5 +44,6 @@ void	graphics_destroy(void *mlx, t_graph *gr)
 	image_destroy(mlx, &gr->scene);
 	mlx_do_key_autorepeaton(mlx);
 	mlx_mouse_show(mlx, gr->win);
+	mlx_destroy_window(mlx, gr->win);
 
 }

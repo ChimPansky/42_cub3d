@@ -6,11 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 13:06:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/03 11:16:57 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "input_parsing.h"
+#include "cub3d.h"
 #include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
@@ -87,7 +88,7 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 	while (elements_read < WALLS_FLOOR_CEILING_COUNT)
 	{
 		if (get_next_element(scene_fd, &element) != SUCCESS)
-			return (FAILURE);
+			return (sprites_destroy(mlx, &static_gr->sprites), FAILURE);
 		if (element.scene_type == FLOOR || element.scene_type == CEILING)
 		{
 			if (add_floor_ceiling(static_gr, &element) != SUCCESS)
@@ -97,7 +98,8 @@ static int	read_walls_floor_ceiling(void *mlx, t_static_graphics *static_gr, int
 		{
 			if (add_sprite_img(mlx, &static_gr->sprites, element.scene_type,
 				element.tx_path) != SUCCESS)
-				return (free(element.tx_path), FAILURE);
+				return (sprites_destroy(mlx, &static_gr->sprites),
+					free(element.tx_path), FAILURE);
 			free(element.tx_path);
 		}
 		elements_read++;
