@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/03 11:16:57 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:24:09 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static int	get_next_element(int scene_fd, t_scene_element *element)
 		{
 			if (extract_element_from_line(&line.str, element) != SUCCESS)
 				return (free(ptr_free), FAILURE);
+			// TODO skip spaces from end of line.str and check if there is text after the scene detail...
 			free(ptr_free);
 			break ;
 		}

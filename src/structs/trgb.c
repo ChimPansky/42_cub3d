@@ -28,7 +28,7 @@ static int	get_next_rgb_val(char **str, int *rgb_val)
 	skip_spaces(str);
 	return (SUCCESS);
 }
-
+#include <stdio.h>
 int	trgb_parse(char **str, t_trgb *col)
 {
 	int	rgb[4];
@@ -48,6 +48,12 @@ int	trgb_parse(char **str, t_trgb *col)
 			(*str)++;
 		}
 		i++;
+	}
+	skip_spaces(str);
+	if (**str != '\n')
+	{
+		printf("the problem is: %c\n", **str); // TODO
+		return (print_error("RGB can only consist of 3 values.", NULL));
 	}
 	*col = trgb(rgb[0], rgb[1], rgb[2], rgb[3]);
 	return (SUCCESS);
