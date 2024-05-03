@@ -43,7 +43,7 @@ int	trgb_parse(char **str, t_trgb *col)
 		if (i < 3)
 		{
 			if (**str != ',')
-				return (print_error("RGB values in scene description "
+				return (print_error("RGB values "
 					"must be separated by commas.", NULL));
 			(*str)++;
 		}
