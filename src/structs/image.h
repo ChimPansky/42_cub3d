@@ -30,7 +30,7 @@ void			image_destroy(void *mlx, t_image *img);
 
 void			image_put_pixel(t_image *img, t_pixel pix, t_trgb color);
 t_trgb			image_get_pixel_color(t_image *img, t_pixel *pix);
-void			image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos);
+void			image_put_to_image(t_image *dest, t_image *src, t_pixel insert_pos, t_pixel start, t_pixel end);
 
 void	image_put_transformed_to_image(
 		t_image *dest,

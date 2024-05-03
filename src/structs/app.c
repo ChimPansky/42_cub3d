@@ -24,7 +24,7 @@ int	app_init(t_app *app, char *cub_path)
 	if (load_native_sprites(app->mlx, &app->static_gr.sprites) != SUCCESS)
 		return (game_destroy(&app->game_state),
 			mlx_destroy(app->mlx), FAILURE);
-	if (graphics_init(app->mlx, &app->gr) != SUCCESS)
+	if (graphics_init(app->mlx, &app->gr, &app->static_gr.sprites) != SUCCESS)
 		return (game_destroy(&app->game_state),
 			sprites_destroy(app->mlx, &app->static_gr.sprites),
 			mlx_destroy(app->mlx), FAILURE);

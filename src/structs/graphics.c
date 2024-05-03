@@ -14,7 +14,7 @@
 #include "mlx.h"
 #include "libft.h"
 
-int	graphics_init(void *mlx, t_graph *gr)
+int	graphics_init(void *mlx, t_graph *gr, t_sprites *sprites)
 {
 	int	screen_width;
 	int	screen_height;
@@ -23,7 +23,9 @@ int	graphics_init(void *mlx, t_graph *gr)
 	gr->win = mlx_new_window(mlx,
 			screen_width * WIN_SIZE_FACTOR,
 			screen_height * WIN_SIZE_FACTOR, "cub3d");
-	minimap_init(mlx, &gr->minimap);
+	init_leg_animation(&gr->leg, &sprites->leg);
+	if (SUCCESS != minimap_init(mlx, &gr->minimap, &sprites->minimap_cursor))
+		exit(1);
 	if (NULL == image_init(mlx, &gr->scene,
 			screen_width * WIN_SIZE_FACTOR,
 			screen_height * WIN_SIZE_FACTOR))
