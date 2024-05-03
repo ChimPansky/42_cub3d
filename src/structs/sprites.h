@@ -5,7 +5,7 @@
 
 # define DOOR_SPRITE_PATH "resources/sprites/door.xpm"
 # define MINIMAP_CURSOR_PATH "resources/sprites/coursor.xpm"
-// # define LEG_ANIMATION_PATH "resources/sprites/leg.xpm"
+# define LEG_ANIMATION_PATH "resources/sprites/leg_sc.xpm"
 
 typedef enum	e_sprite_types
 {
@@ -16,8 +16,8 @@ typedef enum	e_sprite_types
 	WALL_NO = 3,
 	DOOR_SPRITE = 4,
 	MINIMAP_CURSOR = 5,
-	// LEG_ANIMATION = 6,
-	MAX_SPRITE = 6,
+	LEG_ANIMATION = 6,
+	MAX_SPRITE = 7,
 }		t_sprite_types;
 
 typedef union u_sprites

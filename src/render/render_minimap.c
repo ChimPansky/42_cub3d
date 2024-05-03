@@ -20,7 +20,7 @@ static void	minimap_pixel_to_coord(
 }
 
 
-static void	render_player(t_minimap *minimap, t_player *player, t_image *minimap_cursor)
+static void	render_player(t_minimap *minimap, t_player *player)
 {
 	t_pixel	pix;
 
@@ -32,12 +32,12 @@ static void	render_player(t_minimap *minimap, t_player *player, t_image *minimap
 			image_put_pixel(&minimap->image, pix, MM_PLAYER_COL);
 	}
 	image_put_transformed_to_image(
-		&minimap->image, minimap_cursor,
+		&minimap->image, minimap->cursor,
 		pixel(minimap->width / 2, minimap->height / 2),
 		pvector(1, player->angle + M_PI_2));
 }
 
-void	render_minimap(t_minimap *minimap, t_static_graphics *static_gr, t_game_state *game_state)
+void	render_minimap(t_minimap *minimap, t_game_state *game_state)
 {
 	t_pixel	pix;
 	t_pos	coord;
@@ -58,5 +58,5 @@ void	render_minimap(t_minimap *minimap, t_static_graphics *static_gr, t_game_sta
 		}
 		++pix.x;
 	}
-	render_player(minimap, &game_state->player, &static_gr->sprites.minimap_cursor);
+	render_player(minimap, &game_state->player);
 }

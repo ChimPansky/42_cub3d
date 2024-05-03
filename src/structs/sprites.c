@@ -33,7 +33,7 @@ int	load_native_sprites(void *mlx, t_sprites *sprites)
 		return (!SUCCESS);
 	if (add_sprite_img(mlx, sprites, DOOR_SPRITE, DOOR_SPRITE_PATH) != SUCCESS)
 		return (!SUCCESS);
-	// if (add_sprite_img(mlx, sprites, LEG_ANIMATION, LEG_ANIMATION_PATH) != SUCCESS)
-	// 	return (!SUCCESS);
+	if (add_sprite_img(mlx, sprites, LEG_ANIMATION, LEG_ANIMATION_PATH) != SUCCESS)
+		return (!SUCCESS);
 	return (SUCCESS);
 }
