@@ -1,7 +1,7 @@
 #include "logic.h"
 #include "structs/physics.h"
 #include "structs/player.h"
-#include <math.h>
+#include "structs/door.h"
 #include <stdbool.h>
 #include "vector/vector.h"
 #include "structs/ray.h"
@@ -24,12 +24,13 @@ void	change_state_for_next_frame(t_game_state *game_state)
 	player = &game_state->player;
 	if (!dbl_is_almost_zero(player->rot_speed))
 		player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
-	if (dbl_is_almost_zero(player->speed.forw)
-		&& dbl_is_almost_zero(player->speed.ort))
-		return ;
-
-	player_move(game_state);
-	player_adjust_player_distance_from_walls(game_state);
+	if (!dbl_is_almost_zero(player->speed.forw)
+		|| !dbl_is_almost_zero(player->speed.ort))
+	{
+		player_move(game_state);
+		player_adjust_player_distance_from_walls(game_state);
+	}
+	doors_check_and_close(game_state, &game_state->map.doors);
 }
 
 #include <stdio.h>

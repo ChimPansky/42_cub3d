@@ -44,12 +44,15 @@ static void	print_game_info(t_app *app)
 
 int	main_loop(void *data)
 {
-	clock_t	start_time;
-	int		msec_passed;
 	t_app	*app;
 
-	start_time = clock();
 	app = (t_app *)data;
+	app->game_state.timer++;
+	//printf("timer: %zu\n", app->game_state.timer);
+	// if (app->game_state.timer % 100 != 0)
+	// 	return (0);
+	// if (app->game_state.timer % ((100 - GAME_SPEED) * 2000 / 100) != 0)
+	// 	return (0);
 	process_inputs(&app->game_state, &app->inputs);
 	change_state_for_next_frame(&app->game_state);
 	render_scene(app);
@@ -59,9 +62,6 @@ int	main_loop(void *data)
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.minimap.image.image, MM_X, MM_Y);
 	print_game_info(app);
-	msec_passed = (clock() - start_time) * 1000 / CLOCKS_PER_SEC;
-	if (msec_passed < MSEC_PER_FRAME)
-		usleep((MSEC_PER_FRAME - msec_passed) * 1000);
 	return (0);
 }
 
