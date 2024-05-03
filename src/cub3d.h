@@ -8,8 +8,6 @@
 #  define SUCCESS 0
 # endif
 
-// between 1% and 100%
-# define GAME_SPEED 80
 # define FPS        60
 
 //             |

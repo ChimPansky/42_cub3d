@@ -47,12 +47,6 @@ int	main_loop(void *data)
 	t_app	*app;
 
 	app = (t_app *)data;
-	app->game_state.timer++;
-	//printf("timer: %zu\n", app->game_state.timer);
-	// if (app->game_state.timer % 100 != 0)
-	// 	return (0);
-	// if (app->game_state.timer % ((100 - GAME_SPEED) * 2000 / 100) != 0)
-	// 	return (0);
 	process_inputs(&app->game_state, &app->inputs);
 	change_state_for_next_frame(&app->game_state);
 	render_scene(app);
