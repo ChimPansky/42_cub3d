@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:43:47 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/01 11:08:32 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 20:16:27 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,14 +107,11 @@ static void	raycaster_reset(t_ray *ray)
 
 void	calculate_ray_collision(t_ray *ray, t_map *map)
 {
-	#ifdef LOGGING
-	if (g_i < 100)
-		printf("Calculating ray collision\n");
-	#endif
 	raycaster_reset(ray);
 	calculate_first_collision_distance(ray);
 	while (ray->raycaster.collision.sprite == NO_SPRITE
-		&& ray->raycaster.collision.distance < MAX_RAY_DISTANCE)
+		&& ray->raycaster.collision.distance
+		< ft_max(map->height, map->width) + 100)
 	{
 		if (ray->raycaster.x_ray_len < ray->raycaster.y_ray_len)
 		{
