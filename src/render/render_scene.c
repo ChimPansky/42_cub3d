@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/20 12:35:26 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:51:17 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,6 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 		image_put_pixel(screen_img, window_pixel, color);
 		window_pixel.y++;
 	}
-}
-
-void animation_put_to_image(t_image *dest, t_pixel insert_pos, t_animation *anim)
-{
-	const int		idx = anim->frames_since_start++ / anim->frames_per_sprite;
-	const t_pixel	start = pixel(anim->one_sprite_size.x * idx, 0);
-	const t_pixel	end = pixel(anim->one_sprite_size.x * (idx + 1), anim->one_sprite_size.y);
-
-	if (idx >= anim->sprites_num)
-	{
-		anim->frames_since_start = 0;
-		anim->play = false;
-		return ;
-	}
-	image_put_to_image(dest, anim->sprites, insert_pos, start, end);
 }
 
 void	render_leg(t_image *scene_image, t_animation *leg)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:43:03 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/01 11:42:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:00:29 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "physics.h"
 
-typedef struct  s_game_state t_game_state;
+typedef struct s_game_state	t_game_state;
 
 typedef struct s_player
 {
@@ -25,7 +25,7 @@ typedef struct s_player
 	double	rot_speed;
 }				t_player;
 
-void 	player_move(t_game_state *game);
+void	player_move(t_game_state *game);
 void	player_adjust_player_distance_from_walls(t_game_state *game);
 
 #endif  // PLAYER_H

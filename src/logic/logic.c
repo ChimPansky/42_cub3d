@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   logic.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:33:31 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:41:30 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdbool.h>
 #include "logic.h"
 #include "physics.h"
@@ -23,10 +35,8 @@ void	change_state_for_next_frame(t_game_state *game_state)
 	t_player	*player;
 
 	player = &game_state->player;
-	if (!dbl_is_almost_zero(player->rot_speed))
-		player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
-	if (!dbl_is_almost_zero(player->speed.forw)
-		|| !dbl_is_almost_zero(player->speed.ort))
+	player->angle += player->rot_speed * PLAYER_RAD_PER_FRAME;
+	if (player->speed.forw || player->speed.ort)
 	{
 		player_move(game_state);
 		player_adjust_player_distance_from_walls(game_state);
@@ -76,8 +86,6 @@ void	player_trigger_action(t_app *app)
 		&& player_view.raycaster.collision.distance < DOOR_OPENING_DISTANCE)
 		player_door_action(&app->game_state, &player_view);
 	if (app->god_mode)
-	{
-		if (coord_to_map_sym(&app->game_state.map, cvector(player_view.raycaster.map_x, player_view.raycaster.map_y)))
-			app->game_state.map.raw_map.buf[player_view.raycaster.map_y][player_view.raycaster.map_x] = PATH_SYM;
-	}
+		try_change_map_symb(&app->game_state.map, player_view.raycaster.map_x,
+			player_view.raycaster.map_y, PATH_SYM);
 }

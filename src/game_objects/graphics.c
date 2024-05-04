@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:00:12 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/03 13:44:18 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:44:45 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "cub3d.h"
 #include "libft.h"
 
+// mlx_mouse_hide causes leaks! 31567 bytes in 400 blocks
 int	graphics_init(void *mlx, t_graph *gr, t_sprites *sprites)
 {
 	int	screen_width;
@@ -32,12 +33,10 @@ int	graphics_init(void *mlx, t_graph *gr, t_sprites *sprites)
 	if (image_init(mlx, &gr->scene,
 			screen_width * WIN_SIZE_FACTOR,
 			screen_height * WIN_SIZE_FACTOR) == NULL)
-		return (mlx_destroy_window(mlx, gr->win), minimap_destroy(mlx, &gr->minimap), FAILURE);
-	mlx_do_key_autorepeaton(mlx);// TODO: delete
-	mlx_mouse_move(mlx, gr->win, gr->scene.width/2, gr->scene.height/2);
-	mlx_mouse_hide(mlx, gr->win); // this causes leaks! 31567 bytes in 400 blocks
-	mlx_do_key_autorepeaton(mlx);// TODO: delete
-	//mlx_do_key_autorepeatoff(mlx); // TODO: uncomment
+		return (mlx_destroy_window(mlx, gr->win),
+			minimap_destroy(mlx, &gr->minimap), FAILURE);
+	mlx_mouse_move(mlx, gr->win, gr->scene.width / 2, gr->scene.height / 2);
+	mlx_mouse_hide(mlx, gr->win);
 	return (SUCCESS);
 }
 

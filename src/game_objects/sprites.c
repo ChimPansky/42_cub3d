@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:48:28 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:48:52 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sprites.h"
 #include "image.h"
 #include "libft.h"
@@ -28,11 +40,13 @@ void	sprites_destroy(void *mlx, t_sprites *sprites)
 
 int	load_native_sprites(void *mlx, t_sprites *sprites)
 {
-	if (add_sprite_img(mlx, sprites, MINIMAP_CURSOR, MINIMAP_CURSOR_PATH) != SUCCESS)
+	if (add_sprite_img(mlx, sprites, MINIMAP_CURSOR, MINIMAP_CURSOR_PATH)
+		!= SUCCESS)
 		return (!SUCCESS);
 	if (add_sprite_img(mlx, sprites, DOOR_SPRITE, DOOR_SPRITE_PATH) != SUCCESS)
 		return (!SUCCESS);
-	if (add_sprite_img(mlx, sprites, LEG_ANIMATION, LEG_ANIMATION_PATH) != SUCCESS)
+	if (add_sprite_img(mlx, sprites, LEG_ANIMATION, LEG_ANIMATION_PATH)
+		!= SUCCESS)
 		return (!SUCCESS);
 	return (SUCCESS);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:33:10 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:33:14 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <sys/types.h>
 #include <math.h>
 #include "render.h"
@@ -18,7 +30,6 @@ static void	minimap_pixel_to_coord(
 	coord->x = center->x + dx / minimap->pix_per_field;
 	coord->y = center->y + dy / minimap->pix_per_field;
 }
-
 
 static void	render_player(t_minimap *minimap, t_player *player)
 {

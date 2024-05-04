@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hooks.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:33:26 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:34:13 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "app.h"
 #include "logic.h"
 #include <mlx.h>
@@ -29,7 +41,7 @@ int	key_press_hook(int key_code, t_app *app)
 	return (0);
 }
 
-static void check_last_inputs(t_app *app)
+static void	check_last_inputs(t_app *app)
 {
 	if (app->inputs.last_inputs[8] == XK_h
 		&& app->inputs.last_inputs[4] == XK_s
@@ -48,11 +60,13 @@ static void check_last_inputs(t_app *app)
 
 int	key_release_hook(int key_code, t_app *app)
 {
+	int	i;
+
 	if (key_code == XK_Escape)
 		mlx_loop_end(app->mlx);
 	else
 		process_tracked_keys(key_code, &app->inputs, false);
-	int i = SAVED_INPUTS_CAP - 1;
+	i = SAVED_INPUTS_CAP - 1;
 	while (i--)
 		app->inputs.last_inputs[i + 1] = app->inputs.last_inputs[i];
 	app->inputs.last_inputs[0] = key_code;

@@ -1,7 +1,19 @@
-#ifndef UTILS_H
-#define UTILS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 14:59:43 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 14:59:48 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdbool.h>
+#ifndef UTILS_H
+# define UTILS_H
+
+# include <stdbool.h>
 
 void	skip_spaces(char **str);
 bool	string_is_empty(char *str);

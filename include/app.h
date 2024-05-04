@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   app.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 14:56:05 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 14:56:06 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef APP_H
 # define APP_H
 
@@ -12,7 +24,6 @@ typedef struct s_static_graphics
 	t_trgb			floor_col;
 	t_trgb			ceiling_col;
 }		t_static_graphics;
-
 
 typedef struct s_app
 {

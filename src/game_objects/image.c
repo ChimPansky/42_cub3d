@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   image.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:44:57 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 16:01:50 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "image.h"
 
 #include <mlx.h>
@@ -19,7 +31,8 @@ t_image	*image_init(void *mlx, t_image *img, int width, int height)
 // TODO error processing, mb success !success
 t_image	*image_init_from_xpm(void *mlx, t_image *img, char *xpm_path)
 {
-	img->image = mlx_xpm_file_to_image(mlx, xpm_path, &img->width, &img->height);
+	img->image = mlx_xpm_file_to_image(mlx, xpm_path,
+			&img->width, &img->height);
 	if (!img->image)
 		return (NULL);
 	img->addr = mlx_get_data_addr(img->image, &img->bits_per_pixel,
@@ -37,7 +50,8 @@ void	image_put_pixel(t_image *img, t_pixel pix, t_trgb color)
 {
 	char	*dst;
 
-	dst = img->addr + (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
+	dst = img->addr
+		+ (pix.y * img->line_length + pix.x * (img->bits_per_pixel / 8));
 	*(t_trgb *)dst = color;
 }
 
@@ -45,15 +59,7 @@ t_trgb	image_get_pixel_color(t_image *img, t_pixel *pix)
 {
 	char	*dst;
 
-	dst = img->addr + (pix->y * img->line_length + pix->x * (img->bits_per_pixel / 8));
+	dst = img->addr
+		+ (pix->y * img->line_length + pix->x * (img->bits_per_pixel / 8));
 	return (*(t_trgb *)dst);
-}
-
-t_pixel	pixel(int x, int y)
-{
-	t_pixel	pix;
-
-	pix.x = x;
-	pix.y = y;
-	return (pix);
 }

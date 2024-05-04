@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:14:32 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/02 16:20:52 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:57:25 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 
-typedef struct  s_game_state t_game_state;
+typedef struct s_game_state	t_game_state;
 
 typedef struct s_door
 {

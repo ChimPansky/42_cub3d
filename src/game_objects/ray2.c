@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 10:30:58 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/30 15:40:48 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:18:08 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "vector.h"
+#include "utils.h"
 #include <math.h>
 
 // differentiate between the 4 quadrants in the trigonometric circle

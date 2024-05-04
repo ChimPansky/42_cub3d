@@ -1,47 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_polar.c                                     :+:      :+:    :+:   */
+/*   pvector.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:39:59 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/29 13:31:16 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 15:32:14 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 #include <math.h>
+#include <stdio.h>
+
+static double	normolize_angle(double angle)
+{
+	if (angle < 0)
+		return (fmod(angle, M_PI * 2) + M_PI * 2);
+	return (fmod(angle, M_PI * 2));
+}
 
 t_pvector	pvector(double r, double phi)
 {
 	t_pvector	result;
 
-	result.r = r;
-	result.phi = phi;
 	if (r < 0)
 	{
-		result.r *= -1;
-		result.phi += M_PI;
+		r *= -1;
+		phi += M_PI;
 	}
-	result.phi = fmod(result.phi + 2 * M_PI, 2 * M_PI);
+	result.r = r;
+	result.phi = normolize_angle(phi);
 	return (result);
-}
-
-void	pvector_scale(t_pvector *pvec, double factor)
-{
-	pvec->r *= factor;
-}
-
-void	pvector_add_pvector(t_pvector *pvec, t_pvector addition)
-{
-	double	x;
-	double	y;
-
-	x = pvec->r * cos(pvec->phi) + addition.r * cos(addition.phi);
-	y = pvec->r * sin(pvec->phi) + addition.r * sin(addition.phi);
-	pvec->r = sqrt(x * x + y * y);
-	pvec->phi = fmod(atan2(y, x) + 2 * M_PI, 2 * M_PI);
 }
 
 t_pvector	pvector_from_coords(double x, double y)
@@ -49,11 +40,16 @@ t_pvector	pvector_from_coords(double x, double y)
 	t_pvector	result;
 
 	result.r = sqrt(x * x + y * y);
-	result.phi = fmod(atan2(y, x) + 2 * M_PI, 2 * M_PI);
+	result.phi = normolize_angle(atan2(y, x));
 	return (result);
+}
+
+void	pvector_print(const t_pvector *pvec)
+{
+	printf("(%f, %f)\n", pvec->r, pvec->phi);
 }
 
 void	pvector_rotate(t_pvector *pvec, double rot_angle)
 {
-	pvec->phi = fmod(pvec->phi + rot_angle + 2 * M_PI, 2 * M_PI);
+	pvec->phi = normolize_angle(pvec->phi + rot_angle);
 }
