@@ -13,7 +13,7 @@
 #ifndef VECTOR_H
 # define VECTOR_H
 
-#include <stdbool.h>
+# include <stdbool.h>
 
 typedef struct s_cartesian_vector
 {

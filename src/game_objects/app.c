@@ -1,7 +1,7 @@
 #include "app.h"
 #include "libft.h"
-#include "mlx.h"
-#include "input_parsing/input_parsing.h"
+#include <mlx.h>
+#include "../input_parsing/input_parsing.h"
 #include "sprites.h"
 
 static void	mlx_destroy(void *mlx)

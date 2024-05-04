@@ -12,9 +12,10 @@
 
 #include "ray.h"
 #include "map.h"
-#include "physics.h"
-#include "sprites.h"
-#include "structs/door.h"
+#include "cub3d.h"
+// #include "physics.h"
+// #include "sprites.h"
+// #include "door.h"
 #include <math.h>
 //#include "log.h"
 

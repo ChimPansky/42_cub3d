@@ -1,8 +1,7 @@
 #ifndef PHYSICS_H
 # define PHYSICS_H
 
-# include "../vector/vector.h"
-# include "sprites.h"
+# include "vector.h"
 
 typedef t_cvector t_pos;
 

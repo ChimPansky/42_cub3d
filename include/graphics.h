@@ -13,11 +13,10 @@
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# include "structs/image.h"
-# include "structs/minimap.h"
+# include "image.h"
+# include "minimap.h"
 # include "animation.h"
-
-# define WIN_SIZE_FACTOR 0.50
+# include "sprites.h"
 
 typedef struct s_graph
 {

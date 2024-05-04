@@ -1,8 +1,8 @@
-#include "render.h"
 #include <sys/types.h>
-#include "structs/trgb.h"
-#include "vector/vector.h"
 #include <math.h>
+#include "render.h"
+#include "vector.h"
+#include "cub3d.h"
 
 static void	minimap_pixel_to_coord(
 	t_minimap *minimap, t_pixel *pix, t_pos *coord, t_pos *center)

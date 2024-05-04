@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "game_state.h"
-#include "structs/door.h"
-#include "structs/ray.h"
-#include "structs/sprites.h"
+#include "door.h"
+#include "ray.h"
 #include "math.h"
-#include <stdio.h>
+#include "cub3d.h"
 
 static void	calculate_sliding_movement(t_raycaster *rc, t_pvector *movement)
 {

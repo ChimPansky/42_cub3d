@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ray.h"
-#include "vector/vector.h"
+#include "vector.h"
 #include <math.h>
 
 // differentiate between the 4 quadrants in the trigonometric circle

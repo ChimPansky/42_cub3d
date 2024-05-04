@@ -13,9 +13,9 @@
 #ifndef INPUT_PARSING_H
 # define INPUT_PARSING_H
 
-# include "structs/trgb.h"
-# include "structs/app.h"
-# include "structs/sprites.h"
+# include "trgb.h"
+# include "app.h"
+# include "sprites.h"
 
 # define MAP_SYMBOLS "01NSWE D"
 # define FLOOR_CEILING_TRANSPARENCY 50

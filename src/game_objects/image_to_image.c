@@ -1,7 +1,6 @@
 #include "image.h"
 #include "trgb.h"
-#include "vector/vector.h"
-#include <math.h>
+#include "vector.h"
 
 static bool is_pixel_on_pict(t_image *image, t_pixel *pix)
 {

@@ -14,10 +14,6 @@
 # define DOOR_H
 
 # include <stdbool.h>
-# include <stddef.h>
-
-# define DOOR_OPENING_DISTANCE 1.0
-# define DOOR_CLOSING_DISTANCE 2
 
 typedef struct  s_game_state t_game_state;
 

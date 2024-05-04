@@ -1,7 +1,8 @@
 #include "minimap.h"
 #include "trgb.h"
 #include "map.h"
-#include "structs/image.h"
+#include "image.h"
+#include "cub3d.h"
 #include "libft.h"
 
 int	minimap_init(void *mlx, t_minimap *minimap, t_image *cursor)

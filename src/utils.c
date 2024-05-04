@@ -1,6 +1,5 @@
 #include "utils.h"
 #include "libft.h"
-#include <float.h>
 #include <unistd.h>
 
 void	skip_spaces(char **str)

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "door.h"
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../cub3d.h"
-#include "structs/player.h"
 #include <stdio.h>
-#include <structs/game_state.h>
+#include "door.h"
+#include "cub3d.h"
+#include "player.h"
+#include "game_state.h"
 
 int	door_add(t_door **doors, int map_x, int map_y, bool is_open)
 {

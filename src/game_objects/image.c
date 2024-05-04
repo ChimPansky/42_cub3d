@@ -1,6 +1,6 @@
 #include "image.h"
 
-#include "mlx.h"
+#include <mlx.h>
 #include "trgb.h"
 #include <stddef.h>
 

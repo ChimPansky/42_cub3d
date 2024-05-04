@@ -9,7 +9,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Wpedantic
 CFLAGS += -g -Og #-fsanitize=address,undefined,leak
 
-IFLAGS = -I/usr/include -I$(SOURCE_DIR)
+IFLAGS = -I/usr/include -I./include
 LFLAGS = -lm
 
 LIBMLX = libs/mlx/libmlx_Linux.a
@@ -29,20 +29,22 @@ LFLAGS += -Llibs/libft -lft
 lft:
 	@make -C libs/libft all clean
 
-CB_FILENAMES = \
-	cub3d.c \
-	utils.c
-
 CB_FILENAMES += \
-	hooks/key_hooks.c \
-	hooks/hooks.c
-
-CB_FILENAMES += \
-	logic/logic.c
-
-CB_FILENAMES += \
-	render/render_minimap.c \
-	render/render_scene.c
+	game_objects/animation.c \
+	game_objects/app.c \
+	game_objects/door.c \
+	game_objects/game_state.c \
+	game_objects/graphics.c \
+	game_objects/image.c \
+	game_objects/image_to_image.c \
+	game_objects/map.c \
+	game_objects/minimap.c \
+	game_objects/physics.c \
+	game_objects/player.c \
+	game_objects/ray.c \
+	game_objects/ray2.c \
+	game_objects/sprites.c \
+	game_objects/trgb.c
 
 CB_FILENAMES += \
 	input_parsing/input_parsing.c \
@@ -54,28 +56,23 @@ CB_FILENAMES += \
 	input_parsing/utilities.c
 
 CB_FILENAMES += \
-	structs/animation.c \
-	structs/app.c \
-	structs/door.c \
-	structs/game_state.c \
-	structs/graphics.c \
-	structs/image.c \
-	structs/image_to_image.c \
-	structs/inputs.c \
-	structs/map.c \
-	structs/minimap.c \
-	structs/physics.c \
-	structs/player.c \
-	structs/ray.c \
-	structs/ray2.c \
-	structs/sprites.c \
-	structs/trgb.c
+	logic/key_hooks.c \
+	logic/hooks.c \
+	logic/logic.c
+
+CB_FILENAMES += \
+	render/render_minimap.c \
+	render/render_scene.c
 
 CB_FILENAMES += \
 	vector/vector_cartesian.c \
 	vector/vector_cartesian2.c \
 	vector/vector_polar.c \
 	vector/vector_utilities.c
+
+CB_FILENAMES += \
+	cub3d.c \
+	utils.c
 
 SRC = $(addprefix $(SOURCE_DIR)/,$(CB_FILENAMES))
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)

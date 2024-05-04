@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../structs/map.h"
+#include "map.h"
 #include "input_parsing.h"
 
 int		door_validate(t_map map, size_t col, size_t row)

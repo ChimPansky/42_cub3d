@@ -1,5 +1,4 @@
 #include "map.h"
-#include "ray.h"
 
 t_map_sym	coord_to_map_sym(t_map *map, t_pos coord)
 {

@@ -1,6 +1,6 @@
-#include "mlx.h"
-#include "X11/X.h"
-#include "hooks.h"
+#include <mlx.h>
+#include <X11/X.h>
+#include "logic.h"
 
 void	set_hooks(t_app *app)
 {

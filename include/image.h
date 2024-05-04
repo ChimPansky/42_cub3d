@@ -2,8 +2,8 @@
 # define MLX_UTILS_H
 
 # include <sys/types.h>
-# include "structs/trgb.h"
-#include "vector/vector.h"
+# include "trgb.h"
+# include "vector.h"
 
 typedef struct s_image
 {

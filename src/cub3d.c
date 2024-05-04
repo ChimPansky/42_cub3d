@@ -6,19 +6,14 @@
 #define COLOR_YELLOW "\033[0;93m"
 
 #include "libft.h"
-#include "mlx.h"
-#include "structs/app.h"
+#include <mlx.h>
+#include "app.h"
 #include "render/render.h"
 #include "logic/logic.h"
-#include "hooks/hooks.h"
 #include "utils.h"
 #include <time.h>
 #include "cub3d.h"
-//#include "log.h"
 
-
-//#include "log.h"
-//int g_i = 0;
 
 #include <stdio.h>
 
@@ -63,15 +58,6 @@ int	main(int ac, char *av[])
 {
 	t_app	app;
 
-	#ifdef LOGGING
-		int fd = open("log.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-			return (print_error("Failed to open log file.", NULL), FAILURE);
-		dup2(fd, 1);
-		dup2(fd, 2);
-		close(fd);
-		printf("LOGGING ENABLED\n");
-	#endif
 	if (ac < 2)
 		return (print_error("Please provide a scene description "
 				"as parameter (.cub file).", NULL), FAILURE);
