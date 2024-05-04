@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/19 09:21:30 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 14:11:23 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/04 21:00:25 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,8 @@ typedef enum e_scene_type
 typedef struct s_scene_element
 {
 	t_scene_type	scene_type;
-	union
-	{
-		char	*tx_path;
-		t_trgb	trgb;
-	};
+	char			*tx_path;
+	t_trgb			trgb;
 }			t_scene_element;
 
 // input_parsing.c:
