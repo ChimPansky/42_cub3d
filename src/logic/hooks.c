@@ -21,6 +21,7 @@ int	mouse_motion_hook(int x, int y, t_app *app)
 
 	app->inputs.mouse_dx += x - center_x;
 	app->inputs.mouse_dy += y - center_y;
-	mlx_mouse_move(app->mlx, app->gr.win, center_x, center_y);
+	if (app->inputs.mouse_dx || app->inputs.mouse_dy)
+		mlx_mouse_move(app->mlx, app->gr.win, center_x, center_y);
 	return (0);
 }
