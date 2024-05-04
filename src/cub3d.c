@@ -1,9 +1,14 @@
-// 1000/60 = 16.6666
-
-#define COLOR_RESET "\033[0;39m"
-#define COLOR_RED "\033[0;91m"
-#define COLOR_GREEN "\033[0;92m"
-#define COLOR_YELLOW "\033[0;93m"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:02:15 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:24:27 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 #include <mlx.h>
@@ -14,27 +19,23 @@
 #include <time.h>
 #include "cub3d.h"
 
-
 #include <stdio.h>
-
-char g_screen_info[100];	// TODO: remove
 
 static void	print_game_info(t_app *app)
 {
-	char player[100];
-	char phi[100];
+	char	player[100];
+	char	phi[100];
 
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 10, 0,
-	"DEBUG INFO:");
+		"DEBUG INFO:");
 	sprintf(player, "Player: %.2f, %.2f", app->game_state.player.pos.x,
 		app->game_state.player.pos.y);
-	sprintf(phi, "Player Phi: %.2f", fmod(app->game_state.player.angle + 2*M_PI, 2*M_PI));
+	sprintf(phi, "Player Phi: %.2f",
+		fmod(app->game_state.player.angle + 2 * M_PI, 2 * M_PI));
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 20, 0,
-	player);
+		player);
 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 30, 0,
-	phi);
-	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 40, 0,
-	g_screen_info);
+		phi);
 }
 
 int	main_loop(void *data)

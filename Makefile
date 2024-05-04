@@ -36,6 +36,7 @@ CB_FILENAMES += \
 	game_objects/game_state.c \
 	game_objects/graphics.c \
 	game_objects/image.c \
+	game_objects/pixel.c \
 	game_objects/image_to_image.c \
 	game_objects/map.c \
 	game_objects/minimap.c \
@@ -65,10 +66,8 @@ CB_FILENAMES += \
 	render/render_scene.c
 
 CB_FILENAMES += \
-	vector/vector_cartesian.c \
-	vector/vector_cartesian2.c \
-	vector/vector_polar.c \
-	vector/vector_utilities.c
+	vector/cvector.c \
+	vector/pvector.c
 
 CB_FILENAMES += \
 	cub3d.c \

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:35:16 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:46:57 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "map.h"
 
 t_map_sym	coord_to_map_sym(t_map *map, t_pos coord)
@@ -16,9 +28,15 @@ t_map_sym	coord_to_map_sym(t_map *map, t_pos coord)
 	return (UNKNOWN_SYM);
 }
 
+void	try_change_map_symb(t_map *map, int x, int y, t_map_sym sym)
+{
+	if (coord_to_map_sym(map, cvector(x, y)) != UNKNOWN_SYM)
+		map->raw_map.buf[y][x] = sym;
+}
+
 bool	coords_are_collidable(t_map *map, t_pos coord)
 {
 	return (coord_to_map_sym(map, coord) == WALL_SYM
 		|| (coord_to_map_sym(map, coord) == DOOR_SYM
-		&& !door_is_open(map->doors, coord.x, coord.y)));
+			&& !door_is_open(map->doors, coord.x, coord.y)));
 }

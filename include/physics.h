@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physics.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 14:58:48 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 14:58:54 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHYSICS_H
 # define PHYSICS_H
 
 # include "vector.h"
 
-typedef t_cvector t_pos;
+typedef t_cvector	t_pos;
 
 typedef struct s_speed
 {

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:00:42 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:00:51 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SPRITES_H
 # define SPRITES_H
 
@@ -7,7 +19,7 @@
 # define MINIMAP_CURSOR_PATH "resources/sprites/coursor.xpm"
 # define LEG_ANIMATION_PATH "resources/sprites/leg_sc.xpm"
 
-typedef enum	e_sprite_types
+typedef enum e_sprite_types
 {
 	NO_SPRITE = -1,
 	WALL_EA = 0,
@@ -22,7 +34,8 @@ typedef enum	e_sprite_types
 
 typedef union u_sprites
 {
-	struct {
+	struct
+	{
 		t_image	wall_ea;
 		t_image	wall_so;
 		t_image	wall_we;
@@ -35,7 +48,7 @@ typedef union u_sprites
 }		t_sprites;
 
 int		add_sprite_img(void *mlx, t_sprites *sprites,
-		int sprite_type, char *img_path);
+			int sprite_type, char *img_path);
 void	sprites_destroy(void *mlx, t_sprites *sprites);
 int		load_native_sprites(void *mlx, t_sprites *sprites);
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   animation.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 14:55:56 by vvilensk          #+#    #+#             */
+/*   Updated: 2024/05/04 15:52:01 by vvilensk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ANIMATION_H
 # define ANIMATION_H
 
@@ -13,6 +25,8 @@ typedef struct s_animation
 	bool	play;
 }		t_animation;
 
-void init_leg_animation(t_animation *leg, t_image *sprites);
+void	init_leg_animation(t_animation *leg, t_image *sprites);
+void	animation_put_to_image(t_image *dest, t_pixel insert_pos,
+			t_animation *anim);
 
 #endif  // ANIMATION_H

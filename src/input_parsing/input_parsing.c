@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 20:09:10 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/03 11:16:57 by tkasbari         ###   ########.fr       */
-
+/*   Updated: 2024/05/04 16:03:05 by vvilensk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
