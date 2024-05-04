@@ -14,7 +14,6 @@ void	set_hooks(t_app *app)
 		mlx_loop_end, app->mlx);
 }
 
-#include "stdio.h"
 int	mouse_motion_hook(int x, int y, t_app *app)
 {
 	const int	center_x = app->gr.scene.width / 2;
