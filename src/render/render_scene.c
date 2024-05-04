@@ -10,16 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "render.h"
-#include "structs/app.h"
-#include "structs/image.h"
-#include "structs/physics.h"
-#include "structs/player.h"
-#include "structs/trgb.h"
-#include "vector/vector.h"
-#include "structs/sprites.h"
 #include <math.h>
-#include "structs/ray.h"
+
+#include "render.h"
+#include "app.h"
+#include "image.h"
+#include "physics.h"
+#include "player.h"
+#include "trgb.h"
+#include "vector.h"
+#include "sprites.h"
+#include "ray.h"
+#include "cub3d.h"
 
 static void		draw_screen_column(
 					t_image *screen_img,

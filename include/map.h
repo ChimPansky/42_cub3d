@@ -3,7 +3,7 @@
 
 # include "libft.h"
 # include "physics.h"
-# include "structs/door.h"
+# include "door.h"
 
 typedef enum e_map_sym
 {

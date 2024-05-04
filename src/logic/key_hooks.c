@@ -1,8 +1,9 @@
-#include "structs/app.h"
-#include "logic/logic.h"
-#include "mlx.h"
+#include "app.h"
+#include "logic.h"
+#include <mlx.h>
 #include <X11/keysym.h>
 #include <unistd.h>
+#include <stdio.h>
 
 void	process_tracked_keys(int key_code, t_inputs *inputs, bool is_pressed)
 {
@@ -28,7 +29,7 @@ int	key_press_hook(int key_code, t_app *app)
 	return (0);
 }
 
-void check_last_inputs(t_app *app)
+static void check_last_inputs(t_app *app)
 {
 	if (app->inputs.last_inputs[8] == XK_h
 		&& app->inputs.last_inputs[4] == XK_s
@@ -39,7 +40,10 @@ void check_last_inputs(t_app *app)
 		&& app->inputs.last_inputs[2] == XK_a
 		&& app->inputs.last_inputs[6] == XK_l
 		&& app->inputs.last_inputs[0] == XK_h)
-		app->test = true;
+	{
+		app->god_mode = true;
+		printf("Cheater!!\n");
+	}
 }
 
 int	key_release_hook(int key_code, t_app *app)

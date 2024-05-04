@@ -1,11 +1,12 @@
-#include "logic.h"
-#include "structs/physics.h"
-#include "structs/player.h"
-#include "structs/door.h"
 #include <stdbool.h>
-#include "vector/vector.h"
-#include "structs/ray.h"
-#include "structs/app.h"
+#include "logic.h"
+#include "physics.h"
+#include "player.h"
+#include "door.h"
+#include "vector.h"
+#include "ray.h"
+#include "app.h"
+#include "cub3d.h"
 
 void	process_inputs(t_game_state *game_state, t_inputs *inputs)
 {
@@ -74,7 +75,7 @@ void	player_trigger_action(t_app *app)
 	if (player_view.raycaster.collision.sprite == DOOR_SPRITE
 		&& player_view.raycaster.collision.distance < DOOR_OPENING_DISTANCE)
 		player_door_action(&app->game_state, &player_view);
-	if (app->test)
+	if (app->god_mode)
 	{
 		if (coord_to_map_sym(&app->game_state.map, cvector(player_view.raycaster.map_x, player_view.raycaster.map_y)))
 			app->game_state.map.raw_map.buf[player_view.raycaster.map_y][player_view.raycaster.map_x] = PATH_SYM;

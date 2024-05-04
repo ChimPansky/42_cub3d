@@ -13,11 +13,7 @@
 #ifndef PLAYER_H
 # define PLAYER_H
 
-# include "cub3d.h"
 # include "physics.h"
-
-# define PLAYER_COLLISION_RADIUS 0.1
-# define PLAYER_SPEED_FIELD_PER_FRAME	1. / FPS * 2
 
 typedef struct  s_game_state t_game_state;
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs/game_state.h"
+#include "game_state.h"
 #include "utils.h"
 #include "input_parsing.h"
 #include <math.h>

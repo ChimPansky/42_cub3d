@@ -13,15 +13,9 @@
 #ifndef RENDER_H
 # define RENDER_H
 
-# include "structs/game_state.h"
-# include "structs/minimap.h"
-# include "structs/image.h"
-# include "structs/app.h"
-
-// should be something between 1.0 and 3.0
-# define WALL_HEIGHT 1.0
-// 60 degrees player field of view
-# define FOV M_PI / 3
+# include "game_state.h"
+# include "minimap.h"
+# include "app.h"
 
 void	render_minimap(t_minimap *minimap, t_game_state *game_state);
 void	render_scene(t_app *app);

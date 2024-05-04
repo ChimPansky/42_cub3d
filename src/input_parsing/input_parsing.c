@@ -12,11 +12,10 @@
 /* ************************************************************************** */
 
 #include "input_parsing.h"
-#include "cub3d.h"
 #include "utils.h"
 #include <stdio.h>
 #include <fcntl.h>
-#include "../structs/sprites.h"
+#include "sprites.h"
 
 static int	extract_element_type_from_line(char **str,
 		t_scene_element *element)

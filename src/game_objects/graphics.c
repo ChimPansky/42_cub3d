@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <mlx.h>
 #include "graphics.h"
-#include "mlx.h"
+#include "cub3d.h"
 #include "libft.h"
 
 int	graphics_init(void *mlx, t_graph *gr, t_sprites *sprites)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs/app.h"
+#include "app.h"
 #include "utils.h"
 #include "input_parsing.h"
 
