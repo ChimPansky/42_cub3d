@@ -116,7 +116,7 @@ int	read_scene_description(t_app *app, char *fpath)
 	int	scene_fd;
 
 	if (ft_file_check_extension(fpath, ".cub") == false
-		|| ft_strlen(fpath) < 5)
+		|| ft_strlen(fpath) < 5 || fpath[ft_strlen(fpath) - 5] == '/')
 		return (print_error("Could not open scene description file.", NULL));
 	scene_fd = open(fpath, O_RDONLY);
 	if (scene_fd == -1)
