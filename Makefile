@@ -52,6 +52,7 @@ CB_FILENAMES += \
 	input_parsing/parse_doors.c \
 	input_parsing/parse_floor_ceiling_colors.c \
 	input_parsing/parse_map.c \
+	input_parsing/parse_map_walls.c \
 	input_parsing/parse_wall_textures.c \
 	input_parsing/prepare_map.c \
 	input_parsing/utilities.c
