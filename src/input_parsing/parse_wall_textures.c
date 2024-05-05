@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/03 15:26:38 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/05 12:39:15 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ int	extract_tx_path_from_line(char **str, char **tx_path)
 	if (!*tx_path)
 		return (perror("extract_tx_path_from_line: ft_strdup"), FAILURE);
 	*str += ft_strlen(*tx_path);
-	if (ft_file_check_extension(*tx_path, ".xpm") == false)
+	if (ft_file_check_extension(*tx_path, ".xpm") == false
+		&& ft_file_check_extension(*tx_path, ".XPM") == false)
 		return (free(*tx_path), print_error("Wall textures "
-				"in scene description have to be .xpm files.", NULL));
+				"in scene description have to be .xpm/.XPM files.", NULL));
 	return (SUCCESS);
 }
