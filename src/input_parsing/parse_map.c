@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:45:04 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 19:20:04 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/05 08:47:00 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,63 +14,14 @@
 #include "utils.h"
 #include "input_parsing.h"
 #include <math.h>
-
-int	check_walls_row_col(t_charptr_array raw_map, int row_col_check,
-	size_t row_col_to_check, size_t max_index)
-{
-	char	last_char;
-	char	cur_char;
-	size_t	i;
-
-	i = 0;
-	last_char = HOLE;
-	while (i < max_index)
-	{
-		if (row_col_check == ROW_CHECK)
-			cur_char = raw_map.buf[row_col_to_check][i];
-		else
-			cur_char = raw_map.buf[i][row_col_to_check];
-		if (ft_strchr("NSWED", cur_char))
-			cur_char = PATH;
-		if (cur_char == PATH && (i == max_index - 1
-				|| (last_char != PATH && last_char != WALL)))
-			return (FAILURE);
-		else if (cur_char == HOLE && last_char != HOLE && last_char != WALL)
-			return (FAILURE);
-		last_char = cur_char;
-		i++;
-	}
-	return (SUCCESS);
-}
-
-static int	check_walls(t_map map)
-{
-	size_t	row;
-	size_t	col;
-
-	row = 0;
-	col = 0;
-	while (row < map.height)
-	{
-		if (check_walls_row_col(map.raw_map, ROW_CHECK, row++, map.width)
-			!= SUCCESS)
-			return (print_error("Map not surrounded by walls", NULL));
-	}
-	while (col < map.width)
-	{
-		if (check_walls_row_col(map.raw_map, COL_CHECK, col++, map.height)
-			!= SUCCESS)
-			return (print_error("Map not surrounded by walls", NULL));
-	}
-	return (SUCCESS);
-}
+#include <stdio.h>
 
 static int	set_player_pos_and_angle(t_player *player,
 	size_t x, size_t y, char direction)
 {
 	if (player->pos.x != 0.0)
-		return (print_error("Found multiple starting positions "
-				"for player in map", NULL));
+		return (print_error("Found multiple starting positions for player.",
+				NULL));
 	player->pos.x = x + 0.5;
 	player->pos.y = y + 0.5;
 	if (direction == PLAYER_E)
@@ -96,9 +47,9 @@ static int	handle_map_symbol(t_game_state *game, size_t row, size_t col)
 	else if (game->map.raw_map.buf[row][col] == 'D')
 	{
 		if (door_validate(game->map, col, row) != SUCCESS)
-			return (print_error("Invalid door placement", NULL), FAILURE);
+			return (print_error("Doors have to be between walls.", NULL));
 		if (door_add(&game->map.doors, col, row, false) != SUCCESS)
-			return (print_error("Malloc error adding door", NULL), FAILURE);
+			return (perror("handle_map_symbol: door_add"), FAILURE);
 	}
 	return (SUCCESS);
 }
@@ -115,8 +66,7 @@ static int	parse_map_symbols(t_game_state *game)
 		while (col < game->map.width)
 		{
 			if (!ft_strchr(MAP_SYMBOLS, game->map.raw_map.buf[row][col]))
-				return (print_error("Found invalid character in map", NULL),
-					FAILURE);
+				return (print_error("Found invalid character in map.", NULL));
 			if (handle_map_symbol(game, row, col) != SUCCESS)
 				return (FAILURE);
 			col++;

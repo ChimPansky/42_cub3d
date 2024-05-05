@@ -6,7 +6,7 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/08 14:33:28 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/04/27 13:07:08 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/05 08:28:17 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	add_floor_ceiling(t_static_graphics *static_gr, t_scene_element *element)
 	else
 		color = &static_gr->ceiling_col;
 	if (*color != 0)
-		return (print_error("Found duplicate floor/ceiling element in "
-				"scene description.", NULL));
+		return (print_error("Found duplicate floor/ceiling element.", NULL));
 	*color = element->trgb;
 	return (SUCCESS);
 }

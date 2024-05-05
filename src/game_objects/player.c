@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:42:05 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/04 16:03:31 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 09:22:35 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game_state.h"
-#include "door.h"
 #include "ray.h"
 #include "math.h"
 #include "cub3d.h"

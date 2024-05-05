@@ -6,16 +6,12 @@
 /*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:14:29 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/02 16:20:31 by tkasbari         ###   ########.fr       */
+/*   Updated: 2024/05/05 08:59:29 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "door.h"
 #include "cub3d.h"
-#include "player.h"
 #include "game_state.h"
 
 int	door_add(t_door **doors, int map_x, int map_y, bool is_open)
@@ -47,20 +43,13 @@ void	doors_check_and_close(t_game_state *game, t_door **doors)
 	t_door	*current_door;
 
 	current_door = *doors;
-	// while (current_door != NULL)
-	// {
-	// 	if (current_door->is_open
-	// 		&& (game->timer - current_door->opening_time) > DOOR_CLOSING_TIME
-	// 		&& !((int)game->player.pos.x == current_door->map_x
-	// 		&& (int)game->player.pos.y == current_door->map_y))
-	// 		current_door->is_open = false;
-	// 	current_door = current_door->next;
-	// }
 	while (current_door != NULL)
 	{
 		if (current_door->is_open
-			&& (abs((int)game->player.pos.x - current_door->map_x) > DOOR_CLOSING_DISTANCE
-			|| (abs((int)game->player.pos.y - current_door->map_y) > DOOR_CLOSING_DISTANCE)))
+			&& (abs((int)game->player.pos.x - current_door->map_x)
+				> DOOR_CLOSING_DISTANCE
+				|| (abs((int)game->player.pos.y - current_door->map_y)
+					> DOOR_CLOSING_DISTANCE)))
 			current_door->is_open = false;
 		current_door = current_door->next;
 	}
@@ -93,30 +82,6 @@ t_door	*door_get(t_door *doors, int map_x, int map_y)
 	return (NULL);
 }
 
-void	door_print(t_door *door)
-{
-	if (door == NULL)
-		return ;
-	printf("Door(%d, %d): ", door->map_x, door->map_y);
-	if (door->is_open)
-		printf("open\n");
-	else
-		printf("closed\n");
-}
-
-void	doors_print(t_door *doors)
-{
-	int	i;
-
-	i = 0;
-	while (doors != NULL)
-	{
-		printf("%d ", i++);
-		door_print(doors);
-		doors = doors->next;
-	}
-}
-
 bool	door_is_open(t_door *doors, int map_x, int map_y)
 {
 	t_door	*door;
@@ -126,20 +91,26 @@ bool	door_is_open(t_door *doors, int map_x, int map_y)
 		return (false);
 	return (door->is_open);
 }
-
-// int main()
+// void	door_print(t_door *door)
 // {
-// 	t_door *doors = NULL;
-// 	t_door *door;
+// 	if (door == NULL)
+// 		return ;
+// 	printf("Door(%d, %d): ", door->map_x, door->map_y);
+// 	if (door->is_open)
+// 		printf("open\n");
+// 	else
+// 		printf("closed\n");
+// }
 
-// 	door_add(&doors, 1, 2, true);
-// 	door_add(&doors, 3, 4, false);
-// 	door_add(&doors, 1231, 788, false);
-// 	door_add(&doors, 0, 86, false);
-// 	doors_print(doors);
+// void	doors_print(t_door *doors)
+// {
+// 	int	i;
 
-// 	door = door_get(doors, 5, 4);
-// 	door_print(door);
-// 	doors_destroy(&doors);
-// 	return 0;
+// 	i = 0;
+// 	while (doors != NULL)
+// 	{
+// 		printf("%d ", i++);
+// 		door_print(doors);
+// 		doors = doors->next;
+// 	}
 // }

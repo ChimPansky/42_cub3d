@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 14:56:11 by vvilensk          #+#    #+#             */
-/*   Updated: 2024/05/04 15:01:31 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 09:32:21 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@
 # define WIN_SIZE_FACTOR 0.50
 
 # define PLAYER_COLLISION_RADIUS		0.1
-# define PLAYER_SPEED_FIELD_PER_FRAME	(1. / FPS * 2)
-# define PLAYER_RAD_PER_FRAME			(M_PI * 2. / FPS / 5)
-# define PLAYER_RAD_PER_MOUSE_PIX		0.0007
 
-# define MAX_RAY_DISTANCE 500
+// # define PLAYER_SPEED_FIELD_PER_FRAME	(1. / FPS * 2)
+# define PLAYER_SPEED_FIELD_PER_FRAME	0.033333333
+// # define PLAYER_RAD_PER_FRAME			(M_PI * 2. / FPS / 5)
+# define PLAYER_RAD_PER_FRAME			0.020943951
+# define PLAYER_RAD_PER_MOUSE_PIX		0.0007
 
 # define DOOR_OPENING_DISTANCE 1.0
 # define DOOR_CLOSING_DISTANCE 2
@@ -44,7 +45,8 @@
 // should be something between 1.0 and 3.0
 # define WALL_HEIGHT 1.0
 // 60 degrees player field of view
-# define FOV (M_PI / 3)
+// # define FOV (M_PI / 3)
+# define FOV 1.047197551
 
 // minimap offset and size
 # define MM_X 20
