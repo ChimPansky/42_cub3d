@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:02:15 by vvilensk          #+#    #+#             */
-/*   Updated: 2024/05/04 15:24:27 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 08:15:38 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,24 @@
 #include "render/render.h"
 #include "logic/logic.h"
 #include "utils.h"
-#include <time.h>
 #include "cub3d.h"
 
-#include <stdio.h>
+// static void	print_game_info(t_app *app)
+// {
+// 	char	player[100];
+// 	char	phi[100];
 
-static void	print_game_info(t_app *app)
-{
-	char	player[100];
-	char	phi[100];
-
-	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 10, 0,
-		"DEBUG INFO:");
-	sprintf(player, "Player: %.2f, %.2f", app->game_state.player.pos.x,
-		app->game_state.player.pos.y);
-	sprintf(phi, "Player Phi: %.2f",
-		fmod(app->game_state.player.angle + 2 * M_PI, 2 * M_PI));
-	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 20, 0,
-		player);
-	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 30, 0,
-		phi);
-}
+// 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 10, 0,
+// 		"DEBUG INFO:");
+// 	sprintf(player, "Player: %.2f, %.2f", app->game_state.player.pos.x,
+// 		app->game_state.player.pos.y);
+// 	sprintf(phi, "Player Phi: %.2f",
+// 		fmod(app->game_state.player.angle + 2 * M_PI, 2 * M_PI));
+// 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 20, 0,
+// 		player);
+// 	mlx_string_put(app->mlx, app->gr.win, app->gr.scene.width - 150, 30, 0,
+// 		phi);
+// }
 
 int	main_loop(void *data)
 {
@@ -51,7 +48,6 @@ int	main_loop(void *data)
 	render_minimap(&app->gr.minimap, &app->game_state);
 	mlx_put_image_to_window(app->mlx, app->gr.win,
 		app->gr.minimap.image.image, MM_X, MM_Y);
-	print_game_info(app);
 	return (0);
 }
 

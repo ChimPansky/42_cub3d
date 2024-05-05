@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:47:06 by vvilensk          #+#    #+#             */
-/*   Updated: 2024/05/04 15:47:07 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 09:01:24 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "map.h"
 #include "image.h"
 #include "cub3d.h"
-#include "libft.h"
 
 int	minimap_init(void *mlx, t_minimap *minimap, t_image *cursor)
 {

@@ -17,12 +17,6 @@
 # include "sprites.h"
 # include "map.h"
 
-// for now ray_casting is only used for rendering the walls (finding
-// collision points between
-// player view (a ray with starting position and viewing direction vector)
-// and walls (as defined in map))
-// later ray_casting can be used to find collision points between player and
-// other objects...
 typedef enum e_collision_direction
 {
 	COLL_EA = 0,
@@ -72,7 +66,9 @@ typedef struct s_ray
 }				t_ray;
 
 void	calculate_ray_collision(t_ray *ray, t_map *map);
-void	raycaster_set_directions(t_ray *ray);
+void	raycaster_set_map_directions(t_ray *ray);
+void	raycaster_set_collision_angle(t_ray *ray);
+void	raycaster_set_collision_direction(t_raycaster *rc);
 t_ray	ray_init(t_pos pos, double angle);
 
 #endif  // RAY_H

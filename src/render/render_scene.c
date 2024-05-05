@@ -3,34 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   render_scene.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 12:49:43 by tkasbari          #+#    #+#             */
-/*   Updated: 2024/05/04 15:51:17 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 08:54:07 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-
+#include "cub3d.h"
 #include "render.h"
-#include "app.h"
 #include "image.h"
-#include "physics.h"
 #include "player.h"
 #include "trgb.h"
 #include "vector.h"
 #include "sprites.h"
 #include "ray.h"
-#include "cub3d.h"
-
-static void		draw_screen_column(
-					t_image *screen_img,
-					t_static_graphics *sprites,
-					t_pixel window_pixel,
-					t_ray *player_view);
-static t_trgb	get_color_from_sprites(
-					t_static_graphics *stat_gr,
-					t_ray *ray, double relative_y);
+#include <math.h>
 
 static t_trgb	get_color_from_picture(
 					t_static_graphics *stat_gr,
@@ -64,8 +52,10 @@ static t_trgb	get_color_from_picture(
 // making sure that all walls that have the same orthogonal
 // distance from the player have the same height on screen
 // (even though their actual distance might be further away)
-static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
-		t_ray *ray, double relative_y)
+static t_trgb	get_color_from_sprites(
+					t_static_graphics *stat_gr,
+					t_ray *ray,
+					double relative_y)
 {
 	double	scaled_wall_height;
 
@@ -85,8 +75,11 @@ static t_trgb	get_color_from_sprites(t_static_graphics *stat_gr,
 			scaled_wall_height));
 }
 
-static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
-	t_pixel window_pixel, t_ray *player_view)
+static void	draw_screen_column(
+				t_image *screen_img,
+				t_static_graphics *sprites,
+				t_pixel window_pixel,
+				t_ray *player_view)
 {
 	t_trgb	color;
 
@@ -100,11 +93,14 @@ static void	draw_screen_column(t_image *screen_img, t_static_graphics *sprites,
 	}
 }
 
-void	render_leg(t_image *scene_image, t_animation *leg)
+void	render_leg(
+			t_image *scene_image,
+			t_animation *leg)
 {
 	const t_pixel	insert_pos
 		= pixel((scene_image->width - leg->one_sprite_size.x) / 2,
-				scene_image->height - leg->one_sprite_size.y);
+			scene_image->height - leg->one_sprite_size.y);
+
 	animation_put_to_image(scene_image, insert_pos, leg);
 }
 
@@ -122,7 +118,8 @@ void	render_scene(t_app *app)
 	while (window_pixel.x < app->gr.scene.width)
 	{
 		calculate_ray_collision(&player_view, &app->game_state.map);
-		draw_screen_column(&app->gr.scene, &app->static_gr, window_pixel, &player_view);
+		draw_screen_column(&app->gr.scene, &app->static_gr, window_pixel,
+			&player_view);
 		pvector_rotate(&player_view.vec, FOV / app->gr.scene.width);
 		window_pixel.x++;
 	}

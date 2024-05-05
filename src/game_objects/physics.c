@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   physics.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/05 09:01:51 by tkasbari          #+#    #+#             */
+/*   Updated: 2024/05/05 09:02:35 by tkasbari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "physics.h"
 #include <math.h>
-#include <stdio.h>
 
 void	update_coords(
 			t_pos *pos,
@@ -12,15 +23,6 @@ void	update_coords(
 		* speed_to_coord_coef;
 	pos->x += (speed->forw * cos(angle) - speed->ort * sin(angle))
 		* speed_to_coord_coef;
-}
-
-t_pos	pos_copy(t_pos *source)
-{
-	t_pos	result;
-
-	result.x = source->x;
-	result.y = source->y;
-	return (result);
 }
 
 t_pos	pos_create(double x, double y)
@@ -55,7 +57,7 @@ double	pos_distance(t_pos pos1, t_pos pos2)
 	return (sqrt(pow(pos1.x - pos2.x, 2) + pow(pos1.y - pos2.y, 2)));
 }
 
-void	pos_print(t_pos pos)
-{
-	printf("(%f / %f)\n", pos.x, pos.y);
-}
+// void	pos_print(t_pos pos)
+// {
+// 	printf("(%f / %f)\n", pos.x, pos.y);
+// }

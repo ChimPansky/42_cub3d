@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvilensk <vilenskii.v@gmail.com>           +#+  +:+       +#+        */
+/*   By: tkasbari <thomas.kasbarian@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 15:44:57 by vvilensk          #+#    #+#             */
-/*   Updated: 2024/05/04 16:01:50 by vvilensk         ###   ########.fr       */
+/*   Updated: 2024/05/05 09:00:56 by tkasbari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_image	*image_init(void *mlx, t_image *img, int width, int height)
 	return (img);
 }
 
-// TODO error processing, mb success !success
 t_image	*image_init_from_xpm(void *mlx, t_image *img, char *xpm_path)
 {
 	img->image = mlx_xpm_file_to_image(mlx, xpm_path,
